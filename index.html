@@ -2,179 +2,651 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Privacy Policy — MapApp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>SteepMap — Discover, plan &amp; share backcountry ski tours</title>
+<meta name="description" content="SteepMap helps you explore the backcountry, keep a bucket list of lines you want to ski, repeat tours your friends have done, and plan every descent with slope-angle and aspect overlays." />
+<meta name="theme-color" content="#0a1420" />
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="SteepMap — Discover, plan &amp; share ski tours" />
+<meta property="og:description" content="Explore the backcountry, keep your bucket list, repeat your friends' lines, and plan tours with slope &amp; aspect overlays." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=1200&q=80" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%233b82f6'/%3E%3Cpath d='M96 384 L200 196 L268 300 L330 168 L416 384 Z' fill='white'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6; max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem;
-    color: #1a1a1a; background: #fff;
+  :root{
+    --blue:#3b82f6;
+    --blue-600:#2563eb;
+    --blue-300:#93c5fd;
+    --navy:#0a1420;
+    --navy-2:#0e1c2e;
+    --ink:#0b1622;
+    --slate:#5b6b7d;
+    --snow:#f6f8fb;
+    --cloud:#eef2f7;
+    --line:rgba(16,32,52,.10);
+    --sun:#ff8a4c;
+    --sun-2:#ff6a3d;
+    --glow:0 24px 60px -24px rgba(11,34,66,.45);
+    --radius:22px;
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,.61,.36,1);
   }
-  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #7fb2ff; } }
-  h1 { font-size: 1.9rem; margin-bottom: .25rem; }
-  h2 { font-size: 1.25rem; margin-top: 2.25rem; border-bottom: 1px solid rgba(128,128,128,.25); padding-bottom: .3rem; }
-  h3 { font-size: 1.05rem; margin-top: 1.5rem; }
-  .meta { color: #888; font-size: .9rem; margin-bottom: 2rem; }
-  ul { padding-left: 1.25rem; }
-  li { margin: .35rem 0; }
-  code { background: rgba(128,128,128,.15); padding: .1rem .35rem; border-radius: 4px; font-size: .9em; }
-  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
-  th, td { border: 1px solid rgba(128,128,128,.3); padding: .5rem .6rem; text-align: left; vertical-align: top; }
-  th { background: rgba(128,128,128,.12); }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--snow);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:"Sora","Inter",sans-serif;line-height:1.08;letter-spacing:-.02em;margin:0}
+  p{margin:0}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--blue-600);
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--blue);border-radius:2px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+    font-weight:700;font-size:1rem;padding:.95rem 1.5rem;border-radius:999px;
+    cursor:pointer;border:0;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s;
+    will-change:transform;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-600) 100%);color:#fff;box-shadow:0 14px 30px -10px rgba(37,99,235,.6)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 44px -12px rgba(37,99,235,.7)}
+  .btn-sun{background:linear-gradient(135deg,var(--sun) 0%,var(--sun-2) 100%);color:#3a1200;box-shadow:0 14px 30px -10px rgba(255,106,61,.55)}
+  .btn-sun:hover{transform:translateY(-3px)}
+  .btn-ghost{background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.2);transform:translateY(-3px)}
+  .btn-dark{background:var(--ink);color:#fff}
+  .btn-dark:hover{transform:translateY(-3px)}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .3s,box-shadow .3s,backdrop-filter .3s;
+  }
+  header.nav .bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:var(--maxw);margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:"Sora";font-weight:800;font-size:1.15rem;color:#fff;transition:color .3s}
+  .brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#3b82f6,#2563eb);display:grid;place-items:center;box-shadow:0 8px 18px -6px rgba(37,99,235,.7);flex:none}
+  .brand .mark svg{width:22px;height:22px}
+  nav.links{display:flex;align-items:center;gap:2rem}
+  nav.links a{font-weight:600;font-size:.95rem;color:rgba(255,255,255,.85);transition:color .2s}
+  nav.links a:hover{color:#fff}
+  header.nav.scrolled{background:rgba(255,255,255,.82);backdrop-filter:blur(14px) saturate(140%);box-shadow:0 1px 0 var(--line),0 10px 30px -18px rgba(11,34,66,.3)}
+  header.nav.scrolled .brand{color:var(--ink)}
+  header.nav.scrolled nav.links a{color:var(--slate)}
+  header.nav.scrolled nav.links a:hover{color:var(--ink)}
+  .nav-cta{padding:.6rem 1.2rem;font-size:.9rem}
+  @media(max-width:820px){nav.links a:not(.nav-cta){display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;color:#fff;padding-top:72px;overflow:hidden}
+  #features,#overlays,#how,#gallery,#get{scroll-margin-top:76px}
+  .hero .bg{position:absolute;inset:0;z-index:-2;background:#0a1420 center/cover no-repeat}
+  .hero .bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(120% 90% at 15% 20%,rgba(10,20,32,.30),transparent 60%),
+      linear-gradient(180deg,rgba(10,20,32,.55) 0%,rgba(10,20,32,.35) 40%,rgba(10,20,32,.82) 100%);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%;padding:60px 0 90px}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;letter-spacing:-.03em}
+  .hero h1 .g{background:linear-gradient(120deg,#bfe0ff,#7cc0ff 60%,#ffb488);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);color:rgba(255,255,255,.9);max-width:34ch;margin-top:1.3rem}
+  .hero .cta-row{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:2rem}
+  .hero .meta{display:flex;gap:1.6rem;margin-top:2.4rem;flex-wrap:wrap}
+  .hero .meta .stat{display:flex;flex-direction:column}
+  .hero .meta .num{font-family:"Sora";font-weight:800;font-size:1.5rem;line-height:1}
+  .hero .meta .lbl{font-size:.8rem;color:rgba(255,255,255,.7);letter-spacing:.04em;margin-top:.35rem}
+  .hero .meta .div{width:1px;background:rgba(255,255,255,.22)}
+  .scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .scroll-hint .mouse{width:22px;height:34px;border:2px solid rgba(255,255,255,.5);border-radius:12px;position:relative}
+  .scroll-hint .mouse::after{content:"";position:absolute;left:50%;top:6px;width:3px;height:7px;background:#fff;border-radius:2px;transform:translateX(-50%);animation:scrolldot 1.6s infinite}
+  @keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:20px}.hero .phone-hero{display:none}}
+
+  /* ---------- PHONE MOCKUP ---------- */
+  .phone{
+    position:relative;width:300px;max-width:78vw;aspect-ratio:300/620;margin:0 auto;
+    background:#0b1622;border-radius:42px;padding:12px;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.06) inset,0 0 0 8px rgba(10,20,32,.5);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .phone .notch{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#0b1622;border-radius:0 0 16px 16px;z-index:5}
+  .phone .screen{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:#dfe7ef}
+  .phone-hero{transform:rotate(3deg);transition:transform .6s var(--ease)}
+  .phone-hero:hover{transform:rotate(0deg) translateY(-6px)}
+  .phone .status{position:absolute;top:0;left:0;right:0;height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:.62rem;font-weight:700;color:#0b1622;z-index:4;opacity:.7}
+
+  /* Mini app screens (placeholder UI) */
+  .screen-map{position:absolute;inset:0;background:
+      linear-gradient(160deg,#e8f0e4 0%,#d9e6d4 30%,#cfe0e6 70%,#bcd3dd 100%);}
+  .topo{position:absolute;inset:0;opacity:.5;background-image:
+      repeating-radial-gradient(circle at 30% 35%,transparent 0 12px,rgba(80,110,90,.25) 12px 13px),
+      repeating-radial-gradient(circle at 72% 68%,transparent 0 14px,rgba(80,110,90,.22) 14px 15px);}
+  .route{position:absolute;top:34px;left:0;right:0;bottom:0}
+  .aspect-legend{position:absolute;left:12px;bottom:78px;width:74px;height:74px;border-radius:50%;
+    background:conic-gradient(#ef4444 0 45deg,#f59e0b 45deg 90deg,#fde047 90deg 135deg,#22c55e 135deg 180deg,#06b6d4 180deg 225deg,#3b82f6 225deg 270deg,#8b5cf6 270deg 315deg,#ec4899 315deg 360deg);
+    box-shadow:0 8px 18px -6px rgba(0,0,0,.4),0 0 0 3px #fff;}
+  .aspect-legend::after{content:"N";position:absolute;top:3px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+  .aspect-legend .hole{position:absolute;inset:26px;background:#fff;border-radius:50%}
+  .pin{position:absolute;width:20px;height:20px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 4px 8px -2px rgba(0,0,0,.4)}
+  .pin::after{content:"";position:absolute;inset:5px;background:#fff;border-radius:50%}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:14px 14px 18px;box-shadow:0 -8px 24px -12px rgba(0,0,0,.25)}
+  .sheet .grab{width:38px;height:4px;border-radius:2px;background:#d3dbe4;margin:0 auto 10px}
+  .card-row{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #eef1f5}
+  .card-row:last-child{border-bottom:0}
+  .thumb{width:44px;height:44px;border-radius:12px;flex:none;background-size:cover;background-position:center}
+  .card-row .t{font-size:.72rem;font-weight:800;color:#0b1622;letter-spacing:-.01em}
+  .card-row .s{font-size:.6rem;color:#7c8896;margin-top:2px}
+  .badge{margin-left:auto;font-size:.55rem;font-weight:800;padding:.2rem .5rem;border-radius:999px;flex:none}
+  .badge.blue{background:#e5efff;color:#2563eb}
+  .badge.green{background:#e3f7ea;color:#12a150}
+  .badge.sun{background:#ffe9dd;color:#d1490d}
+  .chip{position:absolute;top:44px;left:12px;display:flex;gap:6px;flex-wrap:wrap;z-index:3}
+  .chip span{background:rgba(255,255,255,.92);font-size:.55rem;font-weight:800;color:#33414f;padding:.28rem .55rem;border-radius:999px;box-shadow:0 3px 8px -3px rgba(0,0,0,.3)}
+  .chip span.on{background:var(--blue);color:#fff}
+
+  /* ---------- LOGО STRIP / VALUE ---------- */
+  .valuestrip{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .valuestrip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:34px 24px}
+  .vcell{display:flex;gap:.8rem;align-items:flex-start}
+  .vcell .ic{width:40px;height:40px;border-radius:12px;background:#eaf1ff;color:var(--blue-600);display:grid;place-items:center;flex:none}
+  .vcell .ic svg{width:22px;height:22px}
+  .vcell h4{font-family:"Sora";font-size:.98rem;margin:.1rem 0 .2rem}
+  .vcell p{font-size:.85rem;color:var(--slate);line-height:1.45}
+  @media(max-width:860px){.valuestrip .wrap{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.valuestrip .wrap{grid-template-columns:1fr}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{padding:110px 0}
+  .sec-head{max-width:640px;margin:0 auto 64px;text-align:center}
+  .sec-head h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-top:1rem}
+  .sec-head p{font-size:1.12rem;color:var(--slate);margin-top:1.1rem}
+
+  /* ---------- FEATURE ROWS ---------- */
+  .feature{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;margin:0 auto;max-width:var(--maxw);padding:0 24px}
+  .feature + .feature{margin-top:120px}
+  .feature.rev .media{order:2}
+  .feature .copy .eyebrow{margin-bottom:1rem}
+  .feature .copy h3{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800}
+  .feature .copy p{font-size:1.08rem;color:var(--slate);margin-top:1.1rem}
+  .feature .copy ul{list-style:none;padding:0;margin:1.6rem 0 0;display:flex;flex-direction:column;gap:.8rem}
+  .feature .copy li{display:flex;gap:.7rem;align-items:flex-start;font-weight:500;color:var(--ink)}
+  .feature .copy li svg{flex:none;margin-top:3px;color:var(--blue)}
+  .media{position:relative}
+  .media .frame{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--glow);aspect-ratio:4/3;background:#0a1420}
+  .media .frame img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+  .media:hover .frame img{transform:scale(1.05)}
+  .media .float{position:absolute;background:#fff;border-radius:16px;box-shadow:var(--glow);padding:.8rem 1rem;display:flex;gap:.7rem;align-items:center;border:1px solid var(--line)}
+  .media .float .fic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;color:#fff}
+  .media .float .ft{font-family:"Sora";font-weight:700;font-size:.85rem}
+  .media .float .fs{font-size:.72rem;color:var(--slate)}
+  .float.tl{top:-22px;left:-22px}
+  .float.br{bottom:-22px;right:-22px}
+  @media(max-width:880px){
+    .feature{grid-template-columns:1fr;gap:36px}
+    .feature.rev .media{order:0}
+    .float.tl{left:0}.float.br{right:0}
+  }
+
+  /* ---------- OVERLAY SHOWCASE (dark) ---------- */
+  .showcase{background:radial-gradient(120% 100% at 80% 0%,#12263f 0%,var(--navy) 55%);color:#fff;position:relative;overflow:hidden}
+  .showcase::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 39h40M39 0v40' stroke='%23ffffff' stroke-opacity='.04'/%3E%3C/svg%3E");}
+  .showcase .wrap{position:relative}
+  .showcase .sec-head h2{color:#fff}
+  .showcase .sec-head p{color:rgba(255,255,255,.72)}
+  .overlay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px}
+  .ocard{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);border-radius:20px;padding:26px;transition:transform .3s var(--ease),background .3s}
+  .ocard:hover{transform:translateY(-6px);background:rgba(255,255,255,.08)}
+  .ocard .oic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px}
+  .ocard h4{font-family:"Sora";font-size:1.2rem;margin-bottom:.5rem}
+  .ocard p{color:rgba(255,255,255,.72);font-size:.95rem}
+  .swatch{display:flex;height:10px;border-radius:6px;overflow:hidden;margin-top:16px}
+  .swatch i{flex:1}
+  @media(max-width:820px){.overlay-grid{grid-template-columns:1fr}}
+
+  /* ---------- STEPS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .step{position:relative;padding:34px 28px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 40px -30px rgba(11,34,66,.4)}
+  .step .n{font-family:"Sora";font-weight:800;font-size:2.4rem;color:var(--blue);opacity:.25;line-height:1}
+  .step h4{font-family:"Sora";font-size:1.25rem;margin:.6rem 0 .5rem}
+  .step p{color:var(--slate);font-size:.98rem}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+  .gallery a{position:relative;overflow:hidden;border-radius:16px;background:#0a1420}
+  .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease),filter .5s}
+  .gallery a:hover img{transform:scale(1.08)}
+  .gallery .big{grid-column:span 2;grid-row:span 2}
+  .gallery .wide{grid-column:span 2}
+  .gcap{position:absolute;left:14px;bottom:12px;color:#fff;font-weight:700;font-size:.9rem;text-shadow:0 2px 10px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:.4s var(--ease)}
+  .gallery a:hover .gcap{opacity:1;transform:none}
+  @media(max-width:820px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}.gallery .big{grid-column:span 2;grid-row:span 1}}
+
+  /* ---------- CTA BAND ---------- */
+  .cta{position:relative;color:#fff;text-align:center;overflow:hidden}
+  .cta .bg{position:absolute;inset:0;z-index:-2}
+  .cta .bg img{width:100%;height:100%;object-fit:cover}
+  .cta::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(8,14,26,.72),rgba(8,14,26,.85))}
+  .cta .inner{padding:120px 24px}
+  .cta h2{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;max-width:16ch;margin:0 auto}
+  .cta p{font-size:1.15rem;color:rgba(255,255,255,.85);margin:1.2rem auto 0;max-width:46ch}
+  .cta .cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.2rem}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:64px 24px 34px}
+  footer .cols{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+  footer .brand{color:#fff;margin-bottom:1rem}
+  footer h5{color:#fff;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 1rem;font-weight:700}
+  footer a{display:block;color:rgba(255,255,255,.68);font-size:.95rem;padding:.3rem 0;transition:color .2s}
+  footer a:hover{color:#fff}
+  footer .tag{font-size:.92rem;max-width:34ch}
+  footer .bottom{max-width:var(--maxw);margin:44px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.82rem;color:rgba(255,255,255,.5)}
+  @media(max-width:760px){footer .cols{grid-template-columns:1fr 1fr}}
+
+  /* ---------- GET-APP MODAL ---------- */
+  .modal-back{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(6,12,22,.72);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease)}
+  .modal-back.open{display:flex;opacity:1}
+  .modal{position:relative;width:100%;max-width:440px;background:linear-gradient(180deg,#10203400,#0a1420),radial-gradient(120% 120% at 80% 0%,#14304d,#0a1420);border:1px solid rgba(255,255,255,.12);border-radius:26px;padding:32px 30px;color:#fff;box-shadow:0 40px 90px -30px rgba(0,0,0,.85);transform:translateY(16px) scale(.98);transition:transform .35s var(--ease)}
+  .modal-back.open .modal{transform:none}
+  .modal .x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+  .modal .x:hover{background:rgba(255,255,255,.18)}
+  .modal .eyebrow{color:#7cc0ff}
+  .modal h3{font-family:"Sora";font-size:1.55rem;margin-top:.7rem}
+  .modal>p{color:rgba(255,255,255,.72);margin-top:.5rem;font-size:.95rem}
+  .plat{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+  .plat a{display:flex;align-items:center;gap:14px;padding:15px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);transition:transform .25s var(--ease),background .25s,border-color .25s}
+  .plat a:hover{background:rgba(255,255,255,.10);transform:translateY(-2px);border-color:rgba(124,192,255,.5)}
+  .plat .pic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.08);flex:none}
+  .plat .pic svg{width:24px;height:24px}
+  .plat .pt{font-family:"Sora";font-weight:700;font-size:1rem;line-height:1.1}
+  .plat .ps{font-size:.8rem;color:rgba(255,255,255,.6);margin-top:2px}
+  .plat .tag{margin-left:auto;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .6rem;border-radius:999px;flex:none}
+  .plat .tag.soon{background:rgba(255,138,76,.18);color:#ffb488}
+  .plat .tag.live{background:rgba(18,161,80,.20);color:#5fe39a}
+
+  /* ---------- REVEAL ANIM ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.scroll-hint{display:none}}
 </style>
 </head>
 <body>
 
-<h1>Privacy Policy</h1>
-<p class="meta">MapApp &middot; Last updated: 4 July 2026</p>
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="bar">
+    <a class="brand" href="#top">
+      <span class="mark">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M96 384 L200 196 L268 300 L330 168 L416 384 Z" fill="#fff"/><path d="M330 168 L300 224 L330 212 L360 224 Z" fill="#2563eb"/><path d="M200 196 L176 240 L200 230 L224 240 Z" fill="#2563eb"/></svg>
+      </span>
+      SteepMap
+    </a>
+    <nav class="links">
+      <a href="#features">Features</a>
+      <a href="#overlays">Planning</a>
+      <a href="#how">How it works</a>
+      <a href="#gallery">Gallery</a>
+      <a class="btn btn-primary nav-cta js-getapp" href="#get">Get the app</a>
+    </nav>
+  </div>
+</header>
 
-<p>
-  This Privacy Policy explains how <strong>MapApp</strong> (&ldquo;the App&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;)
-  collects, uses, and protects your personal data when you use the mobile application and related services.
-  The App lets you discover, create, and share outdoor tours and routes on a map, and interact with other users.
-</p>
-<p>
-  The data controller is <strong>Ettore Rasca</strong>, operating as Alpine Map. If you have any questions about
-  this policy or your data, contact the Alpine Map Support Team at
-  <a href="mailto:alpinemapapp@gmail.com">alpinemapapp@gmail.com</a>.
-</p>
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="bg">
+    <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=2000&q=80" alt="Alpenglow on jagged backcountry peaks at sunrise" onerror="this.style.display='none'"/>
+  </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal in">
+        <span class="eyebrow" style="color:#bfe0ff">Backcountry, mapped</span>
+        <h1 style="margin-top:1rem">Find your next line<br><span class="g">in the backcountry.</span></h1>
+        <p class="lead">Discover new ski tours, keep a bucket list of the descents you dream about, repeat the lines your friends have skied, and plan every turn with slope &amp; aspect overlays.</p>
+        <div class="cta-row">
+          <a class="btn btn-sun js-getapp" href="#get">Start exploring — free</a>
+          <a class="btn btn-ghost" href="#features">See how it works</a>
+        </div>
+        <div class="meta">
+          <div class="stat"><span class="num">Discover</span><span class="lbl">Tours near you &amp; worldwide</span></div>
+          <div class="div"></div>
+          <div class="stat"><span class="num">Plan</span><span class="lbl">Slope &amp; aspect overlays</span></div>
+          <div class="div"></div>
+          <div class="stat"><span class="num">Share</span><span class="lbl">Follow your crew's lines</span></div>
+        </div>
+      </div>
 
-<h2>1. Information We Collect</h2>
+      <!-- hero phone mockup -->
+      <div class="phone-hero reveal in" style="transition-delay:.15s">
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="status"><span>9:41</span><span>❄ ▮▮▮</span></div>
+            <div class="screen-map">
+              <div class="topo"></div>
+              <div class="chip"><span class="on">Aspect</span><span>Steepness</span><span>Satellite</span></div>
+              <svg class="route" viewBox="0 0 300 560" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M60 470 C 110 400, 90 320, 150 250 S 220 140, 250 70" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+                <path d="M60 470 C 110 400, 90 320, 150 250 S 220 140, 250 70" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 9"/>
+              </svg>
+              <div class="pin" style="left:52px;top:452px;background:#12a150"></div>
+              <div class="pin" style="left:240px;top:60px;background:#ef4444"></div>
+              <div class="aspect-legend"><div class="hole"></div></div>
+              <div class="sheet">
+                <div class="grab"></div>
+                <div class="card-row">
+                  <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1418985991508-e47386d96a71?auto=format&fit=crop&w=200&q=60')"></div>
+                  <div><div class="t">Piz Palü — NE Couloir</div><div class="s">1,240 m ↑ · 38° max · N–NE</div></div>
+                  <span class="badge sun">Pro</span>
+                </div>
+                <div class="card-row">
+                  <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1486078695445-0497c2f58cfe?auto=format&fit=crop&w=200&q=60')"></div>
+                  <div><div class="t">Lake Traverse Loop</div><div class="s">640 m ↑ · Mellow · Ski touring</div></div>
+                  <span class="badge green">Saved</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span class="mouse"></span>Scroll</div>
+</section>
 
-<h3>Account &amp; identity information</h3>
-<p>You sign in using <strong>Google Sign-In (OAuth)</strong>. When you do, we receive from Google and store:</p>
-<ul>
-  <li>Your <strong>email address</strong></li>
-  <li>Your <strong>name</strong> and, where available, your Google <strong>profile picture</strong></li>
-  <li>A unique account identifier</li>
-</ul>
+<!-- ============ VALUE STRIP ============ -->
+<div class="valuestrip">
+  <div class="wrap">
+    <div class="vcell reveal">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 7-16 6 10 3-5 2 11z"/></svg></div>
+      <div><h4>Explore</h4><p>Uncover new backcountry tours on an interactive map.</p></div>
+    </div>
+    <div class="vcell reveal" style="transition-delay:.08s">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+      <div><h4>Bucket list</h4><p>Save the lines you dream of skiing and tick them off.</p></div>
+    </div>
+    <div class="vcell reveal" style="transition-delay:.16s">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div><h4>Repeat</h4><p>Follow friends and re-ski the tours they've done.</p></div>
+    </div>
+    <div class="vcell reveal" style="transition-delay:.24s">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20 3 17V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 7v13M15 4v13"/></svg></div>
+      <div><h4>Plan</h4><p>Read the terrain with slope-angle &amp; aspect overlays.</p></div>
+    </div>
+  </div>
+</div>
 
-<h3>Profile information</h3>
-<p>You may add or edit profile details, which we store:</p>
-<ul>
-  <li>Display name and username</li>
-  <li>Short biography (&ldquo;bio&rdquo;)</li>
-  <li>A free-text location/region you choose to show (e.g. a city or country)</li>
-  <li>A profile photo you upload</li>
-</ul>
+<!-- ============ FEATURES ============ -->
+<section class="block" id="features">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Everything for your day out</span>
+    <h2>One app, from first idea to final turn</h2>
+    <p>Steep brings discovery, planning and your community together — so you spend less time guessing and more time in the good snow.</p>
+  </div>
 
-<h3>Content you create</h3>
-<ul>
-  <li><strong>Tours and routes</strong> you create, including geographic coordinates, waypoints, elevation/route
-      statistics, titles and descriptions</li>
-  <li><strong>Photos</strong> you upload for your tours</li>
-  <li><strong>Interactions</strong>: ratings, likes, comments, tours you log, bucket-list entries, and the users you follow</li>
-</ul>
+  <!-- Feature 1: Explore -->
+  <div class="feature reveal">
+    <div class="copy">
+      <span class="eyebrow">Explore the backcountry</span>
+      <h3>Discover tours you never knew existed</h3>
+      <p>Pan across the map and watch tours light up — from mellow valley tours to committing alpine couloirs. Every line comes with photos, stats and the story of who's skied it.</p>
+      <ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Browse an interactive map packed with real tours</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Filter by vertical, difficulty and region</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>See conditions and photos from people who went</li>
+      </ul>
+    </div>
+    <div class="media">
+      <div class="frame"><img src="https://images.unsplash.com/photo-1418985991508-e47386d96a71?auto=format&fit=crop&w=1200&q=80" alt="Untracked backcountry ridge under a wide sky" onerror="this.parentElement.style.background='linear-gradient(135deg,#3b82f6,#0a1420)'"/></div>
+      <div class="float br"><div class="fic" style="background:linear-gradient(135deg,#3b82f6,#2563eb)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 7-16 6 10 3-5 2 11z"/></svg></div><div><div class="ft">128 tours nearby</div><div class="fs">within 40&nbsp;km of you</div></div></div>
+    </div>
+  </div>
 
-<h3>Device location</h3>
-<p>
-  With your permission, the App accesses your device&rsquo;s <strong>location</strong> to center the map on your
-  position and help you find nearby tours. You can grant or revoke this permission at any time in your device settings.
-  Location is used at the moment you request it and is not continuously tracked in the background.
-</p>
+  <!-- Feature 2: Bucket list -->
+  <div class="feature rev reveal">
+    <div class="copy">
+      <span class="eyebrow">Your bucket list</span>
+      <h3>Keep every dream line in one place</h3>
+      <p>Found a tour that makes your heart race? Save it to your bucket list with a tap. Come back when the conditions align, and tick it off once you've earned the turns.</p>
+      <ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bookmark tours to a personal bucket list</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Organise the season ahead at a glance</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mark tours as done and build your logbook</li>
+      </ul>
+    </div>
+    <div class="media">
+      <div class="frame"><img src="https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&fit=crop&w=1200&q=80" alt="Golden winter light over a snowy alpine slope" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff8a4c,#0a1420)'"/></div>
+      <div class="float tl"><div class="fic" style="background:linear-gradient(135deg,#12a150,#0e7a3c)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div><div><div class="ft">Saved to bucket list</div><div class="fs">14 lines waiting</div></div></div>
+    </div>
+  </div>
 
-<h3>Technical data</h3>
-<p>
-  When you use the App, our service providers automatically process limited technical data needed to deliver the
-  service, such as IP address, device/browser type, and requests for map tiles. This is standard for any networked app.
-</p>
+  <!-- Feature 3: Repeat friends -->
+  <div class="feature reveal">
+    <div class="copy">
+      <span class="eyebrow">Ski with your crew</span>
+      <h3>Repeat the tours your friends have skied</h3>
+      <p>Your feed shows what your friends have been skiing. Loved the look of that descent? Open it, save it, and repeat it yourself — with the same track, stats and beta they used.</p>
+      <ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A live feed of your friends' latest tours</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Repeat any tour with one tap</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>React, comment and plan the next one together</li>
+      </ul>
+    </div>
+    <div class="media">
+      <div class="frame"><img src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?auto=format&fit=crop&w=1200&q=80" alt="Three skiers carving down an open bowl above a mountain panorama" onerror="this.parentElement.style.background='linear-gradient(135deg,#3b82f6,#0a1420)'"/></div>
+      <div class="float br"><div class="fic" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="ft">Mara skied this</div><div class="fs">Tap to repeat →</div></div></div>
+    </div>
+  </div>
+</section>
 
-<h2>2. How We Use Your Information</h2>
-<ul>
-  <li>To create and manage your account and authenticate you</li>
-  <li>To provide core features: displaying the map, and letting you create, view, and share tours</li>
-  <li>To power social features (profiles, follows, ratings, likes, comments, notifications)</li>
-  <li>To moderate content and keep the service safe (e.g. reviewing or removing content that violates our rules)</li>
-  <li>To maintain, secure, and improve the App</li>
-  <li>To comply with legal obligations</li>
-</ul>
+<!-- ============ OVERLAY SHOWCASE ============ -->
+<section class="block showcase" id="overlays">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" style="color:#7cc0ff">Plan like a pro</span>
+      <h2>Read the mountain before you're on it</h2>
+      <p>Toggle map overlays to understand the terrain from your couch. Combine slope steepness and aspect with satellite and topo basemaps to plan a smart, safe route up and down.</p>
+    </div>
+    <div class="overlay-grid">
+      <div class="ocard reveal">
+        <div class="oic" style="background:linear-gradient(135deg,#ef4444,#f59e0b)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18L12 4z"/><path d="M12 9v6"/></svg>
+        </div>
+        <h4>Slope steepness</h4>
+        <p>A colour-graded overlay reveals exactly how steep each pitch is — spot the 30–45° zones that matter most for your line and your safety margin.</p>
+        <div class="swatch"><i style="background:#22c55e"></i><i style="background:#a3e635"></i><i style="background:#fde047"></i><i style="background:#f59e0b"></i><i style="background:#ef4444"></i><i style="background:#7f1d1d"></i></div>
+      </div>
+      <div class="ocard reveal" style="transition-delay:.1s">
+        <div class="oic" style="background:conic-gradient(#ef4444,#f59e0b,#fde047,#22c55e,#06b6d4,#3b82f6,#8b5cf6,#ec4899,#ef4444)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m12 3 2 6-2 3-2-3z" fill="#fff"/></svg>
+        </div>
+        <h4>Slope aspect</h4>
+        <p>See which way every slope faces at a glance. Aspect drives sun, snowpack and hazard — so you can chase the powder and avoid the wrong side of the mountain.</p>
+        <div class="swatch"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><i style="background:#06b6d4"></i><i style="background:#3b82f6"></i><i style="background:#8b5cf6"></i></div>
+      </div>
+      <div class="ocard reveal" style="transition-delay:.2s">
+        <div class="oic" style="background:linear-gradient(135deg,#3b82f6,#1e3a8a)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20 3 17V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 7v13M15 4v13"/></svg>
+        </div>
+        <h4>Satellite, topo &amp; terrain</h4>
+        <p>Switch between crisp satellite imagery, detailed topographic maps and a shaded terrain view — whatever helps you picture the day ahead.</p>
+        <div class="swatch"><i style="background:#3b6b3a"></i><i style="background:#8a9a5b"></i><i style="background:#d9c9a3"></i><i style="background:#b7c7d6"></i><i style="background:#ffffff"></i></div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:34px;color:rgba(255,255,255,.6);font-size:.9rem">Overlays are part of <strong style="color:#ffb488">SteepMap Pro</strong> — everything else is free to explore.</p>
+  </div>
+</section>
 
-<h2>3. Legal Bases for Processing (GDPR)</h2>
-<p>Where the EU General Data Protection Regulation applies, we rely on the following legal bases:</p>
-<ul>
-  <li><strong>Performance of a contract</strong> — to provide the App and its features to you</li>
-  <li><strong>Consent</strong> — for accessing your device location (you may withdraw consent at any time)</li>
-  <li><strong>Legitimate interests</strong> — to secure, maintain, and improve the service and moderate content</li>
-  <li><strong>Legal obligation</strong> — where we must retain or disclose data by law</li>
-</ul>
+<!-- ============ HOW IT WORKS ============ -->
+<section class="block" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Three steps</span>
+      <h2>From scrolling the map to skiing the line</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n">01</div>
+        <h4>Discover &amp; save</h4>
+        <p>Explore the map, find tours that inspire you, and drop them onto your bucket list for the season.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.1s">
+        <div class="n">02</div>
+        <h4>Plan the day</h4>
+        <p>Study the terrain with slope and aspect overlays, check the stats, and pick the right window.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.2s">
+        <div class="n">03</div>
+        <h4>Ski &amp; share</h4>
+        <p>Earn your turns, then share the tour so your friends can repeat it too.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>4. How Your Information Is Shared</h2>
-<p>
-  We do <strong>not</strong> sell your personal data and we do <strong>not</strong> share it with third parties for
-  advertising. We use the following <strong>service providers (data processors)</strong> to run the App:
-</p>
-<table>
-  <tr><th>Provider</th><th>Purpose</th><th>Data involved</th></tr>
-  <tr><td>Google (Sign-In)</td><td>Authentication</td><td>Email, name, profile picture, account ID</td></tr>
-  <tr><td>Supabase</td><td>Backend: authentication, database, file storage</td><td>Account, profile, tour content, photos</td></tr>
-  <tr><td>MapTiler</td><td>Map tiles &amp; styles</td><td>IP address, map/location requests</td></tr>
-  <tr><td>Cloudflare</td><td>Content delivery (map overlay data)</td><td>IP address, technical request data</td></tr>
-</table>
-<p>
-  Public content you choose to publish &mdash; such as tours, your public profile, display name, and profile photo &mdash;
-  is <strong>visible to other users of the App</strong>. Please do not include information in public content that you
-  do not want others to see.
-</p>
-<p>We may also disclose data if required by law, or to protect the rights, safety, and security of our users and the service.</p>
+<!-- ============ GALLERY ============ -->
+<section class="block" id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The reason we build this</span>
+      <h2>Chase the light. Earn the turns.</h2>
+    </div>
+    <div class="gallery reveal">
+      <a class="big" href="#get"><img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=1200&q=80" alt="Skier launching off a ridge above alpine peaks" loading="lazy"/><span class="gcap">Send it</span></a>
+      <a href="#get"><img src="https://images.unsplash.com/photo-1522056615691-da7b8106c665?auto=format&fit=crop&w=700&q=75" alt="Snowboarder with board on a snowy col" loading="lazy"/><span class="gcap">Above the clouds</span></a>
+      <a href="#get"><img src="https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=700&q=75" alt="Aerial view of a snow-covered forest and skin track" loading="lazy"/><span class="gcap">Fresh tracks</span></a>
+      <a class="wide" href="#get"><img src="https://images.unsplash.com/photo-1486078695445-0497c2f58cfe?auto=format&fit=crop&w=1000&q=75" alt="Ski tourer crossing a frozen lake toward the mountains" loading="lazy"/><span class="gcap">The long way up</span></a>
+      <a href="#get"><img src="https://images.unsplash.com/photo-1517299321609-52687d1bc55a?auto=format&fit=crop&w=700&q=75" alt="Snow-covered mountain hut in a silent winter forest" loading="lazy"/><span class="gcap">Mountain refuge</span></a>
+    </div>
+  </div>
+</section>
 
-<h2>5. Data Retention</h2>
-<p>
-  We keep your account and content for as long as your account is active. If you delete specific content (e.g. a tour),
-  it is removed from public view. If you delete your account, we delete or anonymize your personal data within a
-  reasonable period, except where we must retain it to comply with legal obligations or resolve disputes.
-</p>
+<!-- ============ CTA BAND ============ -->
+<section class="cta" id="get">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=2000&q=80" alt="Aurora over a snowy valley" onerror="this.parentElement.parentElement.style.background='linear-gradient(135deg,#0e1c2e,#0a1420)'"/></div>
+  <div class="inner">
+    <div class="reveal in">
+      <span class="eyebrow" style="color:#7cc0ff;justify-content:center;display:inline-flex">Your season starts here</span>
+      <h2 style="margin-top:1rem">The whole mountain, in your pocket</h2>
+      <p>Discover, plan and share backcountry ski tours with Steep. Free to explore — upgrade to Pro when you want the planning overlays.</p>
+      <div class="cta-row">
+        <a class="btn btn-sun js-getapp" href="#get">Get SteepMap</a>
+        <a class="btn btn-ghost" href="#features">Explore features</a>
+      </div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.6);margin-top:1.6rem">Available on Android · iOS &amp; web coming soon</p>
+    </div>
+  </div>
+</section>
 
-<h2>6. Your Rights</h2>
-<p>Depending on your location, you may have the right to:</p>
-<ul>
-  <li>Access the personal data we hold about you</li>
-  <li>Correct inaccurate data</li>
-  <li>Delete your data (&ldquo;right to be forgotten&rdquo;)</li>
-  <li>Restrict or object to certain processing</li>
-  <li>Request a copy of your data (portability)</li>
-  <li>Withdraw consent (e.g. location access) at any time</li>
-</ul>
-<p>To exercise any of these rights, email <a href="mailto:alpinemapapp@gmail.com">alpinemapapp@gmail.com</a>.</p>
+<!-- ============ GET-APP MODAL ============ -->
+<div class="modal-back" id="getModal" role="dialog" aria-modal="true" aria-labelledby="getModalTitle">
+  <div class="modal">
+    <button class="x" data-close aria-label="Close">&times;</button>
+    <span class="eyebrow">Get SteepMap</span>
+    <h3 id="getModalTitle">Choose your platform</h3>
+    <p>Pick where you'd like to explore. More platforms are on the way.</p>
+    <div class="plat">
+      <!-- Replace href="#" with your Google Play listing when it's live -->
+      <a href="#" data-platform="android">
+        <span class="pic"><svg viewBox="0 0 24 24" fill="#5fe39a" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.4.4 0 0 0-.7-.4l-1.87 3.23a11.4 11.4 0 0 0-9.74 0L5.26 5.9a.4.4 0 0 0-.7.4L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2zm10 0a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2z"/></svg></span>
+        <span><span class="pt">Android</span><span class="ps">Get it on Google Play</span></span>
+        <span class="tag live">Available</span>
+      </a>
+      <a href="#" data-platform="ios">
+        <span class="pic"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg></span>
+        <span><span class="pt">iPhone &amp; iPad</span><span class="ps">Coming to the App Store</span></span>
+        <span class="tag soon">Soon</span>
+      </a>
+      <a href="#" data-platform="web">
+        <span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="#7cc0ff" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span>
+        <span><span class="pt">Web app</span><span class="ps">Explore right in your browser</span></span>
+        <span class="tag soon">Soon</span>
+      </a>
+    </div>
+  </div>
+</div>
 
-<h3>Deleting your account and data</h3>
-<p>
-  You can request deletion of your account and associated personal data at any time by emailing
-  <a href="mailto:alpinemapapp@gmail.com">alpinemapapp@gmail.com</a> from the address associated with your account.
-  We will process the request and confirm once completed.
-</p>
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="cols">
+    <div>
+      <a class="brand" href="#top">
+        <span class="mark"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M96 384 L200 196 L268 300 L330 168 L416 384 Z" fill="#fff"/></svg></span>
+        SteepMap
+      </a>
+      <p class="tag">Discover, plan and share backcountry ski tours. Built by skiers, for skiers.</p>
+    </div>
+    <div>
+      <h5>Product</h5>
+      <a href="#features">Features</a>
+      <a href="#overlays">Planning overlays</a>
+      <a href="#how">How it works</a>
+      <a href="#get">Get the app</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="legal/privacy.html">Privacy policy</a>
+      <a href="legal/delete-account.html">Delete your account</a>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <a href="mailto:alpinemapapp@gmail.com">alpinemapapp@gmail.com</a>
+    </div>
+  </div>
+  <div class="bottom">
+    <span>© <span id="year"></span> SteepMap · Ettore Rasca. All rights reserved.</span>
+    <span>Photography from Unsplash — placeholder imagery, to be replaced.</span>
+  </div>
+</footer>
 
-<h2>7. Children&rsquo;s Privacy</h2>
-<p>
-  The App is not directed to children under 16, and we do not knowingly collect personal data from them. If you believe
-  a child has provided us with personal data, contact us and we will delete it.
-</p>
+<script>
+  // Sticky nav background on scroll
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 40); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-<h2>8. Data Security</h2>
-<p>
-  Data is transmitted over encrypted connections (HTTPS/TLS) and stored with our backend provider (Supabase) using
-  access controls that restrict data to the appropriate account. No method of transmission or storage is completely
-  secure, but we take reasonable measures to protect your information.
-</p>
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
 
-<h2>9. International Data Transfers</h2>
-<p>
-  Our providers may process and store data on servers located in the European Union and other countries. Where data is
-  transferred internationally, appropriate safeguards are applied as required by law.
-</p>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-<h2>10. Changes to This Policy</h2>
-<p>
-  We may update this Privacy Policy from time to time. When we do, we will revise the &ldquo;Last updated&rdquo; date at
-  the top of this page. Significant changes may be communicated within the App.
-</p>
-
-<h2>11. Contact Us</h2>
-<p>
-  Questions or requests regarding this policy or your personal data:<br />
-  <strong>the Alpine Map Support Team</strong><br />
-  <a href="mailto:alpinemapapp@gmail.com">alpinemapapp@gmail.com</a>
-</p>
-
+  // Get-app modal
+  var modal = document.getElementById('getModal');
+  var lastFocus = null;
+  function openModal(){ lastFocus = document.activeElement; modal.classList.add('open'); document.body.style.overflow='hidden'; var x=modal.querySelector('.x'); if(x) x.focus(); }
+  function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  document.querySelectorAll('.js-getapp').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); openModal(); }); });
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  modal.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  // Placeholder platform links: keep the modal open until real store URLs are set
+  modal.querySelectorAll('.plat a').forEach(function(a){ a.addEventListener('click', function(e){ if(a.getAttribute('href') === '#') e.preventDefault(); }); });
+</script>
 </body>
 </html>
