@@ -127,7 +127,7 @@
 
   /* ---------- HERO ---------- */
   .hero{position:relative;min-height:100svh;display:flex;align-items:center;color:#fff;padding-top:72px;overflow:hidden}
-  #features,#overlays,#bucket,#how,#gallery,#about,#get{scroll-margin-top:76px}
+  #features,#maps,#overlays,#bucket,#how,#gallery,#about,#get{scroll-margin-top:76px}
   .hero .bg{position:absolute;inset:0;z-index:-2;background:#0a1420 center/cover no-repeat}
   .hero .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0;transition:opacity 1.4s var(--ease)}
   .hero .bg img.on{opacity:1}
@@ -260,6 +260,14 @@
   .swatch{display:flex;height:10px;border-radius:6px;overflow:hidden;margin-top:16px}
   .swatch i{flex:1}
   @media(max-width:820px){.overlay-grid{grid-template-columns:1fr}}
+  /* "Pro" pill on the section eyebrow + the coming-soon-to-Pro row */
+  .pro-tag{margin-left:.6rem;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    padding:.22rem .55rem;border-radius:999px;background:rgba(255,138,76,.18);color:#ffb488;vertical-align:middle}
+  .pro-soon{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:44px}
+  .pro-soon .lbl{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ffb488}
+  .pro-soon .pill{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .95rem;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);font-size:.92rem;font-weight:600;color:rgba(255,255,255,.85)}
+  .pro-soon .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:#ffb488;flex:none}
 
   /* ---------- MAPS SECTION (live 3D map background) ---------- */
   .mapvid{position:relative;color:#fff;overflow:hidden;isolation:isolate;min-height:80vh;display:flex;align-items:center;background:#0a1420}
@@ -542,8 +550,8 @@
     </a>
     <nav class="links">
       <a href="#features">Features</a>
-      <a href="#overlays">Planning</a>
-      <a href="#how">How it works</a>
+      <a href="#maps">Our Map</a>
+      <a href="#overlays">Pro Features</a>
       <a href="#about">About us</a>
       <a class="btn btn-primary nav-cta js-getapp" href="#get">Get the app</a>
     </nav>
@@ -698,8 +706,8 @@
 
   <div class="inner reveal">
     <span class="eyebrow">Maps built for the backcountry</span>
-    <h2>The whole mountain, in stunning detail</h2>
-    <p>Placeholder copy - this section will describe the STEEP map basemaps: high-resolution satellite imagery, detailed topographic maps and shaded 3D terrain, all rendered smoothly so you can read the mountain from ridge to valley floor.</p>
+    <h2>The best outdoor terrain map - free for everyone</h2>
+    <p>We set out to build the finest outdoor terrain map there is, and we give it away for free: worldwide 3D terrain in both summer and winter, complete with trails, paths and ski-resort pistes &amp; lifts. Spin the globe below to explore it. <strong style="color:#ffb488">Satellite imagery</strong> is a STEEP map Pro feature.</p>
   </div>
 
   <div class="mapswitch" id="mapswitch">
@@ -744,9 +752,9 @@
   </div>
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow" style="color:#7cc0ff">Plan like a pro</span>
+      <span class="eyebrow" style="color:#7cc0ff">Plan like a pro<span class="pro-tag">Pro</span></span>
       <h2>Read the mountain before you're on it</h2>
-      <p>Toggle map overlays to understand the terrain from your couch. Combine slope steepness and aspect with satellite and topo basemaps to plan a smart, safe route up and down.</p>
+      <p>These are <strong style="color:#ffb488">STEEP map Pro</strong> features. Toggle slope-steepness and aspect overlays over satellite and topo basemaps to understand the terrain from your couch and plan a smart, safe route up and down.</p>
     </div>
     <div class="plan-live reveal">
       <div class="plan-cards" id="planCards">
@@ -814,7 +822,11 @@
       </div>
     </div>
 
-    <p style="text-align:center;margin-top:48px;color:rgba(255,255,255,.6);font-size:.9rem">Some of the map features <strong style="color:#ffb488">STEEP map Pro</strong> - everything else is free to explore.</p>
+    <div class="pro-soon reveal">
+      <span class="lbl">Coming soon to Pro</span>
+      <span class="pill">Offline maps</span>
+      <span class="pill">Winter satellite imagery</span>
+    </div>
   </div>
 </section>
 
@@ -953,8 +965,8 @@
     <div>
       <h5>Product</h5>
       <a href="#features">Features</a>
-      <a href="#overlays">Planning overlays</a>
-      <a href="#how">How it works</a>
+      <a href="#maps">Our Map</a>
+      <a href="#overlays">Pro Features</a>
       <a href="#about">About us</a>
       <a href="#get">Get the app</a>
     </div>
