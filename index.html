@@ -21,11 +21,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
 
-<!-- Live 3D map (Maps section) — libraries. @protomaps/basemaps is imported as a module in the map script. -->
-<link href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" rel="stylesheet" />
-<script defer src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
-<script defer src="https://unpkg.com/pmtiles@4.4.1/dist/pmtiles.js"></script>
-<script defer src="https://unpkg.com/maplibre-contour@0.1.0/dist/index.min.js"></script>
+<!-- Live 3D map (Maps section): libraries are lazy-loaded on-demand (see the map script
+     at the end of <body>), so ~1 MB of MapLibre JS stays off the initial page load.
+     Warm up the connections the map will need so its first tiles arrive fast. -->
+<link rel="preconnect" href="https://cdn.steepmap.eu" crossorigin />
+<link rel="preconnect" href="https://steep-dem.ettore-rasca.workers.dev" crossorigin />
+<link rel="preconnect" href="https://unpkg.com" crossorigin />
+<link rel="preconnect" href="https://esm.sh" crossorigin />
+<link rel="dns-prefetch" href="https://api.maptiler.com" />
 
 <style>
   :root{
@@ -279,6 +282,17 @@
   .mapswitch button{border:0;background:transparent;font:inherit;font-weight:700;font-size:.85rem;
     color:rgba(255,255,255,.72);padding:.5rem 1.05rem;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
   .mapswitch button.active{background:#fff;color:#0b1622}
+  /* Loading indicator — top-right pill with a small spinner; hidden until loading starts. */
+  .maploading{position:absolute;top:16px;right:16px;z-index:2;
+    display:flex;align-items:center;gap:.5rem;padding:.5rem .85rem;border-radius:999px;
+    background:rgba(10,20,32,.55);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);
+    font-size:.8rem;font-weight:600;color:rgba(255,255,255,.88);
+    opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+  .maploading.on{opacity:1}
+  .maploading .spin{width:14px;height:14px;flex:none;border-radius:50%;
+    border:2px solid rgba(255,255,255,.28);border-top-color:#7cc0ff;animation:maploadspin .8s linear infinite}
+  @keyframes maploadspin{to{transform:rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){.maploading .spin{animation:none}}
   .mapvid .maplibregl-ctrl-attrib{font-size:10px}
   @media(max-width:600px){.mapvid{min-height:72vh}.mapvid .inner{padding:90px 24px}.mapswitch{bottom:16px}}
 
@@ -675,6 +689,12 @@
 <section class="mapvid" id="maps">
   <!-- Live 3D STEEP map — the section background (dark fallback on reduced-motion / no-WebGL). -->
   <div id="mapbg" aria-hidden="true"></div>
+
+  <!-- Loading indicator (top-right): shown while the map libraries + first tiles load. -->
+  <div class="maploading" id="maploading" role="status">
+    <span class="spin" aria-hidden="true"></span>
+    <span>Loading map…</span>
+  </div>
 
   <div class="inner reveal">
     <span class="eyebrow">Maps built for the backcountry</span>
@@ -1157,19 +1177,39 @@
  *   satellite       : MapTiler imagery + STEEP place/peak labels (NO contours)
  * Progressive enhancement: the <video> stays as the fallback for reduced-motion,
  * no-WebGL, and small screens; the live map crossfades in over it on capable devices. */
-(function bootWhenLibsReady(){
-  if (typeof maplibregl === 'undefined' || typeof pmtiles === 'undefined' || typeof mlcontour === 'undefined') {
-    return void setTimeout(bootWhenLibsReady, 60);   // wait for the deferred CDN libs
-  }
+(function(){
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const webgl  = (() => { try { const c=document.createElement('canvas');
     return !!(window.WebGLRenderingContext && (c.getContext('webgl')||c.getContext('experimental-webgl'))); }
     catch(e){ return false; } })();
   if (reduce || !webgl) return;   // fall back to the dark section background
 
-  import('https://esm.sh/@protomaps/basemaps@5.7.2')
-    .then(({ layers: pmLayers, namedFlavor }) => init(pmLayers, namedFlavor))
-    .catch(() => { /* import failed → video fallback stays */ });
+  /* Lazy-load the ~1 MB of map libraries only when the Maps section nears the viewport,
+   * keeping them off the initial page load (and skipping them entirely for visitors who
+   * never scroll that far). The `rootMargin` starts the fetch ~one screen early so the
+   * map is usually ready by the time the section is in view. */
+  const loadScript = src => new Promise((res,rej)=>{ const s=document.createElement('script');
+    s.src=src; s.async=true; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
+  let started=false;
+  function loadAndInit(){
+    if(started) return; started=true;
+    const ld = document.getElementById('maploading'); if (ld) ld.classList.add('on');   // show "loading" + spinner
+    const css=document.createElement('link'); css.rel='stylesheet';
+    css.href='https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css'; document.head.appendChild(css);
+    Promise.all([
+      loadScript('https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js'),
+      loadScript('https://unpkg.com/pmtiles@4.4.1/dist/pmtiles.js'),
+      loadScript('https://unpkg.com/maplibre-contour@0.1.0/dist/index.min.js'),
+    ]).then(() => import('https://esm.sh/@protomaps/basemaps@5.7.2'))
+      .then(({ layers: pmLayers, namedFlavor }) => init(pmLayers, namedFlavor))
+      .catch(() => { if (ld) ld.classList.remove('on'); /* load failed → dark section stays */ });
+  }
+  const section = document.getElementById('maps');
+  if (section && 'IntersectionObserver' in window){
+    const io = new IntersectionObserver(es => { if (es.some(e=>e.isIntersecting)){ io.disconnect(); loadAndInit(); } },
+      { rootMargin: '800px 0px' });
+    io.observe(section);
+  } else { loadAndInit(); }
 
   function init(pmLayers, namedFlavor){
     maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
@@ -1381,6 +1421,9 @@
     const map = new maplibregl.Map({
       container:'mapbg', style:STEEP_MAP_STYLE, center:CENTER, zoom:ZOOM, pitch:PITCH, bearing:0,
       interactive:false, attributionControl:{compact:true}, maxPitch:85,
+      // Cap the render resolution — a rotating background doesn't need full retina, and this
+      // roughly halves GPU fill (and battery draw) on 2×/3× screens.
+      pixelRatio: Math.min(1.5, window.devicePixelRatio || 1),
     });
 
     map.on('styleimagemissing', e => { if(e.id===STEEP_PEAK_ICON && !map.hasImage(STEEP_PEAK_ICON)) map.addImage(STEEP_PEAK_ICON, makePeakTriangle()); });
@@ -1395,23 +1438,31 @@
     map.on('style.load', applyForCurrentBasemap);
 
     map.on('load', () => {
-      document.getElementById('mapbg').classList.add('on');       // fade the live map in
-      document.getElementById('mapswitch').classList.add('on');   // reveal the switcher
-      start();
+      document.getElementById('mapbg').classList.add('on');           // fade the live map in
+      document.getElementById('mapswitch').classList.add('on');       // reveal the switcher
+      const ld = document.getElementById('maploading'); if (ld) ld.classList.remove('on');  // done loading
+      updateRun();
     });
 
-    /* ---- slow 360° rotation, framerate-independent ---- */
-    let last=null, running=false, rafId=null;
+    /* ---- slow 360° rotation, framerate-independent ----
+     * The per-frame setBearing is the single heaviest ongoing cost, so it runs ONLY while
+     * the Maps section is actually on screen AND the tab is visible. Both conditions are
+     * re-checked together (updateRun) so returning to the tab while scrolled away doesn't
+     * quietly restart it. */
+    let last=null, running=false, rafId=null, inView=false;
     function frame(ts){ if(!running) return; if(last==null) last=ts; const dt=(ts-last)/1000; last=ts;
       map.setBearing((map.getBearing()+ROTATE_DEG_PER_SEC*dt)%360); rafId=requestAnimationFrame(frame); }
-    function start(){ if(running) return; running=true; last=null; rafId=requestAnimationFrame(frame); }
-    function stop(){ running=false; if(rafId) cancelAnimationFrame(rafId); rafId=null; }
+    function updateRun(){
+      const shouldRun = inView && !document.hidden;
+      if (shouldRun && !running){ running=true; last=null; rafId=requestAnimationFrame(frame); }
+      else if (!shouldRun && running){ running=false; if(rafId) cancelAnimationFrame(rafId); rafId=null; }
+    }
 
     if('IntersectionObserver' in window){
-      new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?start():stop()),{threshold:0.05})
+      new IntersectionObserver(es => { inView = es.some(e=>e.isIntersecting); updateRun(); }, {threshold:0})
         .observe(document.getElementById('maps'));
-    }
-    document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+    } else { inView = true; updateRun(); }
+    document.addEventListener('visibilitychange', updateRun);
 
     /* ---- basemap switcher ---- */
     const STYLES = { summer:STEEP_MAP_STYLE, winter:STEEP_MAP_STYLE_WINTER, satellite:SATELLITE_URL };
