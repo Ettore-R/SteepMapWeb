@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>STEEP map - Discover, plan &amp; share backcountry ski tours</title>
-<meta name="description" content="STEEP map helps you explore the backcountry, keep a bucket list of lines you want to ski, repeat tours your friends have done, and plan every descent with slope-angle and aspect overlays." />
+<title data-i18n="meta.title">STEEP map - Discover, plan &amp; share backcountry ski tours</title>
+<meta name="description" data-i18n-content="meta.description" content="STEEP map helps you explore the backcountry, keep a bucket list of lines you want to ski, repeat tours your friends have done, and plan every descent with slope-angle and aspect overlays." />
 <meta name="theme-color" content="#0a1420" />
 
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="STEEP map - Discover, plan &amp; share ski tours" />
-<meta property="og:description" content="Explore the backcountry, keep your bucket list, repeat your friends' lines, and plan tours with slope &amp; aspect overlays." />
+<meta property="og:title" data-i18n-content="og.title" content="STEEP map - Discover, plan &amp; share ski tours" />
+<meta property="og:description" data-i18n-content="og.description" content="Explore the backcountry, keep your bucket list, repeat your friends' lines, and plan tours with slope &amp; aspect overlays." />
 <meta property="og:image" content="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&w=1200&q=80" />
 
 <link rel="icon" type="image/svg+xml" href="media/brand/icon.svg?v=2" />
@@ -115,7 +115,28 @@
   header.nav.scrolled nav.links a.nav-cta,
   header.nav.scrolled nav.links a.nav-cta:hover{color:#fff}
   .nav-cta{padding:.6rem 1.2rem;font-size:.9rem;white-space:nowrap;flex:none}
+  /* Language switcher — a compact globe + native <select>, themed for both nav states */
+  .lang-switch{display:inline-flex;align-items:center;gap:.35rem;flex:none;
+    color:rgba(255,255,255,.85);cursor:pointer;transition:color .2s}
+  .lang-switch:hover{color:#fff}
+  .lang-switch svg{width:18px;height:18px;flex:none}
+  .lang-switch select{
+    appearance:none;-webkit-appearance:none;-moz-appearance:none;
+    background:transparent;border:0;color:inherit;font:inherit;font-weight:600;font-size:.95rem;
+    padding:.15rem 1.1rem .15rem .1rem;margin:0;cursor:pointer;line-height:1;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .1rem center;
+  }
+  .lang-switch select:focus-visible{outline:2px solid var(--blue-300);outline-offset:3px;border-radius:6px}
+  .lang-switch select option{color:#0b1622;background:#fff}
+  /* Scrolled / light nav: dark ink so it stays legible on the frosted white bar */
+  header.nav.scrolled .lang-switch{color:var(--slate)}
+  header.nav.scrolled .lang-switch:hover{color:var(--ink)}
+  header.nav.scrolled .lang-switch select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235b6b7d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
   @media(max-width:820px){nav.links a:not(.nav-cta){display:none}}
+  @media(max-width:420px){.lang-switch select{font-size:.82rem}.lang-switch svg{width:16px;height:16px}}
   /* Narrow phones: keep the bar inside the viewport instead of overflowing it */
   @media(max-width:420px){
     header.nav .bar{padding:12px 16px;gap:10px}
@@ -549,11 +570,22 @@
       <span class="wm">STEEP<span class="wm-sub">map</span></span>
     </a>
     <nav class="links">
-      <a href="#features">Features</a>
-      <a href="#maps">Our Map</a>
-      <a href="#overlays">Pro Features</a>
-      <a href="#about">About us</a>
-      <a class="btn btn-primary nav-cta js-getapp" href="#get">Get the app</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#maps" data-i18n="nav.map">Our Map</a>
+      <a href="#overlays" data-i18n="nav.pro">Pro Features</a>
+      <a href="#about" data-i18n="nav.about">About us</a>
+      <label class="lang-switch" aria-label="Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20"/></svg>
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="it">Italiano</option>
+          <option value="es">Español</option>
+          <option value="ja">日本語</option>
+        </select>
+      </label>
+      <a class="btn btn-primary nav-cta js-getapp" href="#get" data-i18n="nav.getapp">Get the app</a>
     </nav>
   </div>
 </header>
@@ -565,19 +597,19 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="reveal in">
-        <span class="eyebrow" style="color:#bfe0ff">Backcountry, mapped</span>
-        <h1 style="margin-top:1rem">Find your next line<br><span class="g">in the backcountry.</span></h1>
-        <p class="lead">Discover new ski tours, keep a bucket list of the descents you dream about, repeat the lines your friends have skied, and explore the most astonishing backcountry map.</p>
+        <span class="eyebrow" style="color:#bfe0ff" data-i18n="hero.eyebrow">Backcountry, mapped</span>
+        <h1 style="margin-top:1rem" data-i18n="hero.h1">Find your next line<br><span class="g">in the backcountry.</span></h1>
+        <p class="lead" data-i18n="hero.lead">Discover new ski tours, keep a bucket list of the descents you dream about, repeat the lines your friends have skied, and explore the most astonishing backcountry map.</p>
         <div class="cta-row">
-          <a class="btn btn-sun js-getapp" href="#get">Start exploring</a>
-          <a class="btn btn-ghost" href="#features">Find out more</a>
+          <a class="btn btn-sun js-getapp" href="#get" data-i18n="hero.cta.explore">Start exploring</a>
+          <a class="btn btn-ghost" href="#features" data-i18n="hero.cta.more">Find out more</a>
         </div>
         <div class="meta">
-          <div class="stat"><span class="num">Discover</span><span class="lbl">Tours near you &amp; worldwide</span></div>
+          <div class="stat"><span class="num" data-i18n="hero.stat.discover">Discover</span><span class="lbl" data-i18n="hero.stat.discover.lbl">Tours near you &amp; worldwide</span></div>
           <div class="div"></div>
-          <div class="stat"><span class="num">Plan</span><span class="lbl">Slope &amp; aspect overlays</span></div>
+          <div class="stat"><span class="num" data-i18n="hero.stat.plan">Plan</span><span class="lbl" data-i18n="hero.stat.plan.lbl">Slope &amp; aspect overlays</span></div>
           <div class="div"></div>
-          <div class="stat"><span class="num">Share</span><span class="lbl">Follow your crew's lines</span></div>
+          <div class="stat"><span class="num" data-i18n="hero.stat.share">Share</span><span class="lbl" data-i18n="hero.stat.share.lbl">Follow your crew's lines</span></div>
         </div>
       </div>
 
@@ -603,7 +635,7 @@
       </div>
     </div>
   </div>
-  <div class="scroll-hint"><span class="mouse"></span>Scroll</div>
+  <div class="scroll-hint"><span class="mouse"></span><span data-i18n="hero.scroll">Scroll</span></div>
 </section>
 
 <!-- ============ VALUE STRIP ============ -->
@@ -611,19 +643,19 @@
   <div class="wrap">
     <div class="vcell reveal">
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 7-16 6 10 3-5 2 11z"/></svg></div>
-      <div><h4>Explore</h4><p>Uncover new backcountry tours on an interactive map.</p></div>
+      <div><h4 data-i18n="value.explore.h">Explore</h4><p data-i18n="value.explore.p">Uncover new backcountry tours on an interactive map.</p></div>
     </div>
     <div class="vcell reveal" style="transition-delay:.08s">
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
-      <div><h4>Bucket list</h4><p>Save the lines you dream of skiing and tick them off.</p></div>
+      <div><h4 data-i18n="value.bucket.h">Bucket list</h4><p data-i18n="value.bucket.p">Save the lines you dream of skiing and tick them off.</p></div>
     </div>
     <div class="vcell reveal" style="transition-delay:.16s">
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <div><h4>Repeat</h4><p>Follow friends and re-ski the tours they've done.</p></div>
+      <div><h4 data-i18n="value.repeat.h">Repeat</h4><p data-i18n="value.repeat.p">Follow friends and re-ski the tours they've done.</p></div>
     </div>
     <div class="vcell reveal" style="transition-delay:.24s">
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20 3 17V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 7v13M15 4v13"/></svg></div>
-      <div><h4>Plan</h4><p>Read the terrain with slope-angle &amp; aspect overlays.</p></div>
+      <div><h4 data-i18n="value.plan.h">Plan</h4><p data-i18n="value.plan.p">Read the terrain with slope-angle &amp; aspect overlays.</p></div>
     </div>
   </div>
 </div>
@@ -631,28 +663,28 @@
 <!-- ============ FEATURES ============ -->
 <section class="block" id="features">
   <div class="sec-head reveal">
-    <span class="eyebrow">Everything for your day out</span>
-    <h2>One app, from first idea to final turn</h2>
-    <p>Steep brings discovery, planning and your community together - so you spend less time guessing and more time in the good snow.</p>
+    <span class="eyebrow" data-i18n="feat.head.eyebrow">Everything for your day out</span>
+    <h2 data-i18n="feat.head.h2">One app, from first idea to final turn</h2>
+    <p data-i18n="feat.head.p">Steep brings discovery, planning and your community together - so you spend less time guessing and more time in the good snow.</p>
   </div>
 
   <!-- Feature 1: Explore (laptop + phone combo) -->
   <div class="feature reveal">
     <div class="copy">
-      <span class="eyebrow">Explore the backcountry</span>
-      <h3>Discover lines you never knew existed</h3>
-      <p>Pan across the map and watch tours light up - from mellow valley tours to committing alpine couloirs. Every line comes with photos, stats and the story of who's skied it, on desktop and in your pocket.</p>
+      <span class="eyebrow" data-i18n="feat1.eyebrow">Explore the backcountry</span>
+      <h3 data-i18n="feat1.h3">Discover lines you never knew existed</h3>
+      <p data-i18n="feat1.p">Pan across the map and watch tours light up - from mellow valley tours to committing alpine couloirs. Every line comes with photos, stats and the story of who's skied it, on desktop and in your pocket.</p>
       <ul>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Browse an interactive map packed with lines from the community</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Filter by vertical, difficulty and region</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Read comments and reviews from those who already skied the line</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="feat1.li1">Browse an interactive map packed with lines from the community</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="feat1.li2">Filter by vertical, difficulty and region</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="feat1.li3">Read comments and reviews from those who already skied the line</span></li>
       </ul>
     </div>
     <div class="media">
       <div class="combo" data-show="phone">
         <div class="device-toggle" role="tablist" aria-label="Choose device">
-          <button type="button" class="active" data-dev="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Phone</button>
-          <button type="button" data-dev="desktop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Desktop</button>
+          <button type="button" class="active" data-dev="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span data-i18n="device.phone">Phone</span></button>
+          <button type="button" data-dev="desktop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span data-i18n="device.desktop">Desktop</span></button>
         </div>
         <div class="stage-slot"><div class="stage-track">
           <div class="stage-pane">
@@ -675,13 +707,13 @@
   <!-- Feature 2: Ski with your crew (phone only) -->
   <div class="feature rev reveal">
     <div class="copy">
-      <span class="eyebrow">Ski with your crew</span>
-      <h3>Repeat the tours your friends have skied</h3>
-      <p>Your feed shows what your friends have been skiing. Loved the look of that descent? Open it, save it, and repeat it yourself - with the same track, stats and beta they used.</p>
+      <span class="eyebrow" data-i18n="feat2.eyebrow">Ski with your crew</span>
+      <h3 data-i18n="feat2.h3">Repeat the tours your friends have skied</h3>
+      <p data-i18n="feat2.p">Your feed shows what your friends have been skiing. Loved the look of that descent? Open it, save it, and repeat it yourself - with the same track, stats and beta they used.</p>
       <ul>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A live feed of your friends' latest tours</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Repeat any tour with one tap</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>React, comment and plan the next one together</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="feat2.li1">A live feed of your friends' latest tours</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="feat2.li2">Repeat any tour with one tap</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="feat2.li3">React, comment and plan the next one together</span></li>
       </ul>
     </div>
     <div class="media">
@@ -701,19 +733,19 @@
   <!-- Loading indicator (top-right): shown while the map libraries + first tiles load. -->
   <div class="maploading" id="maploading" role="status">
     <span class="spin" aria-hidden="true"></span>
-    <span>Loading map…</span>
+    <span data-i18n="maps.loading">Loading map…</span>
   </div>
 
   <div class="inner reveal">
-    <span class="eyebrow">Maps built for the backcountry</span>
-    <h2>The best outdoor terrain map - free for everyone</h2>
-    <p>We set out to build the finest outdoor terrain map there is, and we give it away for free: worldwide 3D terrain in both summer and winter, complete with trails, paths and ski-resort pistes &amp; lifts.<br> <strong style="color:#ffb488">Satellite imagery</strong> is a STEEP map Pro feature, all the rest is free to explore!</p>
+    <span class="eyebrow" data-i18n="maps.eyebrow">Maps built for the backcountry</span>
+    <h2 data-i18n="maps.h2">The best outdoor terrain map - free for everyone</h2>
+    <p data-i18n="maps.p">We set out to build the finest outdoor terrain map there is, and we give it away for free: worldwide 3D terrain in both summer and winter, complete with trails, paths and ski-resort pistes &amp; lifts.<br> <strong style="color:#ffb488">Satellite imagery</strong> is a STEEP map Pro feature, all the rest is free to explore!</p>
   </div>
 
   <div class="mapswitch" id="mapswitch">
-    <button data-map="summer" class="active">Summer</button>
-    <button data-map="winter">Winter</button>
-    <button data-map="satellite">Satellite</button>
+    <button data-map="summer" class="active" data-i18n="maps.summer">Summer</button>
+    <button data-map="winter" data-i18n="maps.winter">Winter</button>
+    <button data-map="satellite" data-i18n="maps.satellite">Satellite</button>
   </div>
 </section>
 
@@ -721,25 +753,25 @@
 <section class="block bucket" id="bucket">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow" style="justify-content:center;display:inline-flex">Your bucket list</span>
-      <h2>Keep every dream line in one place</h2>
-      <p>Found a tour that makes your heart race? Save it to your bucket list with a tap, come back when the conditions align, and tick it off once you've earned the turns.</p>
+      <span class="eyebrow" style="justify-content:center;display:inline-flex" data-i18n="bucket.eyebrow">Your bucket list</span>
+      <h2 data-i18n="bucket.h2">Keep every dream line in one place</h2>
+      <p data-i18n="bucket.p">Found a tour that makes your heart race? Save it to your bucket list with a tap, come back when the conditions align, and tick it off once you've earned the turns.</p>
     </div>
     <div class="bkt-cards reveal">
       <div class="bkt-card">
         <div class="bic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
-        <h4>Save in a tap</h4>
-        <p>Bookmark any tour to a personal bucket list while you explore the map.</p>
+        <h4 data-i18n="bucket.c1.h">Save in a tap</h4>
+        <p data-i18n="bucket.c1.p">Bookmark any tour to a personal bucket list while you explore the map.</p>
       </div>
       <div class="bkt-card">
         <div class="bic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <h4>Plan the season</h4>
-        <p>See the whole season ahead at a glance and pick lines as the conditions come in.</p>
+        <h4 data-i18n="bucket.c2.h">Plan the season</h4>
+        <p data-i18n="bucket.c2.p">See the whole season ahead at a glance and pick lines as the conditions come in.</p>
       </div>
       <div class="bkt-card">
         <div class="bic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h4>Build your logbook</h4>
-        <p>Mark tours as done and watch your personal logbook of skied lines grow.</p>
+        <h4 data-i18n="bucket.c3.h">Build your logbook</h4>
+        <p data-i18n="bucket.c3.p">Mark tours as done and watch your personal logbook of skied lines grow.</p>
       </div>
     </div>
   </div>
@@ -752,24 +784,24 @@
   </div>
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow" style="color:#7cc0ff">Plan like a pro<span class="pro-tag">Pro</span></span>
-      <h2>Read the mountain before you're on it</h2>
-      <p>These are <strong style="color:#ffb488">STEEP map Pro</strong> features. Toggle slope-steepness and aspect overlays to find the best snow conditions for your next day out. Activate satellite view for crips worldwide terrain.</p>
+      <span class="eyebrow" style="color:#7cc0ff"><span data-i18n="ov.eyebrow">Plan like a pro</span><span class="pro-tag">Pro</span></span>
+      <h2 data-i18n="ov.h2">Read the mountain before you're on it</h2>
+      <p data-i18n="ov.p">These are <strong style="color:#ffb488">STEEP map Pro</strong> features. Toggle slope-steepness and aspect overlays to find the best snow conditions for your next day out. Activate satellite view for crisp worldwide terrain.</p>
     </div>
     <div class="plan-live reveal">
       <div class="plan-cards" id="planCards">
       <button class="ocard active" data-view="steep">
-        <h4>Slope steepness<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></h4>
+        <h4><span data-i18n="ov.steep.h">Slope steepness</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></h4>
         <div class="oc-body"><div class="oc-inner">
-        <p>A colour-graded overlay reveals exactly how steep each pitch is - spot the 35–45° zones that matter most for your line and your safety margin.</p>
+        <p data-i18n="ov.steep.p">A colour-graded overlay reveals exactly how steep each pitch is - spot the 35–45° zones that matter most for your line and your safety margin.</p>
         <div class="legend-steep"><i style="background:#FFD700"></i><i style="background:#FF8C00"></i><i style="background:#E63900"></i><i style="background:#CC0000"></i><i style="background:#8B0000"></i><i style="background:#4B0082"></i></div>
         <div class="legend-ticks"><span>25°</span><span>30°</span><span>35°</span><span>40°</span><span>45°</span><span>50°+</span></div>
         </div></div>
       </button>
       <button class="ocard" data-view="aspect">
-        <h4>Slope aspect<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></h4>
+        <h4><span data-i18n="ov.aspect.h">Slope aspect</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></h4>
         <div class="oc-body"><div class="oc-inner">
-        <p>See which way every slope faces at a glance. Aspect drives sun, snowpack and hazard - so you can chase the powder and avoid the wrong side of the mountain.</p>
+        <p data-i18n="ov.aspect.p">See which way every slope faces at a glance. Aspect drives sun, snowpack and hazard - so you can chase the powder and avoid the wrong side of the mountain.</p>
         <svg class="rose" viewBox="0 0 100 100" aria-label="Aspect legend rose">
           <path d="M 33.52 7.06 A 46 46 0 0 1 66.48 7.06 L 55.02 36.93 A 14 14 0 0 0 44.98 36.93 Z" fill="#1644B6" stroke="rgba(255,255,255,.35)" stroke-width=".8"/><text x="50.0" y="20.0" text-anchor="middle" dominant-baseline="central" font-size="9.5" font-weight="700" fill="#fff">N</text>
           <path d="M 68.71 7.98 A 46 46 0 0 1 92.02 31.29 L 62.79 44.31 A 14 14 0 0 0 55.69 37.21 Z" fill="#4285F4" stroke="rgba(255,255,255,.35)" stroke-width=".8"/><text x="71.2" y="28.8" text-anchor="middle" dominant-baseline="central" font-size="7" font-weight="700" fill="#fff">NE</text>
@@ -784,9 +816,9 @@
         </div></div>
       </button>
       <button class="ocard" data-view="base">
-        <h4>Satellite, topo &amp; terrain<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></h4>
+        <h4><span data-i18n="ov.base.h">Satellite, topo &amp; terrain</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></h4>
         <div class="oc-body"><div class="oc-inner">
-        <p>Switch between crisp satellite imagery, detailed topographic maps and a shaded terrain view - whatever helps you picture the day ahead.</p>
+        <p data-i18n="ov.base.p">Switch between crisp satellite imagery, detailed topographic maps and a shaded terrain view - whatever helps you picture the day ahead.</p>
         <div class="swatch"><i style="background:#3b6b3a"></i><i style="background:#8a9a5b"></i><i style="background:#d9c9a3"></i><i style="background:#b7c7d6"></i><i style="background:#ffffff"></i></div>
         </div></div>
       </button>
@@ -795,8 +827,8 @@
       <!-- One laptop + one phone that swap with the active card -->
       <div class="plan-stage" id="planStage" data-show="phone">
         <div class="device-toggle" role="tablist" aria-label="Choose device">
-          <button type="button" class="active" data-dev="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Phone</button>
-          <button type="button" data-dev="desktop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Desktop</button>
+          <button type="button" class="active" data-dev="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span data-i18n="device.phone">Phone</span></button>
+          <button type="button" data-dev="desktop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span data-i18n="device.desktop">Desktop</span></button>
         </div>
         <div class="stage-slot"><div class="stage-track">
           <div class="stage-pane">
@@ -823,9 +855,9 @@
     </div>
 
     <div class="pro-soon reveal">
-      <span class="lbl">Coming soon to Pro</span>
-      <span class="pill">Offline maps</span>
-      <span class="pill">Winter satellite imagery</span>
+      <span class="lbl" data-i18n="ov.soon.lbl">Coming soon to Pro</span>
+      <span class="pill" data-i18n="ov.soon.offline">Offline maps</span>
+      <span class="pill" data-i18n="ov.soon.winter">Winter satellite imagery</span>
     </div>
   </div>
 </section>
@@ -834,24 +866,24 @@
 <section class="block" id="how">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Ready for the winter season?</span>
-      <h2>From scrolling the map to skiing the line</h2>
+      <span class="eyebrow" data-i18n="how.eyebrow">Ready for the winter season?</span>
+      <h2 data-i18n="how.h2">From scrolling the map to skiing the line</h2>
     </div>
     <div class="steps">
       <div class="step reveal">
         <div class="n">01</div>
-        <h4>Discover &amp; save</h4>
-        <p>Explore the map, find tours that inspire you, and drop them onto your bucket list for the season.</p>
+        <h4 data-i18n="how.s1.h">Discover &amp; save</h4>
+        <p data-i18n="how.s1.p">Explore the map, find tours that inspire you, and drop them onto your bucket list for the season.</p>
       </div>
       <div class="step reveal" style="transition-delay:.1s">
         <div class="n">02</div>
-        <h4>Plan the day</h4>
-        <p>Study the terrain with slope and aspect overlays, check the stats, and pick the right window.</p>
+        <h4 data-i18n="how.s2.h">Plan the day</h4>
+        <p data-i18n="how.s2.p">Study the terrain with slope and aspect overlays, check the stats, and pick the right window.</p>
       </div>
       <div class="step reveal" style="transition-delay:.2s">
         <div class="n">03</div>
-        <h4>Ski &amp; share</h4>
-        <p>Earn your turns, then share the tour so your friends can repeat it too.</p>
+        <h4 data-i18n="how.s3.h">Ski &amp; share</h4>
+        <p data-i18n="how.s3.p">Earn your turns, then share the tour so your friends can repeat it too.</p>
       </div>
     </div>
   </div>
@@ -861,32 +893,32 @@
 <section class="block about" id="about">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Who's behind STEEP map</span>
-      <h2>From the community, for the community</h2>
-      <p>We're a small group of developers and committed skiers. We started STEEP map because we wanted a better way to connect skiers all around the world and share what we love most - the experience of the backcountry.</p>
+      <span class="eyebrow" data-i18n="about.eyebrow">Who's behind STEEP map</span>
+      <h2 data-i18n="about.h2">From the community, for the community</h2>
+      <p data-i18n="about.p">We're a small group of developers and committed skiers. We started STEEP map because we wanted a better way to connect skiers all around the world and share what we love most - the experience of the backcountry.</p>
     </div>
 
-    <p class="pledge reveal">Unlike other platforms, we believe the knowledge the community shares should stay <span class="hl">accessible to everyone, free of charge.</span></p>
+    <p class="pledge reveal" data-i18n="about.pledge">Unlike other platforms, we believe the knowledge the community shares should stay <span class="hl">accessible to everyone, free of charge.</span></p>
 
     <div class="mission-cards reveal">
       <div class="mcard">
         <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h4>Built by skiers</h4>
-        <p>We ride the same lines we map. Every feature comes from what we need to plan the next day out.</p>
+        <h4 data-i18n="about.c1.h">Built by skiers</h4>
+        <p data-i18n="about.c1.p">We ride the same lines we map. Every feature comes from what we need to plan the next day out.</p>
       </div>
       <div class="mcard">
         <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-        <h4>The guidebook is free</h4>
-        <p>Every tour, track and note the community shares is there for everyone to see - the shared knowledge should never cost a thing.</p>
+        <h4 data-i18n="about.c2.h">The guidebook is free</h4>
+        <p data-i18n="about.c2.p">Every tour, track and note the community shares is there for everyone to see - the shared knowledge should never cost a thing.</p>
       </div>
       <div class="mcard">
         <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 15.09 8.26 22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg></div>
-        <h4>Rewarding our supporters</h4>
-        <p>Those who choose to back us with Pro unlock exciting extras - and their support keeps new features coming for free and Pro users alike.</p>
+        <h4 data-i18n="about.c3.h">Rewarding our supporters</h4>
+        <p data-i18n="about.c3.p">Those who choose to back us with Pro unlock exciting extras - and their support keeps new features coming for free and Pro users alike.</p>
       </div>
     </div>
 
-    <p class="signoff reveal">We're just getting started - and we're committed to keeping the mountain open for <strong>everyone</strong>.</p>
+    <p class="signoff reveal" data-i18n="about.signoff">We're just getting started - and we're committed to keeping the mountain open for <strong>everyone</strong>.</p>
   </div>
 </section>
 
@@ -894,8 +926,8 @@
 <section class="block" id="gallery">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">The reason we build this</span>
-      <h2>Earn your next turns.</h2>
+      <span class="eyebrow" data-i18n="gallery.eyebrow">The reason we build this</span>
+      <h2 data-i18n="gallery.h2">Earn your next turns.</h2>
     </div>
     <!-- Gallery tiles injected from SCENERY_PHOTOS (see script) -->
     <div class="gallery reveal" id="galleryGrid"></div>
@@ -907,14 +939,14 @@
   <div class="bg"><img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=2000&q=80" alt="Aurora over a snowy valley" onerror="this.parentElement.parentElement.style.background='linear-gradient(135deg,#0e1c2e,#0a1420)'"/></div>
   <div class="inner">
     <div class="reveal in">
-      <span class="eyebrow" style="color:#7cc0ff;justify-content:center;display:inline-flex">Your season starts here</span>
-      <h2 style="margin-top:1rem">The whole mountain, in your pocket</h2>
-      <p>Discover, plan and share backcountry ski tours with Steep. Free to explore - upgrade to Pro when you want the planning overlays.</p>
+      <span class="eyebrow" style="color:#7cc0ff;justify-content:center;display:inline-flex" data-i18n="cta.eyebrow">Your season starts here</span>
+      <h2 style="margin-top:1rem" data-i18n="cta.h2">The whole mountain, in your pocket</h2>
+      <p data-i18n="cta.p">Discover, plan and share backcountry ski tours with Steep. Free to explore - upgrade to Pro when you want the planning overlays.</p>
       <div class="cta-row">
-        <a class="btn btn-sun js-getapp" href="#get">Get STEEP map</a>
-        <a class="btn btn-ghost" href="#features">Explore features</a>
+        <a class="btn btn-sun js-getapp" href="#get" data-i18n="cta.get">Get STEEP map</a>
+        <a class="btn btn-ghost" href="#features" data-i18n="cta.explore">Explore features</a>
       </div>
-      <p style="font-size:.82rem;color:rgba(255,255,255,.6);margin-top:1.6rem">Preview the web app now · Android &amp; iOS coming soon</p>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.6);margin-top:1.6rem" data-i18n="cta.note">Now on Google Play &amp; the web · iOS coming soon</p>
     </div>
   </div>
 </section>
@@ -922,22 +954,22 @@
 <!-- ============ GET-APP MODAL ============ -->
 <div class="modal-back" id="getModal" role="dialog" aria-modal="true" aria-labelledby="getModalTitle">
   <div class="modal">
-    <button class="x" data-close aria-label="Close">&times;</button>
-    <h3 id="getModalTitle">Get STEEP map</h3>
+    <button class="x" data-close aria-label="Close" data-i18n-aria="modal.close">&times;</button>
+    <h3 id="getModalTitle" data-i18n="modal.title">Get STEEP map</h3>
     <div class="plat">
       <a href="https://app.steepmap.eu/" data-platform="web" target="_blank" rel="noopener">
         <span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="#7cc0ff" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span>
-        <span><span class="pt">Web app</span><span class="ps"><br>Open it in your browser</span></span>
+        <span><span class="pt" data-i18n="modal.web.t">Web app</span><span class="ps"><br><span data-i18n="modal.web.s">Open it in your browser</span></span></span>
       </a>
-      <a href="#" data-platform="android">
+      <a href="https://play.google.com/store/apps/details?id=com.ettore.mapapp" data-platform="android" target="_blank" rel="noopener">
         <span class="pic"><svg viewBox="0 0 24 24" fill="#5fe39a" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.4.4 0 0 0-.7-.4l-1.87 3.23a11.4 11.4 0 0 0-9.74 0L5.26 5.9a.4.4 0 0 0-.7.4L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2zm10 0a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2z"/></svg></span>
-        <span><span class="pt">Android</span><span class="ps"><br>Coming soon</span></span>
-        <span class="tag soon">Soon</span>
+        <span><span class="pt" data-i18n="modal.android.t">Android</span><span class="ps"><br><span data-i18n="modal.android.s">Get it on Google Play</span></span></span>
+        <span class="tag live" data-i18n="modal.live.tag">Live</span>
       </a>
       <a href="#" data-platform="ios">
         <span class="pic"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg></span>
-        <span><span class="pt">iPhone &amp; iPad</span><span class="ps"><br>Coming soon</span></span>
-        <span class="tag soon">Soon</span>
+        <span><span class="pt" data-i18n="modal.ios.t">iPhone &amp; iPad</span><span class="ps"><br><span data-i18n="modal.soon.s">Coming soon</span></span></span>
+        <span class="tag soon" data-i18n="modal.soon.tag">Soon</span>
       </a>
     </div>
   </div>
@@ -959,29 +991,29 @@
         </span>
         <span class="wm">STEEP<span class="wm-sub">map</span></span>
       </a>
-      <p class="tag">Discover, plan and share backcountry ski tours. Built by skiers, for skiers.</p>
+      <p class="tag" data-i18n="footer.tag">Discover, plan and share backcountry ski tours. Built by skiers, for skiers.</p>
     </div>
     <div>
-      <h5>Product</h5>
-      <a href="#features">Features</a>
-      <a href="#maps">Our Map</a>
-      <a href="#overlays">Pro Features</a>
-      <a href="#about">About us</a>
-      <a href="#get">Get the app</a>
+      <h5 data-i18n="footer.product">Product</h5>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#maps" data-i18n="nav.map">Our Map</a>
+      <a href="#overlays" data-i18n="nav.pro">Pro Features</a>
+      <a href="#about" data-i18n="nav.about">About us</a>
+      <a href="#get" data-i18n="nav.getapp">Get the app</a>
     </div>
     <div>
-      <h5>Legal</h5>
-      <a href="legal/terms.html">Terms of use</a>
-      <a href="legal/privacy.html">Privacy policy</a>
-      <a href="legal/delete-account.html">Delete your account</a>
+      <h5 data-i18n="footer.legal">Legal</h5>
+      <a href="legal/terms.html" data-i18n="footer.terms">Terms of use</a>
+      <a href="legal/privacy.html" data-i18n="footer.privacy">Privacy policy</a>
+      <a href="legal/delete-account.html" data-i18n="footer.delete">Delete your account</a>
     </div>
     <div>
-      <h5>Contact</h5>
+      <h5 data-i18n="footer.contact">Contact</h5>
       <a href="mailto:alpinemapapp@gmail.com">alpinemapapp@gmail.com</a>
     </div>
   </div>
   <div class="bottom">
-    <span>© <span id="year"></span> STEEP map · Ettore Rasca. All rights reserved.</span>
+    <span>© <span id="year"></span> <span data-i18n="footer.rights">STEEP map · Ettore Rasca. All rights reserved.</span></span>
     <span id="photoCredit">Scenery photography from <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Unsplash</a>.</span>
   </div>
 </footer>
@@ -1064,7 +1096,7 @@
   (function(){
     var grid = document.getElementById('galleryGrid');
     if(!grid) return;
-    SCENERY_PHOTOS.forEach(function(p){
+    SCENERY_PHOTOS.forEach(function(p, idx){
       var a = document.createElement('a');
       a.href = '#get';
       var img = document.createElement('img');
@@ -1073,6 +1105,8 @@
       img.loading = 'lazy';
       var cap = document.createElement('span');
       cap.className = 'gcap';
+      // i18n: caption text lives in the catalogs (scenery.cap.N); English stays here as the source.
+      cap.setAttribute('data-i18n', 'scenery.cap.' + idx);
       cap.textContent = p.caption || '';
       a.appendChild(img); a.appendChild(cap);
       grid.appendChild(a);
@@ -1080,7 +1114,9 @@
   })();
 
   // --- Footer Unsplash credit - built from the same list ---
-  (function(){
+  // Exposed so the i18n engine can re-render it with a translated template
+  // ({names} = photographer links, {unsplash} = the Unsplash link).
+  window.renderPhotoCredit = function(tpl){
     var el = document.getElementById('photoCredit');
     if(!el) return;
     var names = SCENERY_PHOTOS.map(function(p){
@@ -1089,9 +1125,11 @@
     var joined = names.length > 1
       ? names.slice(0, -1).join(', ') + ' &amp; ' + names[names.length - 1]
       : names[0];
-    el.innerHTML = 'Scenery photos by ' + joined +
-      ' on <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Unsplash</a>.';
-  })();
+    var unsplash = '<a href="https://unsplash.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Unsplash</a>';
+    tpl = tpl || 'Scenery photos by {names} on {unsplash}.';
+    el.innerHTML = tpl.replace('{names}', joined).replace('{unsplash}', unsplash);
+  };
+  window.renderPhotoCredit();
 
   // Sticky nav background on scroll
   var nav = document.getElementById('nav');
@@ -1178,6 +1216,708 @@
       });
     });
   });
+</script>
+<!-- ============ I18N — landing-page translations ============ -->
+<script>
+/* ============================================================
+ * i18n — a tiny, dependency-free translation layer.
+ * English is the source of truth (it lives in the HTML); the
+ * catalogs below hold de / fr / it / es / ja. A missing key
+ * falls back to the captured English. The chosen language is
+ * persisted under localStorage 'lang' — the SAME key the STEEP
+ * map app uses — so a visitor's choice carries over to the app
+ * (and vice-versa). Language also seeds from the browser locale.
+ *
+ * To translate a new string: add data-i18n="some.key" (innerHTML),
+ * data-i18n-content (meta content) or data-i18n-aria (aria-label)
+ * in the HTML, then add "some.key" to ALL catalogs below.
+ * ============================================================ */
+(function(){
+  var SUPPORTED = ['en','de','fr','it','es','ja'];
+
+  var I18N = {
+    /* ---------------- DEUTSCH ---------------- */
+    de: {
+      'meta.title': `STEEP map – Skitouren entdecken, planen & teilen`,
+      'meta.description': `Mit STEEP map erkundest du das Backcountry, sammelst deine Wunsch-Abfahrten auf einer Bucket-List, wiederholst die Touren deiner Freunde und planst jede Abfahrt mit Hangneigungs- und Expositions-Overlays.`,
+      'og.title': `STEEP map – Skitouren entdecken, planen & teilen`,
+      'og.description': `Erkunde das Backcountry, führe deine Bucket-List, wiederhole die Lines deiner Freunde und plane Touren mit Hangneigungs- & Expositions-Overlays.`,
+      'nav.features': `Funktionen`,
+      'nav.map': `Unsere Karte`,
+      'nav.pro': `Pro-Funktionen`,
+      'nav.about': `Über uns`,
+      'nav.getapp': `App holen`,
+      'hero.eyebrow': `Das Backcountry, kartiert`,
+      'hero.h1': `Finde deine nächste Line<br><span class="g">im Backcountry.</span>`,
+      'hero.lead': `Entdecke neue Skitouren, sammle die Abfahrten, von denen du träumst, wiederhole die Lines deiner Freunde und erkunde die beeindruckendste Backcountry-Karte.`,
+      'hero.cta.explore': `Jetzt entdecken`,
+      'hero.cta.more': `Mehr erfahren`,
+      'hero.stat.discover': `Entdecken`,
+      'hero.stat.discover.lbl': `Touren in der Nähe & weltweit`,
+      'hero.stat.plan': `Planen`,
+      'hero.stat.plan.lbl': `Hangneigungs- & Expositions-Overlays`,
+      'hero.stat.share': `Teilen`,
+      'hero.stat.share.lbl': `Folge den Lines deiner Crew`,
+      'hero.scroll': `Scrollen`,
+      'value.explore.h': `Entdecken`,
+      'value.explore.p': `Finde neue Backcountry-Touren auf einer interaktiven Karte.`,
+      'value.bucket.h': `Bucket-List`,
+      'value.bucket.p': `Speichere die Lines, von denen du träumst, und hake sie ab.`,
+      'value.repeat.h': `Wiederholen`,
+      'value.repeat.p': `Folge Freunden und fahre ihre Touren nach.`,
+      'value.plan.h': `Planen`,
+      'value.plan.p': `Lies das Gelände mit Hangneigungs- & Expositions-Overlays.`,
+      'feat.head.eyebrow': `Alles für deinen Tag am Berg`,
+      'feat.head.h2': `Eine App – von der ersten Idee bis zum letzten Schwung`,
+      'feat.head.p': `Steep bringt Entdeckung, Planung und deine Community zusammen – so rätst du weniger und bist mehr im guten Schnee unterwegs.`,
+      'feat1.eyebrow': `Das Backcountry erkunden`,
+      'feat1.h3': `Entdecke Lines, von denen du nie wusstest`,
+      'feat1.p': `Schwenke über die Karte und sieh, wie Touren aufleuchten – von entspannten Talabfahrten bis zu anspruchsvollen alpinen Couloirs. Jede Line kommt mit Fotos, Daten und der Geschichte, wer sie schon gefahren ist – am Desktop und in deiner Tasche.`,
+      'feat1.li1': `Durchstöbere eine interaktive Karte voller Lines aus der Community`,
+      'feat1.li2': `Filtere nach Höhenmetern, Schwierigkeit und Region`,
+      'feat1.li3': `Lies Kommentare und Bewertungen von denen, die die Line schon gefahren sind`,
+      'device.phone': `Handy`,
+      'device.desktop': `Desktop`,
+      'feat2.eyebrow': `Mit deiner Crew unterwegs`,
+      'feat2.h3': `Wiederhole die Touren deiner Freunde`,
+      'feat2.p': `Dein Feed zeigt, was deine Freunde gefahren sind. Gefällt dir eine Abfahrt? Öffne sie, speichere sie und fahre sie selbst nach – mit demselben Track, denselben Daten und Infos.`,
+      'feat2.li1': `Ein Live-Feed der neuesten Touren deiner Freunde`,
+      'feat2.li2': `Wiederhole jede Tour mit einem Tipp`,
+      'feat2.li3': `Reagiere, kommentiere und plant gemeinsam die nächste`,
+      'maps.loading': `Karte wird geladen …`,
+      'maps.eyebrow': `Karten fürs Backcountry gemacht`,
+      'maps.h2': `Die beste Outdoor-Geländekarte – kostenlos für alle`,
+      'maps.p': `Wir wollten die beste Outdoor-Geländekarte bauen, die es gibt – und geben sie kostenlos weiter: weltweites 3D-Gelände im Sommer wie im Winter, mit Wegen, Pfaden und Pisten & Liften der Skigebiete.<br> <strong style="color:#ffb488">Satellitenbilder</strong> sind eine STEEP map Pro-Funktion, alles andere ist frei erkundbar!`,
+      'maps.summer': `Sommer`,
+      'maps.winter': `Winter`,
+      'maps.satellite': `Satellit`,
+      'bucket.eyebrow': `Deine Bucket-List`,
+      'bucket.h2': `Alle Traum-Lines an einem Ort`,
+      'bucket.p': `Eine Tour, die dein Herz höherschlagen lässt? Speichere sie mit einem Tipp auf deiner Bucket-List, komm zurück, wenn die Bedingungen passen, und hake sie ab, sobald du dir die Schwünge verdient hast.`,
+      'bucket.c1.h': `Mit einem Tipp speichern`,
+      'bucket.c1.p': `Merke dir jede Tour auf einer persönlichen Bucket-List, während du die Karte erkundest.`,
+      'bucket.c2.h': `Die Saison planen`,
+      'bucket.c2.p': `Sieh die ganze Saison auf einen Blick und wähle Lines, sobald die Bedingungen stimmen.`,
+      'bucket.c3.h': `Dein Tourenbuch aufbauen`,
+      'bucket.c3.p': `Markiere Touren als gefahren und sieh dein persönliches Tourenbuch wachsen.`,
+      'ov.eyebrow': `Plane wie ein Profi`,
+      'ov.h2': `Lies den Berg, bevor du dran bist`,
+      'ov.p': `Dies sind <strong style="color:#ffb488">STEEP map Pro</strong>-Funktionen. Schalte Hangneigungs- und Expositions-Overlays ein, um die besten Schneebedingungen für deinen nächsten Tag zu finden. Aktiviere die Satellitenansicht für gestochen scharfes Gelände weltweit.`,
+      'ov.steep.h': `Hangneigung`,
+      'ov.steep.p': `Ein farbig abgestuftes Overlay zeigt genau, wie steil jede Passage ist – erkenne die 35–45°-Zonen, die für deine Line und deine Sicherheitsreserve am wichtigsten sind.`,
+      'ov.aspect.h': `Exposition`,
+      'ov.aspect.p': `Sieh auf einen Blick, wohin jeder Hang zeigt. Die Exposition bestimmt Sonne, Schneedecke und Gefahr – so jagst du dem Powder nach und meidest die falsche Bergseite.`,
+      'ov.base.h': `Satellit, Topo & Gelände`,
+      'ov.base.p': `Wechsle zwischen gestochen scharfen Satellitenbildern, detaillierten topografischen Karten und einer schattierten Geländeansicht – ganz wie du dir den Tag am besten vorstellst.`,
+      'ov.soon.lbl': `Bald für Pro`,
+      'ov.soon.offline': `Offline-Karten`,
+      'ov.soon.winter': `Winter-Satellitenbilder`,
+      'how.eyebrow': `Bereit für die Wintersaison?`,
+      'how.h2': `Vom Scrollen auf der Karte zur Abfahrt`,
+      'how.s1.h': `Entdecken & speichern`,
+      'how.s1.p': `Erkunde die Karte, finde Touren, die dich begeistern, und leg sie für die Saison auf deine Bucket-List.`,
+      'how.s2.h': `Den Tag planen`,
+      'how.s2.p': `Studiere das Gelände mit Hangneigungs- und Expositions-Overlays, prüfe die Daten und wähle das richtige Zeitfenster.`,
+      'how.s3.h': `Fahren & teilen`,
+      'how.s3.p': `Verdien dir deine Schwünge und teile die Tour, damit deine Freunde sie nachfahren können.`,
+      'about.eyebrow': `Wer hinter STEEP map steckt`,
+      'about.h2': `Aus der Community, für die Community`,
+      'about.p': `Wir sind eine kleine Gruppe von Entwicklern und begeisterten Skifahrern. Wir haben STEEP map gestartet, weil wir Skifahrer auf der ganzen Welt besser verbinden und das teilen wollten, was wir am meisten lieben – das Erlebnis Backcountry.`,
+      'about.pledge': `Anders als andere Plattformen glauben wir, dass das Wissen, das die Community teilt, <span class="hl">für alle zugänglich bleiben soll, kostenlos.</span>`,
+      'about.c1.h': `Von Skifahrern gebaut`,
+      'about.c1.p': `Wir fahren die Lines, die wir kartieren. Jede Funktion entsteht aus dem, was wir zum Planen des nächsten Tages brauchen.`,
+      'about.c2.h': `Der Führer ist kostenlos`,
+      'about.c2.p': `Jede Tour, jeder Track und jede Notiz der Community ist für alle sichtbar – geteiltes Wissen sollte niemals etwas kosten.`,
+      'about.c3.h': `Unsere Unterstützer belohnen`,
+      'about.c3.p': `Wer uns mit Pro unterstützt, schaltet spannende Extras frei – und ihre Unterstützung sorgt dafür, dass neue Funktionen für Gratis- wie Pro-Nutzer weiterkommen.`,
+      'about.signoff': `Wir fangen gerade erst an – und wir halten den Berg für <strong>alle</strong> offen.`,
+      'gallery.eyebrow': `Warum wir das bauen`,
+      'gallery.h2': `Verdien dir deine nächsten Schwünge.`,
+      'cta.eyebrow': `Deine Saison beginnt hier`,
+      'cta.h2': `Der ganze Berg, in deiner Tasche`,
+      'cta.p': `Entdecke, plane und teile Skitouren mit Steep. Kostenlos erkundbar – upgrade auf Pro, wenn du die Planungs-Overlays willst.`,
+      'cta.get': `STEEP map holen`,
+      'cta.explore': `Funktionen entdecken`,
+      'cta.note': `Jetzt bei Google Play & im Web · iOS bald verfügbar`,
+      'modal.close': `Schließen`,
+      'modal.title': `STEEP map holen`,
+      'modal.web.t': `Web-App`,
+      'modal.web.s': `Im Browser öffnen`,
+      'modal.android.s': `Bei Google Play holen`,
+      'modal.live.tag': `Live`,
+      'modal.android.t': `Android`,
+      'modal.ios.t': `iPhone & iPad`,
+      'modal.soon.s': `Bald verfügbar`,
+      'modal.soon.tag': `Bald`,
+      'footer.tag': `Entdecke, plane und teile Backcountry-Skitouren. Von Skifahrern für Skifahrer.`,
+      'footer.product': `Produkt`,
+      'footer.legal': `Rechtliches`,
+      'footer.terms': `Nutzungsbedingungen`,
+      'footer.privacy': `Datenschutz`,
+      'footer.delete': `Konto löschen`,
+      'footer.contact': `Kontakt`,
+      'footer.rights': `STEEP map · Ettore Rasca. Alle Rechte vorbehalten.`,
+      'footer.photoCredit': `Landschaftsfotos von {names} auf {unsplash}.`,
+      'scenery.cap.0': `Unverspurte Lines`,
+      'scenery.cap.1': `Verdien dir die Schwünge`,
+      'scenery.cap.2': `Die Berge erkunden`,
+      'scenery.cap.3': `Über den Wolken`,
+    },
+
+    /* ---------------- FRANÇAIS ---------------- */
+    fr: {
+      'meta.title': `STEEP map – Découvrez, planifiez et partagez vos randos à ski`,
+      'meta.description': `STEEP map vous aide à explorer le backcountry, à garder une liste des lignes que vous rêvez de skier, à refaire les sorties de vos amis et à planifier chaque descente avec les calques de pente et d'exposition.`,
+      'og.title': `STEEP map – Découvrez, planifiez et partagez vos sorties à ski`,
+      'og.description': `Explorez le backcountry, gardez votre liste de rêves, refaites les lignes de vos amis et planifiez vos sorties avec les calques de pente et d'exposition.`,
+      'nav.features': `Fonctions`,
+      'nav.map': `Notre carte`,
+      'nav.pro': `Fonctions Pro`,
+      'nav.about': `À propos`,
+      'nav.getapp': `Obtenir l'appli`,
+      'hero.eyebrow': `Le backcountry, cartographié`,
+      'hero.h1': `Trouvez votre prochaine ligne<br><span class="g">dans le backcountry.</span>`,
+      'hero.lead': `Découvrez de nouvelles randos à ski, gardez une liste des descentes dont vous rêvez, refaites les lignes de vos amis et explorez la carte du backcountry la plus impressionnante.`,
+      'hero.cta.explore': `Commencer à explorer`,
+      'hero.cta.more': `En savoir plus`,
+      'hero.stat.discover': `Découvrir`,
+      'hero.stat.discover.lbl': `Sorties près de vous & dans le monde`,
+      'hero.stat.plan': `Planifier`,
+      'hero.stat.plan.lbl': `Calques de pente & d'exposition`,
+      'hero.stat.share': `Partager`,
+      'hero.stat.share.lbl': `Suivez les lignes de votre équipe`,
+      'hero.scroll': `Défiler`,
+      'value.explore.h': `Explorer`,
+      'value.explore.p': `Découvrez de nouvelles sorties de backcountry sur une carte interactive.`,
+      'value.bucket.h': `Liste de rêves`,
+      'value.bucket.p': `Enregistrez les lignes dont vous rêvez et cochez-les.`,
+      'value.repeat.h': `Refaire`,
+      'value.repeat.p': `Suivez vos amis et refaites les sorties qu'ils ont faites.`,
+      'value.plan.h': `Planifier`,
+      'value.plan.p': `Lisez le terrain avec les calques de pente et d'exposition.`,
+      'feat.head.eyebrow': `Tout pour votre journée`,
+      'feat.head.h2': `Une appli, de la première idée au dernier virage`,
+      'feat.head.p': `Steep réunit la découverte, la planification et votre communauté – pour passer moins de temps à deviner et plus de temps dans la bonne neige.`,
+      'feat1.eyebrow': `Explorer le backcountry`,
+      'feat1.h3': `Découvrez des lignes insoupçonnées`,
+      'feat1.p': `Parcourez la carte et voyez les sorties s'illuminer – des tranquilles descentes de vallée aux couloirs alpins engagés. Chaque ligne s'accompagne de photos, de statistiques et de l'histoire de ceux qui l'ont skiée, sur ordinateur et dans votre poche.`,
+      'feat1.li1': `Parcourez une carte interactive remplie de lignes de la communauté`,
+      'feat1.li2': `Filtrez par dénivelé, difficulté et région`,
+      'feat1.li3': `Lisez les commentaires et avis de ceux qui ont déjà skié la ligne`,
+      'device.phone': `Téléphone`,
+      'device.desktop': `Ordinateur`,
+      'feat2.eyebrow': `Skiez avec votre équipe`,
+      'feat2.h3': `Refaites les sorties de vos amis`,
+      'feat2.p': `Votre fil montre ce que vos amis ont skié. Une descente vous plaît ? Ouvrez-la, enregistrez-la et refaites-la vous-même – avec la même trace, les mêmes stats et infos.`,
+      'feat2.li1': `Un fil en direct des dernières sorties de vos amis`,
+      'feat2.li2': `Refaites n'importe quelle sortie d'un seul geste`,
+      'feat2.li3': `Réagissez, commentez et planifiez la prochaine ensemble`,
+      'maps.loading': `Chargement de la carte…`,
+      'maps.eyebrow': `Des cartes pensées pour le backcountry`,
+      'maps.h2': `La meilleure carte du terrain outdoor – gratuite pour tous`,
+      'maps.p': `Nous voulions créer la meilleure carte de terrain outdoor qui soit, et nous l'offrons gratuitement : un relief 3D mondial en été comme en hiver, avec sentiers, chemins et pistes & remontées des stations.<br> <strong style="color:#ffb488">L'imagerie satellite</strong> est une fonction STEEP map Pro, tout le reste est libre à explorer !`,
+      'maps.summer': `Été`,
+      'maps.winter': `Hiver`,
+      'maps.satellite': `Satellite`,
+      'bucket.eyebrow': `Votre liste de rêves`,
+      'bucket.h2': `Gardez chaque ligne de rêve au même endroit`,
+      'bucket.p': `Une sortie qui fait battre votre cœur ? Ajoutez-la à votre liste de rêves d'un geste, revenez quand les conditions s'alignent, et cochez-la une fois les virages mérités.`,
+      'bucket.c1.h': `Enregistrer d'un geste`,
+      'bucket.c1.p': `Ajoutez n'importe quelle sortie à une liste de rêves personnelle en explorant la carte.`,
+      'bucket.c2.h': `Planifier la saison`,
+      'bucket.c2.p': `Voyez toute la saison d'un coup d'œil et choisissez vos lignes au fil des conditions.`,
+      'bucket.c3.h': `Constituer votre carnet`,
+      'bucket.c3.p': `Marquez les sorties comme faites et regardez votre carnet de lignes skiées grandir.`,
+      'ov.eyebrow': `Planifiez comme un pro`,
+      'ov.h2': `Lisez la montagne avant d'y être`,
+      'ov.p': `Ce sont des fonctions <strong style="color:#ffb488">STEEP map Pro</strong>. Activez les calques de pente et d'exposition pour trouver les meilleures conditions de neige pour votre prochaine sortie. Activez la vue satellite pour un terrain net dans le monde entier.`,
+      'ov.steep.h': `Pente`,
+      'ov.steep.p': `Un calque en dégradé de couleurs révèle exactement la raideur de chaque section – repérez les zones à 35–45° qui comptent le plus pour votre ligne et votre marge de sécurité.`,
+      'ov.aspect.h': `Exposition`,
+      'ov.aspect.p': `Voyez d'un coup d'œil l'orientation de chaque pente. L'exposition détermine le soleil, le manteau neigeux et le danger – pour chasser la poudreuse et éviter le mauvais versant.`,
+      'ov.base.h': `Satellite, topo & relief`,
+      'ov.base.p': `Basculez entre imagerie satellite nette, cartes topographiques détaillées et vue de relief ombré – ce qui vous aide à visualiser votre journée.`,
+      'ov.soon.lbl': `Bientôt sur Pro`,
+      'ov.soon.offline': `Cartes hors ligne`,
+      'ov.soon.winter': `Imagerie satellite d'hiver`,
+      'how.eyebrow': `Prêt pour la saison d'hiver ?`,
+      'how.h2': `De la carte à la descente`,
+      'how.s1.h': `Découvrir & enregistrer`,
+      'how.s1.p': `Explorez la carte, trouvez des sorties qui vous inspirent et ajoutez-les à votre liste de rêves pour la saison.`,
+      'how.s2.h': `Planifier la journée`,
+      'how.s2.p': `Étudiez le terrain avec les calques de pente et d'exposition, vérifiez les stats et choisissez le bon créneau.`,
+      'how.s3.h': `Skier & partager`,
+      'how.s3.p': `Méritez vos virages, puis partagez la sortie pour que vos amis puissent la refaire.`,
+      'about.eyebrow': `Qui se cache derrière STEEP map`,
+      'about.h2': `De la communauté, pour la communauté`,
+      'about.p': `Nous sommes un petit groupe de développeurs et de skieurs passionnés. Nous avons lancé STEEP map parce que nous voulions mieux connecter les skieurs du monde entier et partager ce que nous aimons le plus – l'expérience du backcountry.`,
+      'about.pledge': `Contrairement à d'autres plateformes, nous pensons que le savoir partagé par la communauté doit rester <span class="hl">accessible à tous, gratuitement.</span>`,
+      'about.c1.h': `Créé par des skieurs`,
+      'about.c1.p': `Nous skions les lignes que nous cartographions. Chaque fonction naît de ce dont nous avons besoin pour planifier la prochaine sortie.`,
+      'about.c2.h': `Le guide est gratuit`,
+      'about.c2.p': `Chaque sortie, trace et note partagée par la communauté est visible par tous – le savoir partagé ne devrait jamais rien coûter.`,
+      'about.c3.h': `Récompenser nos soutiens`,
+      'about.c3.p': `Ceux qui nous soutiennent avec Pro débloquent des extras – et leur soutien permet de continuer à sortir de nouvelles fonctions pour tous, gratuit comme Pro.`,
+      'about.signoff': `Nous ne faisons que commencer – et nous nous engageons à garder la montagne ouverte à <strong>tous</strong>.`,
+      'gallery.eyebrow': `La raison de tout ça`,
+      'gallery.h2': `Méritez vos prochains virages.`,
+      'cta.eyebrow': `Votre saison commence ici`,
+      'cta.h2': `Toute la montagne, dans votre poche`,
+      'cta.p': `Découvrez, planifiez et partagez vos randos à ski avec Steep. Gratuit à explorer – passez à Pro quand vous voulez les calques de planification.`,
+      'cta.get': `Obtenir STEEP map`,
+      'cta.explore': `Explorer les fonctions`,
+      'cta.note': `Sur Google Play & sur le web · iOS bientôt`,
+      'modal.close': `Fermer`,
+      'modal.title': `Obtenir STEEP map`,
+      'modal.web.t': `Appli web`,
+      'modal.web.s': `Ouvrir dans le navigateur`,
+      'modal.android.s': `Disponible sur Google Play`,
+      'modal.live.tag': `Dispo`,
+      'modal.android.t': `Android`,
+      'modal.ios.t': `iPhone & iPad`,
+      'modal.soon.s': `Bientôt`,
+      'modal.soon.tag': `Bientôt`,
+      'footer.tag': `Découvrez, planifiez et partagez vos randos à ski. Par des skieurs, pour des skieurs.`,
+      'footer.product': `Produit`,
+      'footer.legal': `Mentions légales`,
+      'footer.terms': `Conditions d'utilisation`,
+      'footer.privacy': `Confidentialité`,
+      'footer.delete': `Supprimer le compte`,
+      'footer.contact': `Contact`,
+      'footer.rights': `STEEP map · Ettore Rasca. Tous droits réservés.`,
+      'footer.photoCredit': `Photos de paysage par {names} sur {unsplash}.`,
+      'scenery.cap.0': `Lignes vierges`,
+      'scenery.cap.1': `Méritez vos virages`,
+      'scenery.cap.2': `Explorez la montagne`,
+      'scenery.cap.3': `Au-dessus des nuages`,
+    },
+
+    /* ---------------- ITALIANO ---------------- */
+    it: {
+      'meta.title': `STEEP map – Scopri, pianifica e condividi le tue gite scialpinistiche`,
+      'meta.description': `STEEP map ti aiuta a esplorare il backcountry, tenere una lista dei desideri delle linee che vuoi sciare, ripetere le gite dei tuoi amici e pianificare ogni discesa con gli overlay di pendenza ed esposizione.`,
+      'og.title': `STEEP map – Scopri, pianifica e condividi le tue gite`,
+      'og.description': `Esplora il backcountry, tieni la tua lista dei desideri, ripeti le linee dei tuoi amici e pianifica le gite con gli overlay di pendenza ed esposizione.`,
+      'nav.features': `Funzioni`,
+      'nav.map': `La nostra mappa`,
+      'nav.pro': `Funzioni Pro`,
+      'nav.about': `Chi siamo`,
+      'nav.getapp': `Scarica l'app`,
+      'hero.eyebrow': `Il backcountry, mappato`,
+      'hero.h1': `Trova la tua prossima linea<br><span class="g">nel backcountry.</span>`,
+      'hero.lead': `Scopri nuove gite scialpinistiche, tieni una lista dei desideri delle discese che sogni, ripeti le linee dei tuoi amici ed esplora la mappa del backcountry più straordinaria.`,
+      'hero.cta.explore': `Inizia a esplorare`,
+      'hero.cta.more': `Scopri di più`,
+      'hero.stat.discover': `Scopri`,
+      'hero.stat.discover.lbl': `Gite vicino a te & nel mondo`,
+      'hero.stat.plan': `Pianifica`,
+      'hero.stat.plan.lbl': `Overlay di pendenza & esposizione`,
+      'hero.stat.share': `Condividi`,
+      'hero.stat.share.lbl': `Segui le linee del tuo gruppo`,
+      'hero.scroll': `Scorri`,
+      'value.explore.h': `Esplora`,
+      'value.explore.p': `Scopri nuove gite di backcountry su una mappa interattiva.`,
+      'value.bucket.h': `Lista dei desideri`,
+      'value.bucket.p': `Salva le linee che sogni di sciare e spuntale.`,
+      'value.repeat.h': `Ripeti`,
+      'value.repeat.p': `Segui gli amici e rifai le gite che hanno fatto.`,
+      'value.plan.h': `Pianifica`,
+      'value.plan.p': `Leggi il terreno con gli overlay di pendenza ed esposizione.`,
+      'feat.head.eyebrow': `Tutto per la tua giornata`,
+      'feat.head.h2': `Un'app, dalla prima idea all'ultima curva`,
+      'feat.head.p': `Steep unisce scoperta, pianificazione e la tua community – così passi meno tempo a indovinare e più tempo nella neve buona.`,
+      'feat1.eyebrow': `Esplora il backcountry`,
+      'feat1.h3': `Scopri linee che non sapevi esistessero`,
+      'feat1.p': `Scorri la mappa e guarda le gite accendersi – dalle tranquille discese di valle ai couloir alpini più impegnativi. Ogni linea arriva con foto, statistiche e la storia di chi l'ha sciata, sul desktop e in tasca.`,
+      'feat1.li1': `Sfoglia una mappa interattiva piena di linee della community`,
+      'feat1.li2': `Filtra per dislivello, difficoltà e regione`,
+      'feat1.li3': `Leggi commenti e recensioni di chi ha già sciato la linea`,
+      'device.phone': `Telefono`,
+      'device.desktop': `Desktop`,
+      'feat2.eyebrow': `Scia con il tuo gruppo`,
+      'feat2.h3': `Ripeti le gite dei tuoi amici`,
+      'feat2.p': `Il tuo feed mostra cosa hanno sciato i tuoi amici. Ti piace quella discesa? Aprila, salvala e rifalla tu stesso – con la stessa traccia, le stesse statistiche e info.`,
+      'feat2.li1': `Un feed dal vivo delle ultime gite dei tuoi amici`,
+      'feat2.li2': `Ripeti qualsiasi gita con un tocco`,
+      'feat2.li3': `Reagisci, commenta e pianificate insieme la prossima`,
+      'maps.loading': `Caricamento mappa…`,
+      'maps.eyebrow': `Mappe fatte per il backcountry`,
+      'maps.h2': `La migliore mappa del terreno outdoor – gratis per tutti`,
+      'maps.p': `Volevamo costruire la migliore mappa del terreno outdoor che ci sia, e la regaliamo: terreno 3D mondiale in estate e in inverno, con sentieri, tracce e piste & impianti degli impianti sciistici.<br> <strong style="color:#ffb488">Le immagini satellitari</strong> sono una funzione STEEP map Pro, tutto il resto è libero da esplorare!`,
+      'maps.summer': `Estate`,
+      'maps.winter': `Inverno`,
+      'maps.satellite': `Satellite`,
+      'bucket.eyebrow': `La tua lista dei desideri`,
+      'bucket.h2': `Tieni ogni linea dei sogni in un unico posto`,
+      'bucket.p': `Una gita che ti fa battere il cuore? Salvala nella tua lista dei desideri con un tocco, torna quando le condizioni sono giuste e spuntala una volta guadagnate le curve.`,
+      'bucket.c1.h': `Salva con un tocco`,
+      'bucket.c1.p': `Aggiungi qualsiasi gita a una lista dei desideri personale mentre esplori la mappa.`,
+      'bucket.c2.h': `Pianifica la stagione`,
+      'bucket.c2.p': `Vedi tutta la stagione a colpo d'occhio e scegli le linee man mano che arrivano le condizioni.`,
+      'bucket.c3.h': `Costruisci il tuo diario`,
+      'bucket.c3.p': `Segna le gite come fatte e guarda crescere il tuo diario personale delle linee sciate.`,
+      'ov.eyebrow': `Pianifica da professionista`,
+      'ov.h2': `Leggi la montagna prima di esserci`,
+      'ov.p': `Queste sono funzioni <strong style="color:#ffb488">STEEP map Pro</strong>. Attiva gli overlay di pendenza ed esposizione per trovare le migliori condizioni di neve per la tua prossima uscita. Attiva la vista satellitare per un terreno nitido in tutto il mondo.`,
+      'ov.steep.h': `Pendenza`,
+      'ov.steep.p': `Un overlay a gradazione di colore mostra esattamente quanto è ripido ogni tratto – individua le zone a 35–45° che contano di più per la tua linea e il tuo margine di sicurezza.`,
+      'ov.aspect.h': `Esposizione`,
+      'ov.aspect.p': `Vedi a colpo d'occhio dove guarda ogni pendio. L'esposizione determina sole, manto nevoso e pericolo – così insegui la neve fresca ed eviti il versante sbagliato.`,
+      'ov.base.h': `Satellite, topo & terreno`,
+      'ov.base.p': `Passa tra immagini satellitari nitide, mappe topografiche dettagliate e una vista del terreno ombreggiato – ciò che ti aiuta a immaginare la giornata.`,
+      'ov.soon.lbl': `Presto su Pro`,
+      'ov.soon.offline': `Mappe offline`,
+      'ov.soon.winter': `Immagini satellitari invernali`,
+      'how.eyebrow': `Pronto per la stagione invernale?`,
+      'how.h2': `Dallo scorrere la mappa allo sciare la linea`,
+      'how.s1.h': `Scopri & salva`,
+      'how.s1.p': `Esplora la mappa, trova gite che ti ispirano e mettile nella tua lista dei desideri per la stagione.`,
+      'how.s2.h': `Pianifica la giornata`,
+      'how.s2.p': `Studia il terreno con gli overlay di pendenza ed esposizione, controlla le statistiche e scegli il momento giusto.`,
+      'how.s3.h': `Scia & condividi`,
+      'how.s3.p': `Guadagnati le curve, poi condividi la gita così i tuoi amici possono ripeterla.`,
+      'about.eyebrow': `Chi c'è dietro STEEP map`,
+      'about.h2': `Dalla community, per la community`,
+      'about.p': `Siamo un piccolo gruppo di sviluppatori e sciatori appassionati. Abbiamo iniziato STEEP map perché volevamo un modo migliore per collegare gli sciatori di tutto il mondo e condividere ciò che amiamo di più – l'esperienza del backcountry.`,
+      'about.pledge': `A differenza di altre piattaforme, crediamo che la conoscenza condivisa dalla community debba restare <span class="hl">accessibile a tutti, gratuitamente.</span>`,
+      'about.c1.h': `Creato da sciatori`,
+      'about.c1.p': `Sciamo le stesse linee che mappiamo. Ogni funzione nasce da ciò che ci serve per pianificare la prossima uscita.`,
+      'about.c2.h': `La guida è gratuita`,
+      'about.c2.p': `Ogni gita, traccia e nota condivisa dalla community è visibile a tutti – la conoscenza condivisa non dovrebbe mai costare nulla.`,
+      'about.c3.h': `Premiamo i nostri sostenitori`,
+      'about.c3.p': `Chi ci sostiene con Pro sblocca extra entusiasmanti – e il loro supporto fa arrivare nuove funzioni per utenti free e Pro allo stesso modo.`,
+      'about.signoff': `Abbiamo appena iniziato – e ci impegniamo a tenere la montagna aperta a <strong>tutti</strong>.`,
+      'gallery.eyebrow': `Il motivo per cui lo facciamo`,
+      'gallery.h2': `Guadagnati le prossime curve.`,
+      'cta.eyebrow': `La tua stagione inizia qui`,
+      'cta.h2': `Tutta la montagna, in tasca`,
+      'cta.p': `Scopri, pianifica e condividi gite scialpinistiche con Steep. Gratis da esplorare – passa a Pro quando vuoi gli overlay di pianificazione.`,
+      'cta.get': `Scarica STEEP map`,
+      'cta.explore': `Esplora le funzioni`,
+      'cta.note': `Su Google Play & sul web · iOS in arrivo`,
+      'modal.close': `Chiudi`,
+      'modal.title': `Scarica STEEP map`,
+      'modal.web.t': `Web app`,
+      'modal.web.s': `Aprila nel browser`,
+      'modal.android.s': `Scaricala su Google Play`,
+      'modal.live.tag': `Live`,
+      'modal.android.t': `Android`,
+      'modal.ios.t': `iPhone & iPad`,
+      'modal.soon.s': `In arrivo`,
+      'modal.soon.tag': `Presto`,
+      'footer.tag': `Scopri, pianifica e condividi gite scialpinistiche. Da sciatori, per sciatori.`,
+      'footer.product': `Prodotto`,
+      'footer.legal': `Note legali`,
+      'footer.terms': `Termini d'uso`,
+      'footer.privacy': `Privacy`,
+      'footer.delete': `Elimina account`,
+      'footer.contact': `Contatti`,
+      'footer.rights': `STEEP map · Ettore Rasca. Tutti i diritti riservati.`,
+      'footer.photoCredit': `Foto dei paesaggi di {names} su {unsplash}.`,
+      'scenery.cap.0': `Linee vergini`,
+      'scenery.cap.1': `Guadagnati le curve`,
+      'scenery.cap.2': `Esplora le montagne`,
+      'scenery.cap.3': `Sopra le nuvole`,
+    },
+
+    /* ---------------- ESPAÑOL ---------------- */
+    es: {
+      'meta.title': `STEEP map – Descubre, planifica y comparte rutas de esquí de travesía`,
+      'meta.description': `STEEP map te ayuda a explorar el backcountry, guardar una lista de deseos de las líneas que quieres esquiar, repetir las rutas de tus amigos y planificar cada descenso con las capas de pendiente y orientación.`,
+      'og.title': `STEEP map – Descubre, planifica y comparte rutas de esquí`,
+      'og.description': `Explora el backcountry, guarda tu lista de deseos, repite las líneas de tus amigos y planifica rutas con las capas de pendiente y orientación.`,
+      'nav.features': `Funciones`,
+      'nav.map': `Nuestro mapa`,
+      'nav.pro': `Funciones Pro`,
+      'nav.about': `Quiénes somos`,
+      'nav.getapp': `Descargar la app`,
+      'hero.eyebrow': `El backcountry, cartografiado`,
+      'hero.h1': `Encuentra tu próxima línea<br><span class="g">en el backcountry.</span>`,
+      'hero.lead': `Descubre nuevas rutas de esquí, guarda una lista de deseos de los descensos que sueñas, repite las líneas que han esquiado tus amigos y explora el mapa de backcountry más asombroso.`,
+      'hero.cta.explore': `Empieza a explorar`,
+      'hero.cta.more': `Saber más`,
+      'hero.stat.discover': `Descubre`,
+      'hero.stat.discover.lbl': `Rutas cerca de ti y por el mundo`,
+      'hero.stat.plan': `Planifica`,
+      'hero.stat.plan.lbl': `Capas de pendiente y orientación`,
+      'hero.stat.share': `Comparte`,
+      'hero.stat.share.lbl': `Sigue las líneas de tu grupo`,
+      'hero.scroll': `Desplázate`,
+      'value.explore.h': `Explora`,
+      'value.explore.p': `Descubre nuevas rutas de backcountry en un mapa interactivo.`,
+      'value.bucket.h': `Lista de deseos`,
+      'value.bucket.p': `Guarda las líneas que sueñas esquiar y ve tachándolas.`,
+      'value.repeat.h': `Repite`,
+      'value.repeat.p': `Sigue a tus amigos y repite las rutas que han hecho.`,
+      'value.plan.h': `Planifica`,
+      'value.plan.p': `Lee el terreno con las capas de pendiente y orientación.`,
+      'feat.head.eyebrow': `Todo para tu día en la montaña`,
+      'feat.head.h2': `Una app, desde la primera idea hasta el último giro`,
+      'feat.head.p': `Steep reúne descubrimiento, planificación y tu comunidad – para que pases menos tiempo adivinando y más tiempo en la buena nieve.`,
+      'feat1.eyebrow': `Explora el backcountry`,
+      'feat1.h3': `Descubre líneas que no sabías que existían`,
+      'feat1.p': `Recorre el mapa y mira cómo se iluminan las rutas – desde tranquilos descensos de valle hasta comprometidos couloirs alpinos. Cada línea viene con fotos, datos y la historia de quién la ha esquiado, en el ordenador y en tu bolsillo.`,
+      'feat1.li1': `Explora un mapa interactivo lleno de líneas de la comunidad`,
+      'feat1.li2': `Filtra por desnivel, dificultad y región`,
+      'feat1.li3': `Lee comentarios y reseñas de quienes ya esquiaron la línea`,
+      'device.phone': `Móvil`,
+      'device.desktop': `Escritorio`,
+      'feat2.eyebrow': `Esquía con tu grupo`,
+      'feat2.h3': `Repite las rutas que han esquiado tus amigos`,
+      'feat2.p': `Tu feed muestra lo que han esquiado tus amigos. ¿Te gustó ese descenso? Ábrelo, guárdalo y repítelo tú mismo – con el mismo track, datos e info.`,
+      'feat2.li1': `Un feed en directo de las últimas rutas de tus amigos`,
+      'feat2.li2': `Repite cualquier ruta con un toque`,
+      'feat2.li3': `Reacciona, comenta y planificad juntos la siguiente`,
+      'maps.loading': `Cargando mapa…`,
+      'maps.eyebrow': `Mapas hechos para el backcountry`,
+      'maps.h2': `El mejor mapa de terreno outdoor – gratis para todos`,
+      'maps.p': `Nos propusimos crear el mejor mapa de terreno outdoor que existe, y lo regalamos: terreno 3D mundial en verano e invierno, con senderos, caminos y pistas y remontes de las estaciones.<br> <strong style="color:#ffb488">Las imágenes por satélite</strong> son una función STEEP map Pro, ¡todo lo demás es libre de explorar!`,
+      'maps.summer': `Verano`,
+      'maps.winter': `Invierno`,
+      'maps.satellite': `Satélite`,
+      'bucket.eyebrow': `Tu lista de deseos`,
+      'bucket.h2': `Ten todas tus líneas soñadas en un solo lugar`,
+      'bucket.p': `¿Una ruta que te acelera el corazón? Guárdala en tu lista de deseos con un toque, vuelve cuando las condiciones se alineen y táchala cuando te hayas ganado los giros.`,
+      'bucket.c1.h': `Guarda con un toque`,
+      'bucket.c1.p': `Añade cualquier ruta a una lista de deseos personal mientras exploras el mapa.`,
+      'bucket.c2.h': `Planifica la temporada`,
+      'bucket.c2.p': `Ve toda la temporada de un vistazo y elige líneas según lleguen las condiciones.`,
+      'bucket.c3.h': `Crea tu cuaderno`,
+      'bucket.c3.p': `Marca rutas como hechas y ve crecer tu cuaderno personal de líneas esquiadas.`,
+      'ov.eyebrow': `Planifica como un pro`,
+      'ov.h2': `Lee la montaña antes de estar en ella`,
+      'ov.p': `Estas son funciones <strong style="color:#ffb488">STEEP map Pro</strong>. Activa las capas de pendiente y orientación para encontrar las mejores condiciones de nieve para tu próxima salida. Activa la vista por satélite para un terreno nítido en todo el mundo.`,
+      'ov.steep.h': `Pendiente`,
+      'ov.steep.p': `Una capa graduada por colores revela exactamente lo empinado que es cada tramo – detecta las zonas de 35–45° que más importan para tu línea y tu margen de seguridad.`,
+      'ov.aspect.h': `Orientación`,
+      'ov.aspect.p': `Ve de un vistazo hacia dónde mira cada ladera. La orientación marca el sol, el manto y el peligro – así persigues la nieve polvo y evitas la ladera equivocada.`,
+      'ov.base.h': `Satélite, topo y terreno`,
+      'ov.base.p': `Cambia entre imágenes por satélite nítidas, mapas topográficos detallados y una vista de terreno sombreado – lo que te ayude a imaginar el día.`,
+      'ov.soon.lbl': `Pronto en Pro`,
+      'ov.soon.offline': `Mapas sin conexión`,
+      'ov.soon.winter': `Imágenes por satélite de invierno`,
+      'how.eyebrow': `¿Listo para la temporada de invierno?`,
+      'how.h2': `De deslizar el mapa a esquiar la línea`,
+      'how.s1.h': `Descubre y guarda`,
+      'how.s1.p': `Explora el mapa, encuentra rutas que te inspiren y añádelas a tu lista de deseos para la temporada.`,
+      'how.s2.h': `Planifica el día`,
+      'how.s2.p': `Estudia el terreno con las capas de pendiente y orientación, revisa los datos y elige el momento adecuado.`,
+      'how.s3.h': `Esquía y comparte`,
+      'how.s3.p': `Gánate los giros y luego comparte la ruta para que tus amigos puedan repetirla.`,
+      'about.eyebrow': `Quién está detrás de STEEP map`,
+      'about.h2': `De la comunidad, para la comunidad`,
+      'about.p': `Somos un grupo pequeño de desarrolladores y esquiadores comprometidos. Empezamos STEEP map porque queríamos una mejor forma de conectar a esquiadores de todo el mundo y compartir lo que más amamos – la experiencia del backcountry.`,
+      'about.pledge': `A diferencia de otras plataformas, creemos que el conocimiento que comparte la comunidad debe seguir siendo <span class="hl">accesible para todos, de forma gratuita.</span>`,
+      'about.c1.h': `Creado por esquiadores`,
+      'about.c1.p': `Esquiamos las mismas líneas que cartografiamos. Cada función surge de lo que necesitamos para planificar la próxima salida.`,
+      'about.c2.h': `La guía es gratis`,
+      'about.c2.p': `Cada ruta, track y nota que comparte la comunidad está a la vista de todos – el conocimiento compartido nunca debería costar nada.`,
+      'about.c3.h': `Recompensamos a quienes nos apoyan`,
+      'about.c3.p': `Quienes nos apoyan con Pro desbloquean extras estupendos – y su apoyo hace que sigan llegando nuevas funciones para usuarios gratuitos y Pro por igual.`,
+      'about.signoff': `Solo estamos empezando – y nos comprometemos a mantener la montaña abierta para <strong>todos</strong>.`,
+      'gallery.eyebrow': `La razón por la que lo hacemos`,
+      'gallery.h2': `Gánate tus próximos giros.`,
+      'cta.eyebrow': `Tu temporada empieza aquí`,
+      'cta.h2': `Toda la montaña, en tu bolsillo`,
+      'cta.p': `Descubre, planifica y comparte rutas de esquí de travesía con Steep. Gratis para explorar – pásate a Pro cuando quieras las capas de planificación.`,
+      'cta.get': `Descargar STEEP map`,
+      'cta.explore': `Explorar funciones`,
+      'cta.note': `Ya en Google Play y en la web · iOS muy pronto`,
+      'modal.close': `Cerrar`,
+      'modal.title': `Descargar STEEP map`,
+      'modal.web.t': `App web`,
+      'modal.web.s': `Ábrela en tu navegador`,
+      'modal.android.s': `Descárgala en Google Play`,
+      'modal.live.tag': `Ya está`,
+      'modal.android.t': `Android`,
+      'modal.ios.t': `iPhone y iPad`,
+      'modal.soon.s': `Muy pronto`,
+      'modal.soon.tag': `Pronto`,
+      'footer.tag': `Descubre, planifica y comparte rutas de esquí de travesía. Por esquiadores, para esquiadores.`,
+      'footer.product': `Producto`,
+      'footer.legal': `Legal`,
+      'footer.terms': `Términos de uso`,
+      'footer.privacy': `Privacidad`,
+      'footer.delete': `Eliminar cuenta`,
+      'footer.contact': `Contacto`,
+      'footer.rights': `STEEP map · Ettore Rasca. Todos los derechos reservados.`,
+      'footer.photoCredit': `Fotos de paisaje de {names} en {unsplash}.`,
+      'scenery.cap.0': `Líneas vírgenes`,
+      'scenery.cap.1': `Gánate los giros`,
+      'scenery.cap.2': `Explora las montañas`,
+      'scenery.cap.3': `Sobre las nubes`,
+    },
+
+    /* ---------------- 日本語 ---------------- */
+    ja: {
+      'meta.title': `STEEP map – バックカントリースキーツアーを発見・計画・共有`,
+      'meta.description': `STEEP map は、バックカントリーの探索、滑りたいラインのバケットリスト作成、友だちのツアーの再挑戦、傾斜・斜面方位オーバーレイでの各滑降の計画をサポートします。`,
+      'og.title': `STEEP map – スキーツアーを発見・計画・共有`,
+      'og.description': `バックカントリーを探索し、バケットリストを残し、友だちのラインを再挑戦し、傾斜・斜面方位オーバーレイでツアーを計画。`,
+      'nav.features': `機能`,
+      'nav.map': `マップ`,
+      'nav.pro': `Pro機能`,
+      'nav.about': `私たちについて`,
+      'nav.getapp': `アプリを入手`,
+      'hero.eyebrow': `バックカントリーをマップに`,
+      'hero.h1': `次のラインを見つけよう<br><span class="g">バックカントリーで。</span>`,
+      'hero.lead': `新しいスキーツアーを発見し、夢の滑降をバケットリストに残し、友だちが滑ったラインを再挑戦し、最も驚くべきバックカントリーマップを探索しよう。`,
+      'hero.cta.explore': `探索を始める`,
+      'hero.cta.more': `詳しく見る`,
+      'hero.stat.discover': `発見`,
+      'hero.stat.discover.lbl': `近くのツアーも世界中も`,
+      'hero.stat.plan': `計画`,
+      'hero.stat.plan.lbl': `傾斜・斜面方位オーバーレイ`,
+      'hero.stat.share': `共有`,
+      'hero.stat.share.lbl': `仲間のラインをフォロー`,
+      'hero.scroll': `スクロール`,
+      'value.explore.h': `探索`,
+      'value.explore.p': `インタラクティブマップで新しいバックカントリーツアーを見つけよう。`,
+      'value.bucket.h': `バケットリスト`,
+      'value.bucket.p': `滑りたいラインを保存して、こなしたらチェック。`,
+      'value.repeat.h': `再挑戦`,
+      'value.repeat.p': `友だちをフォローして、彼らのツアーを再び滑ろう。`,
+      'value.plan.h': `計画`,
+      'value.plan.p': `傾斜・斜面方位オーバーレイで地形を読もう。`,
+      'feat.head.eyebrow': `一日のすべてを`,
+      'feat.head.h2': `最初のひらめきから最後のターンまで、ひとつのアプリで`,
+      'feat.head.p': `Steep は発見・計画・コミュニティをひとつに――迷う時間を減らし、良い雪の中で過ごす時間を増やします。`,
+      'feat1.eyebrow': `バックカントリーを探索`,
+      'feat1.h3': `知らなかったラインを発見`,
+      'feat1.p': `マップをパンすると、ツアーが次々に浮かび上がります――穏やかな谷のツアーから手強いアルパインのクーロワールまで。どのラインにも写真、データ、そして誰が滑ったかの記録が付いています。デスクトップでも、ポケットの中でも。`,
+      'feat1.li1': `コミュニティのラインが詰まったインタラクティブマップを見る`,
+      'feat1.li2': `標高差・難易度・地域で絞り込む`,
+      'feat1.li3': `すでに滑った人のコメントやレビューを読む`,
+      'device.phone': `スマホ`,
+      'device.desktop': `デスクトップ`,
+      'feat2.eyebrow': `仲間と滑ろう`,
+      'feat2.h3': `友だちが滑ったツアーを再挑戦`,
+      'feat2.p': `フィードには友だちが滑ったものが表示されます。あの滑降が気になった？　開いて、保存して、自分でも再挑戦しよう――同じトラック、データ、情報で。`,
+      'feat2.li1': `友だちの最新ツアーのライブフィード`,
+      'feat2.li2': `どのツアーもワンタップで再挑戦`,
+      'feat2.li3': `リアクション、コメント、次の計画を一緒に`,
+      'maps.loading': `マップを読み込み中…`,
+      'maps.eyebrow': `バックカントリーのためのマップ`,
+      'maps.h2': `最高のアウトドア地形マップ――みんなに無料`,
+      'maps.p': `私たちは最高のアウトドア地形マップを作ることを目指し、それを無料で提供します：夏も冬も世界中の3D地形、トレイル・小道・スキー場のゲレンデ＆リフトまで。<br> <strong style="color:#ffb488">衛星画像</strong>は STEEP map Pro の機能で、それ以外はすべて自由に探索できます！`,
+      'maps.summer': `夏`,
+      'maps.winter': `冬`,
+      'maps.satellite': `衛星`,
+      'bucket.eyebrow': `あなたのバケットリスト`,
+      'bucket.h2': `夢のラインをすべてひとつに`,
+      'bucket.p': `胸が高鳴るツアーを見つけた？　ワンタップでバケットリストに保存し、条件が揃ったら戻ってきて、ターンを勝ち取ったらチェックを。`,
+      'bucket.c1.h': `ワンタップで保存`,
+      'bucket.c1.p': `マップを探索しながら、どのツアーも自分のバケットリストにブックマーク。`,
+      'bucket.c2.h': `シーズンを計画`,
+      'bucket.c2.p': `シーズン全体をひと目で見渡し、条件が来たらラインを選ぼう。`,
+      'bucket.c3.h': `記録帳を作る`,
+      'bucket.c3.p': `ツアーを滑走済みにして、滑ったラインの記録帳が増えていくのを見よう。`,
+      'ov.eyebrow': `プロのように計画`,
+      'ov.h2': `その場に立つ前に、山を読む`,
+      'ov.p': `これらは <strong style="color:#ffb488">STEEP map Pro</strong> の機能です。傾斜と斜面方位のオーバーレイを切り替えて、次の一日に最適な雪の条件を見つけましょう。衛星ビューを有効にすれば、世界中の地形が鮮明に。`,
+      'ov.steep.h': `傾斜`,
+      'ov.steep.p': `色分けされたオーバーレイが、各斜面の傾斜をはっきり示します――あなたのラインと安全マージンに最も重要な35〜45°ゾーンを見つけましょう。`,
+      'ov.aspect.h': `斜面方位`,
+      'ov.aspect.p': `各斜面がどちらを向いているかをひと目で。方位は日照・積雪・危険を左右します――パウダーを追い、危険な斜面を避けましょう。`,
+      'ov.base.h': `衛星・地形図・地形`,
+      'ov.base.p': `鮮明な衛星画像、詳細な地形図、陰影のかかった地形ビューを切り替え――一日をイメージするのに役立つものを。`,
+      'ov.soon.lbl': `Proに近日登場`,
+      'ov.soon.offline': `オフラインマップ`,
+      'ov.soon.winter': `冬の衛星画像`,
+      'how.eyebrow': `ウィンターシーズンの準備は？`,
+      'how.h2': `マップをめくることから、ラインを滑ることへ`,
+      'how.s1.h': `発見して保存`,
+      'how.s1.p': `マップを探索し、心を動かすツアーを見つけ、シーズンのバケットリストに追加。`,
+      'how.s2.h': `一日を計画`,
+      'how.s2.p': `傾斜と斜面方位のオーバーレイで地形を調べ、データを確認し、最適なタイミングを選ぶ。`,
+      'how.s3.h': `滑って共有`,
+      'how.s3.p': `ターンを勝ち取ったら、ツアーを共有して友だちも再挑戦できるように。`,
+      'about.eyebrow': `STEEP map を作る人たち`,
+      'about.h2': `コミュニティから、コミュニティへ`,
+      'about.p': `私たちは開発者と熱心なスキーヤーからなる小さなグループです。世界中のスキーヤーをよりよくつなぎ、いちばん愛するもの――バックカントリーの体験を分かち合いたくて、STEEP map を始めました。`,
+      'about.pledge': `他のプラットフォームとは違い、コミュニティが共有する知識は<span class="hl">誰にとっても無料で、開かれたままであるべきだと信じています。</span>`,
+      'about.c1.h': `スキーヤーが作った`,
+      'about.c1.p': `私たちはマップに載せるラインを自ら滑ります。すべての機能は、次の一日を計画するために自分たちが必要とするものから生まれます。`,
+      'about.c2.h': `ガイドブックは無料`,
+      'about.c2.p': `コミュニティが共有するツアー・トラック・メモは、すべての人が見られます――共有された知識に費用がかかるべきではありません。`,
+      'about.c3.h': `支えてくれる人へ`,
+      'about.c3.p': `Pro で支えてくれる人はわくわくする追加機能を手にできます――そのサポートが、無料ユーザーにも Pro ユーザーにも新機能を届け続けます。`,
+      'about.signoff': `私たちはまだ始まったばかり――山を<strong>すべての人</strong>に開かれたものに保ち続けます。`,
+      'gallery.eyebrow': `私たちがこれを作る理由`,
+      'gallery.h2': `次のターンを勝ち取ろう。`,
+      'cta.eyebrow': `あなたのシーズンはここから`,
+      'cta.h2': `山まるごと、ポケットに`,
+      'cta.p': `Steep でバックカントリースキーツアーを発見・計画・共有。探索は無料――計画オーバーレイが欲しくなったら Pro へ。`,
+      'cta.get': `STEEP map を入手`,
+      'cta.explore': `機能を見る`,
+      'cta.note': `Google Play とウェブで配信中 · iOS は近日`,
+      'modal.close': `閉じる`,
+      'modal.title': `STEEP map を入手`,
+      'modal.web.t': `ウェブアプリ`,
+      'modal.web.s': `ブラウザで開く`,
+      'modal.android.s': `Google Play で入手`,
+      'modal.live.tag': `配信中`,
+      'modal.android.t': `Android`,
+      'modal.ios.t': `iPhone＆iPad`,
+      'modal.soon.s': `近日公開`,
+      'modal.soon.tag': `近日`,
+      'footer.tag': `バックカントリースキーツアーを発見・計画・共有。スキーヤーによる、スキーヤーのためのアプリ。`,
+      'footer.product': `製品`,
+      'footer.legal': `法的情報`,
+      'footer.terms': `利用規約`,
+      'footer.privacy': `プライバシー`,
+      'footer.delete': `アカウント削除`,
+      'footer.contact': `お問い合わせ`,
+      'footer.rights': `STEEP map · Ettore Rasca. All rights reserved.`,
+      'footer.photoCredit': `風景写真：{names}（{unsplash}）`,
+      'scenery.cap.0': `未踏のライン`,
+      'scenery.cap.1': `ターンを勝ち取れ`,
+      'scenery.cap.2': `山を探索しよう`,
+      'scenery.cap.3': `雲の上で`,
+    },
+  };
+
+  function pickLang(){
+    try { var s = localStorage.getItem('lang'); if(s && SUPPORTED.indexOf(s) >= 0) return s; } catch(e){}
+    var nav = (navigator.language || '').slice(0,2).toLowerCase();
+    return SUPPORTED.indexOf(nav) >= 0 ? nav : 'en';
+  }
+
+  // Capture the English source once so switching back to English restores it.
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ el.__en = el.innerHTML; });
+  document.querySelectorAll('[data-i18n-content]').forEach(function(el){ el.__enC = el.getAttribute('content') || ''; });
+  document.querySelectorAll('[data-i18n-aria]').forEach(function(el){ el.__enA = el.getAttribute('aria-label') || ''; });
+
+  function apply(lang){
+    var cat = I18N[lang] || {};
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      el.innerHTML = (k in cat) ? cat[k] : el.__en;
+    });
+    document.querySelectorAll('[data-i18n-content]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-content');
+      el.setAttribute('content', (k in cat) ? cat[k] : el.__enC);
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-aria');
+      el.setAttribute('aria-label', (k in cat) ? cat[k] : el.__enA);
+    });
+    if (typeof window.renderPhotoCredit === 'function') window.renderPhotoCredit(cat['footer.photoCredit']);
+    var sel = document.getElementById('langSelect');
+    if (sel) sel.value = lang;
+  }
+
+  var current = pickLang();
+  apply(current);
+
+  var sel = document.getElementById('langSelect');
+  if (sel) sel.addEventListener('change', function(){
+    var lang = sel.value;
+    try { localStorage.setItem('lang', lang); } catch(e){}
+    apply(lang);
+  });
+})();
 </script>
 <!-- ============ LIVE 3D STEEP MAP (Maps section) ============ -->
 <script type="module">
