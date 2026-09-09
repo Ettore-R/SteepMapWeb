@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>STEEP · Marketing image generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue:#3b82f6; --blue-600:#2563eb; --ink:#0b1622; --slate:#5b6b7d;
+    --sun:#ff8a4c; --sun-2:#ff6a3d; --panel:#0e1c2e; --panel-2:#132639;
+    --line:rgba(255,255,255,.10); --glow:0 24px 60px -24px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:#0a1420; color:#e7eef7; display:grid; grid-template-columns:320px 1fr; height:100vh; overflow:hidden;
+  }
+
+  /* ---------- CONTROL PANEL (never part of the capture) ---------- */
+  .panel{background:var(--panel);border-right:1px solid var(--line);padding:18px 18px 40px;overflow-y:auto}
+  .panel h1{font-family:"Sora";font-size:1.02rem;font-weight:800;margin:0 0 2px}
+  .panel .sub{font-size:.76rem;color:#7f93a8;margin:0 0 18px;line-height:1.4}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8ea3b8;margin-bottom:6px}
+  .field select,.field input[type=text],.field textarea{
+    width:100%;background:var(--panel-2);border:1px solid var(--line);color:#e7eef7;
+    border-radius:10px;padding:.55rem .65rem;font:inherit;font-size:.88rem;
+  }
+  .field textarea{resize:vertical;min-height:50px;line-height:1.3}
+  .field select:focus,.field input:focus,.field textarea:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent}
+  .field input[type=range]{width:100%;accent-color:var(--blue)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}
+  .seg button{flex:1 1 auto;background:var(--panel-2);border:1px solid var(--line);color:#cdd9e6;border-radius:8px;padding:.5rem .4rem;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
+  .seg button:hover{border-color:var(--blue)}
+  .seg button.active{background:linear-gradient(135deg,var(--blue),var(--blue-600));border-color:transparent;color:#fff}
+  .toggle{display:flex;align-items:center;justify-content:space-between;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;font-size:.84rem;font-weight:600;cursor:pointer;margin-bottom:10px}
+  .toggle input{accent-color:var(--blue);width:18px;height:18px}
+  .note{font-size:.72rem;color:#7f93a8;line-height:1.45;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:10px;padding:.6rem .7rem;margin-top:8px}
+  .divider{height:1px;background:var(--line);margin:18px 0}
+  .btn2{width:100%;background:var(--panel-2);border:1px solid var(--line);color:#e7eef7;font-weight:700;border-radius:10px;padding:.6rem;font:inherit;font-size:.85rem;cursor:pointer;margin-bottom:10px}
+  .btn2:hover{border-color:var(--blue)}
+  .dl{width:100%;background:linear-gradient(135deg,var(--sun),var(--sun-2));border:0;color:#3a1200;font-weight:800;border-radius:12px;padding:.8rem;font-size:.95rem;cursor:pointer;font-family:"Sora"}
+  .dl:hover{filter:brightness(1.05)}
+  [hidden]{display:none!important}
+
+  /* ---------- STAGE ---------- */
+  .stage{position:relative;display:flex;align-items:center;justify-content:center;overflow:auto;padding:46px 40px 40px;
+    background:radial-gradient(120% 120% at 50% 0%,#12233a 0%,#0a1420 60%);}
+  .stage-inner{position:relative}
+  .frame-label{position:absolute;top:-28px;left:0;width:100%;text-align:center;font-size:.74rem;color:#8ea3b8;font-weight:600}
+
+  /* The CANVAS is the ONLY thing you screenshot. */
+  #canvas{position:relative;overflow:hidden;background:#0a1420;transform-origin:top left;box-shadow:0 30px 90px -30px rgba(0,0,0,.85)}
+  #canvas .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  #canvas .scrim{position:absolute;inset:0}
+
+  /* ---------- MOVABLE / RESIZABLE LAYERS ---------- */
+  .layer{position:absolute;transform:translate(-50%,-50%);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+  .layer.dragging{cursor:grabbing}
+  #layerDevice{z-index:1}
+  #layerLogo{z-index:2}
+  #layerText{z-index:3}
+  /* edit chrome (hidden from exports) */
+  #canvas.guides .layer{outline:1.5px dashed rgba(124,192,255,.45);outline-offset:6px}
+  .layer:hover{outline:1.5px dashed rgba(124,192,255,.85)!important}
+  .rz{position:absolute;right:-9px;bottom:-9px;width:18px;height:18px;border-radius:50%;
+    background:var(--blue);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.5);
+    cursor:nwse-resize;opacity:0;transition:opacity .15s;touch-action:none;z-index:9}
+  .layer:hover .rz{opacity:1}
+  #canvas.exporting .layer{outline:none!important}
+  #canvas.exporting .rz{display:none}
+
+  /* text */
+  .textcol{display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff}
+  .brandmark{display:inline-flex;align-items:center;gap:.45em;font-family:"Sora";font-weight:800;color:#fff}
+  .brandmark .mk{width:1.55em;height:1.55em;border-radius:.42em;background:linear-gradient(135deg,#1e2e53,#142142);display:grid;place-items:center;flex:none;box-shadow:0 8px 18px -6px rgba(20,33,66,.7)}
+  .brandmark .mk svg{width:.95em;height:.95em}
+  .brandmark .wm-sub{font-weight:500;opacity:.62;margin-left:.18em}
+  .headline{font-family:"Sora";font-weight:800;letter-spacing:-.025em;line-height:1.03;text-shadow:0 4px 34px rgba(0,0,0,.5)}
+  .subline{font-weight:500;line-height:1.35;opacity:.94;text-shadow:0 2px 18px rgba(0,0,0,.45);margin-top:.4em}
+  .g{background:linear-gradient(120deg,#bfe0ff,#7cc0ff 55%,#ffb488);-webkit-background-clip:text;background-clip:text;color:transparent}
+  /* text colour + glow are set in JS (inline styles) */
+  .field input[type=color]{width:100%;height:38px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:3px;cursor:pointer}
+  .aligngrid{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:6px;align-items:center}
+  .aligngrid > span{font-size:.78rem;font-weight:600;color:#cdd9e6;padding-right:4px}
+  .aligngrid button{background:var(--panel-2);border:1px solid var(--line);color:#cdd9e6;border-radius:8px;padding:.4rem;font:inherit;font-size:.95rem;line-height:1;cursor:pointer}
+  .aligngrid button:hover{border-color:var(--blue)}
+
+  /* PHONE — mirrors the website .phone / .phone-shot exactly (proportional) */
+  .phone{position:relative;background:#0b1622;border:1px solid rgba(255,255,255,.08)}
+  .phone .screen{position:relative;width:100%;height:100%;overflow:hidden;background:#0b1622}
+  .phone .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+
+  /* LAPTOP (PC) — mirrors the website .laptop exactly (proportional) */
+  .laptop{position:relative}
+  .laptop .lid{background:#111c28;border:1px solid rgba(255,255,255,.10);box-shadow:var(--glow)}
+  .laptop .disp{position:relative;overflow:hidden;aspect-ratio:16/9.35;background:#0a1420}
+  .laptop .disp img{width:100%;height:100%;object-fit:cover;object-position:top left}
+  .laptop .base{margin-left:-8%;width:116%;background:linear-gradient(180deg,#d6dee7,#a7b3c1);border-radius:0 0 13px 13px;box-shadow:0 16px 26px -16px rgba(0,0,0,.55)}
+  .laptop .base::before{content:"";display:block;height:38%;background:#8593a2;border-radius:0 0 8px 8px}
+
+  /* combo (phone overlapping laptop) */
+  .combo{position:relative}
+  .combo .phone{position:absolute;left:-3%;bottom:-4%;z-index:3;transform:rotate(-2.5deg)}
+</style>
+</head>
+<body>
+
+<!-- ============ CONTROLS ============ -->
+<aside class="panel">
+  <h1>Marketing image generator</h1>
+  <p class="sub">Drag the logo, text and device to move them; grab the blue corner dot to resize. Overlaps are fine.</p>
+
+  <div class="field">
+    <label>Format / ratio</label>
+    <div class="seg" id="ratioSeg"></div>
+  </div>
+
+  <div class="field">
+    <label>Background photo</label>
+    <select id="bgSel"></select>
+  </div>
+  <div class="row2">
+    <div class="field"><label>Photo focus</label><input type="range" id="bgFocus" min="0" max="100" value="42" /></div>
+    <div class="field"><label>Darken</label><input type="range" id="scrim" min="0" max="85" value="46" /></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="field">
+    <label>Device</label>
+    <div class="seg" id="deviceSeg">
+      <button data-device="phone" class="active">Phone</button>
+      <button data-device="combo">Phone + PC</button>
+      <button data-device="none">None</button>
+    </div>
+  </div>
+  <div class="field" id="shotField">
+    <label>Phone screenshot</label>
+    <select id="shotSel"></select>
+  </div>
+  <div class="field" id="deskField" hidden>
+    <label>Desktop screenshot</label>
+    <select id="deskSel"></select>
+  </div>
+  <div class="field" id="tiltField">
+    <label>Phone tilt</label>
+    <input type="range" id="phoneTilt" min="-8" max="8" value="0" />
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="field">
+    <label>Headline</label>
+    <textarea id="headTxt">Explore the backcountry</textarea>
+  </div>
+  <div class="field">
+    <label>Sub-headline (optional)</label>
+    <input type="text" id="subTxt" placeholder="Discover, plan &amp; share ski tours" value="" />
+  </div>
+  <div class="row2">
+    <div class="field"><label>Text colour</label><input type="color" id="textColor" value="#ffffff" /></div>
+    <div class="field" style="display:flex;align-items:flex-end"><label class="toggle" style="margin:0;width:100%">Dark text <input type="checkbox" id="darkText" /></label></div>
+  </div>
+  <div class="row2">
+    <div class="field"><label>Dark glow (light text)</label><input type="range" id="darkGlow" min="0" max="100" value="50" /></div>
+    <div class="field"><label>Bright glow (dark text)</label><input type="range" id="brightGlow" min="0" max="100" value="60" /></div>
+  </div>
+  <label class="toggle">Show STEEP logo <input type="checkbox" id="showLogo" checked /></label>
+  <label class="toggle">Show edit guides <input type="checkbox" id="showGuides" checked /></label>
+
+  <div class="divider"></div>
+  <div class="field">
+    <label>Center / align</label>
+    <div class="aligngrid" id="alignGrid">
+      <span>Logo</span>
+      <button data-k="logo" data-a="h" title="Center horizontally">↔</button>
+      <button data-k="logo" data-a="v" title="Center vertically">↕</button>
+      <button data-k="logo" data-a="both" title="Center both">＋</button>
+      <span>Text</span>
+      <button data-k="text" data-a="h" title="Center horizontally">↔</button>
+      <button data-k="text" data-a="v" title="Center vertically">↕</button>
+      <button data-k="text" data-a="both" title="Center both">＋</button>
+      <span>Device</span>
+      <button data-k="device" data-a="h" title="Center horizontally">↔</button>
+      <button data-k="device" data-a="v" title="Center vertically">↕</button>
+      <button data-k="device" data-a="both" title="Center both">＋</button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <button class="btn2" id="arrangeBtn">Auto-arrange for this ratio</button>
+  <div class="row2">
+    <button class="btn2" id="saveBtn">Save layout</button>
+    <button class="btn2" id="resetBtn">Reset layout</button>
+  </div>
+  <button class="dl" id="downloadBtn">Download PNG</button>
+  <p class="note">Guides &amp; handles are never part of the export or a clean screenshot (move the mouse off the canvas first).</p>
+</aside>
+
+<!-- ============ STAGE + CAPTURE CANVAS ============ -->
+<main class="stage" id="stage">
+  <div class="stage-inner" id="stageInner">
+    <div class="frame-label" id="frameLabel"></div>
+    <div id="canvas" class="guides">
+      <img class="bg" id="bgImg" alt="" crossorigin="anonymous" />
+      <div class="scrim" id="scrimEl"></div>
+
+      <div class="layer" id="layerLogo">
+        <div class="brandmark" id="brandmark">
+          <span class="mk">
+            <svg viewBox="0 0 340 274" aria-hidden="true">
+              <defs><linearGradient id="mk" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0" gradientTransform="matrix(0,121.597885,-121.597885,0,401.3321,369.5805)"><stop offset="0" stop-color="#f3f3f5"/><stop offset="1" stop-color="#8d8dc7"/></linearGradient></defs>
+              <g transform="translate(-241.38996,-233.630384)">
+                <g transform="matrix(3.958426,0,0,3.958426,-1183.643245,-1143.945213)"><path d="M360,417L403,348.011C403,348.011 406.104,353.064 407.95,355.942C414.399,366 413.646,372.724 408.306,381.311L386,417L360,417Z" fill="url(#mk)"/></g>
+                <g transform="matrix(3.958426,0,0,3.958426,-1179.684819,-1143.945213)"><path d="M392,417L421.306,369.49C421.306,369.49 437.639,395.623 442.588,403.541C445.206,407.729 447.694,416.751 437,417C428.278,417.203 392,417 392,417Z" fill="url(#mk)"/></g>
+              </g>
+            </svg>
+          </span>
+          <span class="wm">STEEP<span class="wm-sub">map</span></span>
+        </div>
+        <div class="rz" data-key="logo"></div>
+      </div>
+
+      <div class="layer" id="layerText">
+        <div class="textcol" id="textCol">
+          <div class="headline" id="headline"></div>
+          <div class="subline" id="subline"></div>
+        </div>
+        <div class="rz" data-key="text"></div>
+      </div>
+
+      <div class="layer" id="layerDevice">
+        <div id="deviceInner"></div>
+        <div class="rz" data-key="device"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ---------- Assets (kept in sync with the website) ---------- */
+const BACKGROUNDS = [
+  {id:'photo-1495619744764-2cc11fcbe5f0', label:'Snowboarder ridge (Untracked lines)'},
+  {id:'photo-1586357111879-28b152bdb01c', label:'Red-jacket skier'},
+  {id:'photo-1717051835101-903456ccf792', label:'Skier carving'},
+  {id:'photo-1562826542-449090f38c70',  label:'Snowy peaks, grey sky (Above the clouds)'},
+  {id:'photo-1531366936337-7c912a4589a7', label:'Aurora over snowy valley'},
+];
+const bgSrc = id => 'https://images.unsplash.com/'+id+'?auto=format&fit=crop&w=2200&q=80';
+
+/* Screenshots are auto-discovered from ../media/app at load time by probing
+   app_<n>.png (phone) and desktop_app_<n>.png (desktop). Drop a new file in that
+   folder following the naming convention and it shows up here automatically.
+   Optional friendly labels below; anything not listed falls back to its filename. */
+const SHOT_LABELS = {
+  'app_0.png':'Tour detail + stats',
+  'app_1.png':'3D terrain',
+  'app_3.png':'Winter satellite + tracks',
+  'app_4.png':'Friends feed',
+  'app_5.png':'Slope aspect overlay',
+  'app_6.png':'Slope steepness overlay',
+  'app_7.png':'3D terrain view',
+  'desktop_app_0.png':'Tour detail + 3D map',
+  'desktop_app_1.png':'3D terrain basemap',
+  'desktop_app_3.png':'Slope steepness overlay',
+  'desktop_app_4.png':'Slope aspect overlay',
+};
+let SHOTS = [];     // phone screenshots (app_*.png), filled by discoverShots()
+let DESKTOPS = [];  // desktop screenshots (desktop_*.png)
+const appSrc = f => '../media/app/'+f;
+
+/* Probe indices 0..MAX for "<prefix>_<n>.png"; keep the ones that load, in order.
+   Tolerates gaps (e.g. a missing app_2.png). */
+const MAX_SHOT_INDEX = 60;
+function probeImg(file){
+  return new Promise(res=>{ const im=new Image();
+    im.onload=()=>res(file); im.onerror=()=>res(null); im.src=appSrc(file); });
+}
+async function discoverPrefix(prefix){
+  const jobs=[]; for(let i=0;i<=MAX_SHOT_INDEX;i++) jobs.push(probeImg(prefix+'_'+i+'.png'));
+  const found=(await Promise.all(jobs)).filter(Boolean);
+  return found.map(f=>({file:f, label:SHOT_LABELS[f]||f}));
+}
+async function discoverShots(){
+  [SHOTS, DESKTOPS] = await Promise.all([discoverPrefix('app'), discoverPrefix('desktop_app')]);
+}
+
+const RATIOS = [
+  {key:'square',   label:'Square',    w:1080, h:1080, full:'Square 1:1 (1080×1080)'},
+  {key:'portrait', label:'Portrait',  w:1080, h:1350, full:'Portrait 4:5 (1080×1350)'},
+  {key:'feature',  label:'Feature',   w:1024, h:500 , full:'Play feature (1024×500)'},
+  {key:'landscape',label:'Landscape', w:1200, h:675 , full:'Landscape 16:9 (1200×675)'},
+  {key:'story',    label:'Story',     w:1080, h:1920, full:'Story 9:16 (1080×1920)'},
+  {key:'tall',     label:'Tall',      w:1080, h:2340, full:'Store tall 9:19.5 (1080×2340)'},
+];
+
+/* ---------- State ---------- */
+const state = { ratio:'square', bg:BACKGROUNDS[0].id, focus:42, scrim:46,
+  device:'phone', shot:null, desk:null, tilt:0, showLogo:true, guides:true, darkText:false,
+  darkGlow:50, brightGlow:60, textColor:'#ffffff', head:'', sub:'' };
+
+/* layer positions (fractions of canvas) + scale multipliers. x/y = element CENTRE. */
+const L = {
+  logo:  {x:.5, y:.12, scale:1},
+  text:  {x:.5, y:.30, scale:1, w:.86},
+  device:{x:.5, y:.70, scale:1},
+};
+
+let CW=1080, CH=1080;
+const el = id => document.getElementById(id);
+const canvas=el('canvas'), stageInner=el('stageInner'),
+  headline=el('headline'), subline=el('subline'), brandmark=el('brandmark'),
+  layerLogo=el('layerLogo'), layerText=el('layerText'), layerDevice=el('layerDevice'),
+  deviceInner=el('deviceInner');
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* ---------- Build controls ---------- */
+const ratioSeg=el('ratioSeg');
+RATIOS.forEach(r=>{ const b=document.createElement('button'); b.textContent=r.label; b.title=r.full;
+  b.dataset.key=r.key; if(r.key===state.ratio) b.classList.add('active');
+  b.onclick=()=>{ state.ratio=r.key; [...ratioSeg.children].forEach(c=>c.classList.toggle('active',c===b)); loadRatioL(); render(); };
+  ratioSeg.appendChild(b); });
+
+const bgSel=el('bgSel'); BACKGROUNDS.forEach(b=>bgSel.add(new Option(b.label,b.id)));
+bgSel.onchange=()=>{ state.bg=bgSel.value; applyBg(); };
+const shotSel=el('shotSel');
+shotSel.onchange=()=>{ state.shot=shotSel.value; buildDevice(); layout(); };
+const deskSel=el('deskSel');
+deskSel.onchange=()=>{ state.desk=deskSel.value; buildDevice(); layout(); };
+function populateShotSelects(){
+  shotSel.innerHTML=''; SHOTS.forEach(s=>shotSel.add(new Option(s.label,s.file)));
+  deskSel.innerHTML=''; DESKTOPS.forEach(s=>deskSel.add(new Option(s.label,s.file)));
+  if(SHOTS.length){ state.shot=SHOTS.find(s=>s.file===state.shot)?state.shot:SHOTS[0].file; shotSel.value=state.shot; }
+  if(DESKTOPS.length){ state.desk=DESKTOPS.find(s=>s.file===state.desk)?state.desk:DESKTOPS[0].file; deskSel.value=state.desk; }
+}
+
+document.querySelectorAll('#deviceSeg button').forEach(b=>{
+  b.onclick=()=>{ state.device=b.dataset.device; document.querySelectorAll('#deviceSeg button').forEach(x=>x.classList.toggle('active',x===b));
+    el('deskField').hidden = state.device!=='combo';
+    el('shotField').hidden = state.device==='none';
+    el('tiltField').hidden = state.device!=='phone';
+    layerDevice.style.display = state.device==='none' ? 'none':'';
+    buildDevice(); layout(); };
+});
+
+el('bgFocus').oninput=e=>{ state.focus=+e.target.value; applyBg(); };
+el('scrim').oninput=e=>{ state.scrim=+e.target.value; applyBg(); };
+el('phoneTilt').oninput=e=>{ state.tilt=+e.target.value; layout(); };
+el('headTxt').oninput=e=>{ state.head=e.target.value; headline.textContent=e.target.value; layout(); };
+el('subTxt').oninput=e=>{ state.sub=e.target.value; subline.textContent=e.target.value; subline.style.display=e.target.value?'':'none'; layout(); };
+el('textColor').oninput=e=>{ state.textColor=e.target.value; applyTextColor(); };
+el('darkText').onchange=e=>{ state.darkText=e.target.checked;
+  state.textColor=state.darkText?'#0b1622':'#ffffff'; el('textColor').value=state.textColor;
+  applyTextColor(); applyGlow(); };
+el('darkGlow').oninput=e=>{ state.darkGlow=+e.target.value; applyGlow(); };
+el('brightGlow').oninput=e=>{ state.brightGlow=+e.target.value; applyGlow(); };
+
+/* Text colour (picker is the source of truth) */
+function applyTextColor(){ el('textCol').style.color=state.textColor; }
+/* Text glow: bright/white glow behind dark text, dark glow behind light text */
+function applyGlow(){
+  const dark=state.darkText;
+  const a=(dark?state.brightGlow:state.darkGlow)/100;
+  const col=dark?'255,255,255':'0,0,0';
+  headline.style.textShadow='0 4px 34px rgba('+col+','+a+')';
+  subline.style.textShadow ='0 2px 18px rgba('+col+','+(a*0.9)+')';
+}
+
+/* Center / align any layer on the canvas */
+const LAYER_EL={logo:layerLogo, text:layerText, device:layerDevice};
+function centerLayer(key,axis){
+  const d=L[key];
+  if(axis==='h'||axis==='both') d.x=.5;
+  if(axis==='v'||axis==='both') d.y=.5;
+  place(LAYER_EL[key], d);
+}
+document.querySelectorAll('#alignGrid button').forEach(b=>{
+  b.onclick=()=>centerLayer(b.dataset.k, b.dataset.a);
+});
+el('showLogo').onchange=e=>{ state.showLogo=e.target.checked; layerLogo.style.display=state.showLogo?'':'none'; };
+el('showGuides').onchange=e=>{ state.guides=e.target.checked; canvas.classList.toggle('guides',state.guides); };
+el('arrangeBtn').onclick=()=>{ autoArrange(); layout(); };
+
+/* ---------- Background ---------- */
+function applyBg(){
+  el('bgImg').src=bgSrc(state.bg);
+  el('bgImg').style.objectPosition='center '+state.focus+'%';
+  const s=state.scrim/100;
+  el('scrimEl').style.background=
+    'linear-gradient(180deg, rgba(6,14,24,'+(s*0.92)+') 0%, rgba(6,14,24,'+(s*0.32)+') 42%, rgba(6,14,24,'+(s*0.82)+') 100%)';
+}
+
+/* ---------- Device DOM ---------- */
+function buildDevice(){
+  if(state.device==='combo'){
+    deviceInner.innerHTML=
+      '<div class="combo" id="combo">'+
+        '<div class="laptop" id="laptop"><div class="lid"><div class="disp"><img id="deskImg" alt=""/></div></div><div class="base"></div></div>'+
+        '<div class="phone" id="phone"><div class="screen"><img id="shotImg" alt=""/></div></div>'+
+      '</div>';
+  }else if(state.device==='phone'){
+    deviceInner.innerHTML='<div class="phone" id="phone"><div class="screen"><img id="shotImg" alt=""/></div></div>';
+  }else{ deviceInner.innerHTML=''; }
+  const si=el('shotImg'); if(si && state.shot) si.src=appSrc(state.shot);
+  const di=el('deskImg'); if(di && state.desk) di.src=appSrc(state.desk);
+}
+
+/* proportional device styling (identical proportions to the website at any size) */
+function stylePhone(pw){
+  const p=el('phone'); if(!p) return;
+  p.style.width=pw+'px'; p.style.height=(pw*620/300)+'px';
+  p.style.borderRadius=(pw*0.14)+'px'; p.style.padding=(pw*0.04)+'px';
+  p.querySelector('.screen').style.borderRadius=(pw*0.105)+'px';
+  p.style.boxShadow='0 '+(pw*0.13)+'px '+(pw*0.27)+'px -'+(pw*0.1)+'px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.06) inset,0 0 0 '+(pw*0.027)+'px rgba(10,20,32,.5)';
+}
+function styleLaptop(lw){
+  const l=el('laptop'); if(!l) return;
+  l.style.width=lw+'px';
+  const lid=l.querySelector('.lid'); lid.style.borderRadius=(lw*0.025)+'px'; lid.style.padding=(lw*0.021)+'px';
+  l.querySelector('.disp').style.borderRadius=(lw*0.0125)+'px';
+  l.querySelector('.base').style.height=(lw*0.027)+'px';
+}
+
+/* ---------- Layout (positions + sizes) ---------- */
+function unit(){ return Math.min(CW,CH)/100; }
+function layout(){
+  const u=unit();
+  // logo
+  el('brandmark').style.fontSize=(u*3.0*L.logo.scale)+'px';
+  place(layerLogo, L.logo);
+  // text
+  headline.style.fontSize=(u*4.6*L.text.scale)+'px';
+  subline.style.fontSize =(u*1.7*L.text.scale)+'px';
+  el('textCol').style.width=(L.text.w*CW)+'px';
+  place(layerText, L.text);
+  // device
+  if(state.device==='combo'){
+    styleLaptop(CW*0.42*L.device.scale);
+    stylePhone(CW*0.42*L.device.scale*0.34);
+  }else if(state.device==='phone'){
+    stylePhone(CH*0.26*L.device.scale);          // phone width; height = *2.067
+    const p=el('phone'); if(p) p.style.transform='rotate('+state.tilt+'deg)';
+  }
+  place(layerDevice, L.device);
+}
+function place(elm, d){ elm.style.left=(d.x*CW)+'px'; elm.style.top=(d.y*CH)+'px'; }
+
+/* ---------- Auto-arrange sensible defaults for the current ratio ---------- */
+function autoArrange(){
+  const r=RATIOS.find(x=>x.key===state.ratio); const wide=r.w/r.h>=1.25;
+  if(wide){
+    L.logo  ={x:.30, y:.24, scale:1.0};
+    L.text  ={x:.30, y:.52, scale:1.15, w:.5};
+    L.device={x:.74, y:.55, scale:1.2};
+  }else{
+    const tall=r.h/r.w;
+    L.logo  ={x:.5, y:.10, scale:1.0};
+    L.text  ={x:.5, y:.24, scale:1.15, w:.86};
+    L.device={x:.5, y:.68, scale: tall>1.6?1.25:(tall>1.15?1.1:1.0)};
+  }
+}
+
+/* ---------- Save / restore layout (localStorage) ---------- */
+const LS_KEY='steepGenLayout';
+let savedRatios={};   // { ratioKey: {logo,text,device} }
+
+function loadRatioL(){
+  const s=savedRatios[state.ratio];
+  if(s){ L.logo={...s.logo}; L.text={...s.text}; L.device={...s.device}; }
+  else autoArrange();
+}
+function saveLayout(){
+  savedRatios[state.ratio]={logo:{...L.logo}, text:{...L.text}, device:{...L.device}};
+  try{ localStorage.setItem(LS_KEY, JSON.stringify({ratios:savedRatios, state:{...state}}));
+    flashBtn(el('saveBtn'),'Saved ✓');
+  }catch(err){ alert('Could not save layout: '+err); }
+}
+function restoreSaved(){
+  try{ const raw=localStorage.getItem(LS_KEY); if(!raw) return;
+    const data=JSON.parse(raw);
+    savedRatios=data.ratios||{};
+    if(data.state) Object.assign(state, data.state);
+  }catch(_){ savedRatios={}; }
+}
+function resetLayout(){
+  savedRatios={}; try{ localStorage.removeItem(LS_KEY); }catch(_){}
+  autoArrange(); layout(); flashBtn(el('resetBtn'),'Reset ✓');
+}
+function flashBtn(btn,msg){ const t=btn.textContent; btn.textContent=msg; setTimeout(()=>btn.textContent=t,1100); }
+el('saveBtn').onclick=saveLayout;
+el('resetBtn').onclick=resetLayout;
+
+/* Reflect the current state into every control (used after restoring a saved layout) */
+function reflectControls(){
+  [...ratioSeg.children].forEach(c=>c.classList.toggle('active', c.dataset.key===state.ratio));
+  bgSel.value=state.bg;
+  el('bgFocus').value=state.focus; el('scrim').value=state.scrim;
+  document.querySelectorAll('#deviceSeg button').forEach(x=>x.classList.toggle('active', x.dataset.device===state.device));
+  el('deskField').hidden = state.device!=='combo';
+  el('shotField').hidden = state.device==='none';
+  el('tiltField').hidden = state.device!=='phone';
+  layerDevice.style.display = state.device==='none'?'none':'';
+  el('phoneTilt').value=state.tilt;
+  el('headTxt').value=state.head; el('subTxt').value=state.sub;
+  headline.textContent=state.head; subline.textContent=state.sub;
+  subline.style.display=state.sub?'':'none';
+  el('showLogo').checked=state.showLogo; layerLogo.style.display=state.showLogo?'':'none';
+  el('darkText').checked=state.darkText;
+  el('textColor').value=state.textColor; applyTextColor();
+  el('darkGlow').value=state.darkGlow; el('brightGlow').value=state.brightGlow; applyGlow();
+  el('showGuides').checked=state.guides; canvas.classList.toggle('guides',state.guides);
+}
+
+/* ---------- Render (ratio change) ---------- */
+function render(){
+  const r=RATIOS.find(x=>x.key===state.ratio); CW=r.w; CH=r.h;
+  canvas.style.width=CW+'px'; canvas.style.height=CH+'px';
+  el('frameLabel').textContent='Capture this frame  ·  '+CW+' × '+CH+' px';
+  applyBg(); buildDevice(); layout(); fit();
+}
+
+/* ---------- Fit canvas into stage (visual only) ---------- */
+let fitScale=1;
+function fit(){
+  const stage=el('stage');
+  fitScale=Math.min((stage.clientWidth-80)/CW,(stage.clientHeight-96)/CH,1);
+  canvas.style.transform='scale('+fitScale+')';
+  stageInner.style.width=(CW*fitScale)+'px';
+  stageInner.style.height=(CH*fitScale)+'px';
+}
+window.addEventListener('resize', fit);
+
+/* ---------- Drag & resize ---------- */
+function toCanvas(cx,cy){ const rc=canvas.getBoundingClientRect(); return {x:(cx-rc.left)*CW/rc.width, y:(cy-rc.top)*CH/rc.height}; }
+function bindDrag(elm, key){
+  elm.addEventListener('pointerdown', e=>{
+    if(e.target.classList.contains('rz')) return;
+    e.preventDefault(); const d=L[key];
+    try{ elm.setPointerCapture(e.pointerId); }catch(_){}
+    elm.classList.add('dragging');
+    const p0=toCanvas(e.clientX,e.clientY), x0=d.x, y0=d.y;
+    const mv=ev=>{ const p=toCanvas(ev.clientX,ev.clientY);
+      d.x=clamp(x0+(p.x-p0.x)/CW,-0.25,1.25); d.y=clamp(y0+(p.y-p0.y)/CH,-0.25,1.25); place(elm,d); };
+    const up=()=>{ elm.classList.remove('dragging');
+      window.removeEventListener('pointermove',mv); window.removeEventListener('pointerup',up); };
+    window.addEventListener('pointermove',mv); window.addEventListener('pointerup',up);
+  });
+}
+function bindResize(handle){
+  handle.addEventListener('pointerdown', e=>{
+    e.preventDefault(); e.stopPropagation();
+    const key=handle.dataset.key, d=L[key];
+    try{ handle.setPointerCapture(e.pointerId); }catch(_){}
+    const c={x:d.x*CW, y:d.y*CH}, p0=toCanvas(e.clientX,e.clientY);
+    const d0=Math.hypot(p0.x-c.x,p0.y-c.y)||1, s0=d.scale;
+    const mv=ev=>{ const p=toCanvas(ev.clientX,ev.clientY); const dist=Math.hypot(p.x-c.x,p.y-c.y);
+      d.scale=clamp(s0*dist/d0,0.3,6); layout(); };
+    const up=()=>{ window.removeEventListener('pointermove',mv); window.removeEventListener('pointerup',up); };
+    window.addEventListener('pointermove',mv); window.addEventListener('pointerup',up);
+  });
+}
+bindDrag(layerLogo,'logo'); bindDrag(layerText,'text'); bindDrag(layerDevice,'device');
+document.querySelectorAll('.rz').forEach(bindResize);
+
+/* ---------- Download PNG (guides/handles stripped) ---------- */
+el('downloadBtn').onclick=async()=>{
+  const btn=el('downloadBtn'), old=btn.textContent; btn.textContent='Rendering…'; btn.disabled=true;
+  try{
+    if(!window.html2canvas){
+      await new Promise((res,rej)=>{ const s=document.createElement('script');
+        s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
+    }
+    const prev=canvas.style.transform, hadGuides=canvas.classList.contains('guides');
+    canvas.classList.remove('guides'); canvas.classList.add('exporting'); canvas.style.transform='none';
+    const out=await html2canvas(canvas,{useCORS:true,backgroundColor:null,width:CW,height:CH,scale:2,logging:false,
+      onclone:(doc)=>{
+        // html2canvas can't render inset or spread-only box-shadows with border-radius —
+        // it draws them as a hard rectangle (the halo around the phone). Replace the
+        // device shadows with a single soft, rounded drop shadow just for the capture.
+        doc.querySelectorAll('#canvas .phone').forEach(p=>{
+          const w=parseFloat(p.style.width)||p.offsetWidth||300;
+          p.style.boxShadow='0 '+(w*0.12)+'px '+(w*0.26)+'px -'+(w*0.07)+'px rgba(0,0,0,.55)';
+        });
+        doc.querySelectorAll('#canvas .laptop .lid').forEach(l=>{
+          const w=parseFloat(l.parentElement.style.width)||l.offsetWidth||600;
+          l.style.boxShadow='0 '+(w*0.05)+'px '+(w*0.11)+'px -'+(w*0.04)+'px rgba(0,0,0,.5)';
+        });
+      }});
+    canvas.classList.remove('exporting'); if(hadGuides) canvas.classList.add('guides'); canvas.style.transform=prev; fit();
+    const a=document.createElement('a'); a.download='steep-'+state.ratio+'-'+Date.now()+'.png'; a.href=out.toDataURL('image/png'); a.click();
+  }catch(err){ alert('Download blocked (cross-origin image). Screenshot the framed canvas instead.\n\n'+err); }
+  finally{ btn.textContent=old; btn.disabled=false; }
+};
+
+/* ---------- Init ---------- */
+state.head=el('headTxt').value;         // seed from the HTML defaults
+state.sub=el('subTxt').value;
+restoreSaved();                          // may overwrite state.* from a saved layout
+reflectControls();                       // push state back into every control
+loadRatioL();                            // saved geometry for this ratio, else auto-arrange
+render();
+discoverShots().then(()=>{ populateShotSelects(); buildDevice(); layout(); });
+</script>
+</body>
+</html>
