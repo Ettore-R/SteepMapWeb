@@ -194,13 +194,33 @@
   </div>
 
   <div class="divider"></div>
-  <button class="btn2" id="arrangeBtn">Auto-arrange for this ratio</button>
   <div class="row2">
-    <button class="btn2" id="saveBtn">Save layout</button>
-    <button class="btn2" id="resetBtn">Reset layout</button>
+    <button class="btn2" id="arrangeBtn" style="margin:0">Auto-arrange</button>
+    <button class="btn2" id="resetBtn" style="margin:0">Reset layout</button>
   </div>
+
+  <div class="field" style="margin-top:14px">
+    <label>Configurations</label>
+    <div class="row2" style="margin-bottom:8px">
+      <input type="text" id="cfgName" placeholder="Name this layout…" />
+      <button class="btn2" id="cfgSave" style="margin:0">Save</button>
+    </div>
+    <div class="row2" style="margin-bottom:8px">
+      <select id="cfgSel"></select>
+      <button class="btn2" id="cfgLoad" style="margin:0">Load</button>
+    </div>
+    <div class="row2" style="margin-bottom:8px">
+      <button class="btn2" id="cfgDelete" style="margin:0">Delete</button>
+      <button class="btn2" id="cfgExport" style="margin:0">Export .json</button>
+    </div>
+    <button class="btn2" id="cfgImport">Import .json…</button>
+    <input type="file" id="cfgFile" accept="application/json,.json" hidden multiple />
+    <p class="note">Save any number of named layouts — ratio, positions, sizes, text colour and the chosen images. They persist in this browser; Export writes them all to a JSON file to back up or share, Import loads them back.</p>
+  </div>
+
+  <label class="toggle" style="margin-top:6px">Compress under 4&nbsp;MB (JPEG) <input type="checkbox" id="smallFile" /></label>
   <button class="dl" id="downloadBtn">Download PNG</button>
-  <p class="note">Guides &amp; handles are never part of the export or a clean screenshot (move the mouse off the canvas first).</p>
+  <p class="note">Guides &amp; handles are never part of the export or a clean screenshot (move the mouse off the canvas first). Tick “Compress” for Play Store uploads — it saves a JPEG kept under 4&nbsp;MB.</p>
 </aside>
 
 <!-- ============ STAGE + CAPTURE CANVAS ============ -->
@@ -254,9 +274,14 @@ const BACKGROUNDS = [
 ];
 const bgSrc = id => 'https://images.unsplash.com/'+id+'?auto=format&fit=crop&w=2200&q=80';
 
-/* Screenshots are auto-discovered from ../media/app at load time by probing
-   app_<n>.png (phone) and desktop_app_<n>.png (desktop). Drop a new file in that
-   folder following the naming convention and it shows up here automatically.
+/* Screenshots are auto-discovered from ../media/app at load time.
+   • Served over http (e.g. `python -m http.server` in SteepMapWeb, then open
+     http://localhost:8000/marketing/generator.html): the real folder is listed,
+     so ANY *.png dropped in shows up — regardless of its name.
+   • Opened directly as a file:// document: a browser can't read a directory, so
+     it falls back to probing app_<n>.png / desktop_app_<n>.png by name.
+   Phone shots must start with "app_"; desktop shots with "desktop_app_".
+   Any image extension works (.png/.jpg/.jpeg/.webp).
    Optional friendly labels below; anything not listed falls back to its filename. */
 const SHOT_LABELS = {
   'app_0.png':'Tour detail + stats',
@@ -273,22 +298,47 @@ const SHOT_LABELS = {
 };
 let SHOTS = [];     // phone screenshots (app_*.png), filled by discoverShots()
 let DESKTOPS = [];  // desktop screenshots (desktop_*.png)
-const appSrc = f => '../media/app/'+f;
+const DIR='../media/app/';
+const appSrc = f => DIR+f;
 
-/* Probe indices 0..MAX for "<prefix>_<n>.png"; keep the ones that load, in order.
-   Tolerates gaps (e.g. a missing app_2.png). */
-const MAX_SHOT_INDEX = 60;
+/* Real directory listing — works when the page is served over http. Tries an
+   optional manifest.json first, then a server autoindex (parsing <a href=…>).
+   Returns an array of filenames, or null if neither is reachable (file://). */
+async function listDirFiles(){
+  try{ const r=await fetch(DIR+'manifest.json',{cache:'no-store'});
+    if(r.ok){ const j=await r.json(); const a=Array.isArray(j)?j:j.files;
+      if(Array.isArray(a)&&a.length) return a; } }catch(_){}
+  try{ const r=await fetch(DIR,{cache:'no-store'});
+    if(r.ok){ const html=await r.text();
+      const names=[...html.matchAll(/href="([^"?#]+\.(?:png|jpe?g|webp))"/gi)]
+        .map(m=>decodeURIComponent(m[1].split('/').pop()));
+      if(names.length) return [...new Set(names)]; } }catch(_){}
+  return null;
+}
+
+/* file:// fallback — can't read a directory, so probe "<prefix>_<n>.png" by name.
+   Keeps whatever loads; tolerates gaps (e.g. a missing app_2.png). */
+const MAX_SHOT_INDEX = 120;
 function probeImg(file){
   return new Promise(res=>{ const im=new Image();
     im.onload=()=>res(file); im.onerror=()=>res(null); im.src=appSrc(file); });
 }
 async function discoverPrefix(prefix){
-  const jobs=[]; for(let i=0;i<=MAX_SHOT_INDEX;i++) jobs.push(probeImg(prefix+'_'+i+'.png'));
-  const found=(await Promise.all(jobs)).filter(Boolean);
-  return found.map(f=>({file:f, label:SHOT_LABELS[f]||f}));
+  const jobs=[];
+  for(let i=0;i<=MAX_SHOT_INDEX;i++)
+    for(const ext of ['png','jpg','jpeg','webp']) jobs.push(probeImg(prefix+'_'+i+'.'+ext));
+  return (await Promise.all(jobs)).filter(Boolean);
 }
+
+const natSort=(a,b)=>a.localeCompare(b,undefined,{numeric:true});
+const toEntry=f=>({file:f, label:SHOT_LABELS[f]||f});
 async function discoverShots(){
-  [SHOTS, DESKTOPS] = await Promise.all([discoverPrefix('app'), discoverPrefix('desktop_app')]);
+  let files=await listDirFiles();
+  if(!files) files=[...await discoverPrefix('app'), ...await discoverPrefix('desktop_app')];
+  files=[...new Set(files.map(f=>f.split('/').pop()))];
+  const isImg=f=>/\.(png|jpe?g|webp)$/i.test(f);
+  SHOTS    = files.filter(f=>/^app_/i.test(f) && isImg(f)).sort(natSort).map(toEntry);
+  DESKTOPS = files.filter(f=>/^desktop_app_/i.test(f) && isImg(f)).sort(natSort).map(toEntry);
 }
 
 const RATIOS = [
@@ -296,7 +346,9 @@ const RATIOS = [
   {key:'portrait', label:'Portrait',  w:1080, h:1350, full:'Portrait 4:5 (1080×1350)'},
   {key:'feature',  label:'Feature',   w:1024, h:500 , full:'Play feature (1024×500)'},
   {key:'landscape',label:'Landscape', w:1200, h:675 , full:'Landscape 16:9 (1200×675)'},
+  {key:'wide169',  label:'16:9',      w:1920, h:1080, full:'Widescreen 16:9 (1920×1080)'},
   {key:'story',    label:'Story',     w:1080, h:1920, full:'Story 9:16 (1080×1920)'},
+  {key:'tall916',  label:'9:16',      w:1080, h:1920, full:'Vertical 9:16 (1080×1920)'},
   {key:'tall',     label:'Tall',      w:1080, h:2340, full:'Store tall 9:19.5 (1080×2340)'},
 ];
 
@@ -324,7 +376,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const ratioSeg=el('ratioSeg');
 RATIOS.forEach(r=>{ const b=document.createElement('button'); b.textContent=r.label; b.title=r.full;
   b.dataset.key=r.key; if(r.key===state.ratio) b.classList.add('active');
-  b.onclick=()=>{ state.ratio=r.key; [...ratioSeg.children].forEach(c=>c.classList.toggle('active',c===b)); loadRatioL(); render(); };
+  b.onclick=()=>{ stashRatioL(); state.ratio=r.key; [...ratioSeg.children].forEach(c=>c.classList.toggle('active',c===b)); loadRatioL(); render(); };
   ratioSeg.appendChild(b); });
 
 const bgSel=el('bgSel'); BACKGROUNDS.forEach(b=>bgSel.add(new Option(b.label,b.id)));
@@ -466,35 +518,113 @@ function autoArrange(){
   }
 }
 
-/* ---------- Save / restore layout (localStorage) ---------- */
-const LS_KEY='steepGenLayout';
-let savedRatios={};   // { ratioKey: {logo,text,device} }
-
+/* ---------- Per-ratio geometry memory (in-session) ---------- */
+let savedRatios={};   // { ratioKey: {logo,text,device} } — remembers tweaks as you switch ratios
+function stashRatioL(){ savedRatios[state.ratio]={logo:{...L.logo}, text:{...L.text}, device:{...L.device}}; }
 function loadRatioL(){
   const s=savedRatios[state.ratio];
   if(s){ L.logo={...s.logo}; L.text={...s.text}; L.device={...s.device}; }
   else autoArrange();
 }
-function saveLayout(){
-  savedRatios[state.ratio]={logo:{...L.logo}, text:{...L.text}, device:{...L.device}};
-  try{ localStorage.setItem(LS_KEY, JSON.stringify({ratios:savedRatios, state:{...state}}));
-    flashBtn(el('saveBtn'),'Saved ✓');
-  }catch(err){ alert('Could not save layout: '+err); }
-}
-function restoreSaved(){
-  try{ const raw=localStorage.getItem(LS_KEY); if(!raw) return;
-    const data=JSON.parse(raw);
-    savedRatios=data.ratios||{};
-    if(data.state) Object.assign(state, data.state);
-  }catch(_){ savedRatios={}; }
-}
-function resetLayout(){
-  savedRatios={}; try{ localStorage.removeItem(LS_KEY); }catch(_){}
-  autoArrange(); layout(); flashBtn(el('resetBtn'),'Reset ✓');
-}
+function resetLayout(){ autoArrange(); layout(); flashBtn(el('resetBtn'),'Reset ✓'); }
 function flashBtn(btn,msg){ const t=btn.textContent; btn.textContent=msg; setTimeout(()=>btn.textContent=t,1100); }
-el('saveBtn').onclick=saveLayout;
 el('resetBtn').onclick=resetLayout;
+
+/* ---------- Named configurations (full snapshot → library + JSON file) ---------- */
+const CFG_KEY='steepGenConfigs';
+let CONFIGS={};                       // { name: snapshot }
+function loadConfigs(){ try{ CONFIGS=JSON.parse(localStorage.getItem(CFG_KEY))||{}; }catch(_){ CONFIGS={}; } }
+function persistConfigs(){ try{ localStorage.setItem(CFG_KEY, JSON.stringify(CONFIGS)); }catch(_){} }
+
+/* A snapshot captures EVERYTHING: ratio, every control's state (background, chosen
+   images, text + colours, toggles) and the position + size of each layer. */
+function snapshot(){
+  return { _type:'steep-marketing-layout', _v:1,
+    state:{...state},
+    layout:{logo:{...L.logo}, text:{...L.text}, device:{...L.device}} };
+}
+function ensureOption(sel,val){
+  if(val && ![...sel.options].some(o=>o.value===val)) sel.add(new Option(val,val));
+  if(val) sel.value=val;
+}
+function applySnapshot(snap){
+  if(!snap || !snap.state) return;
+  Object.assign(state, snap.state);
+  const lo=snap.layout||{};
+  if(lo.logo)   L.logo  ={...lo.logo};
+  if(lo.text)   L.text  ={...lo.text};
+  if(lo.device) L.device={...lo.device};
+  savedRatios[state.ratio]={logo:{...L.logo}, text:{...L.text}, device:{...L.device}};
+  reflectControls();
+  ensureOption(shotSel, state.shot);
+  ensureOption(deskSel, state.desk);
+  render();
+}
+
+const cfgSel=el('cfgSel');
+function refreshConfigSel(keep){
+  const names=Object.keys(CONFIGS).sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+  cfgSel.innerHTML='';
+  if(!names.length){ cfgSel.add(new Option('— no saved layouts —','')); cfgSel.disabled=true; return; }
+  cfgSel.disabled=false;
+  names.forEach(n=>cfgSel.add(new Option(n,n)));
+  if(keep && CONFIGS[keep]) cfgSel.value=keep;
+}
+function saveConfig(){
+  const name=(el('cfgName').value||'').trim();
+  if(!name){ el('cfgName').focus(); flashBtn(el('cfgSave'),'Name?'); return; }
+  const exists=!!CONFIGS[name];
+  CONFIGS[name]=snapshot(); persistConfigs(); refreshConfigSel(name);
+  flashBtn(el('cfgSave'), exists?'Updated ✓':'Saved ✓');
+}
+function loadConfig(){
+  const name=cfgSel.value; if(!name||!CONFIGS[name]) return;
+  applySnapshot(CONFIGS[name]); el('cfgName').value=name; flashBtn(el('cfgLoad'),'Loaded ✓');
+}
+function deleteConfig(){
+  const name=cfgSel.value; if(!name||!CONFIGS[name]) return;
+  if(!confirm('Delete layout “'+name+'”?')) return;
+  delete CONFIGS[name]; persistConfigs(); refreshConfigSel();
+}
+function download(filename, text){
+  const blob=new Blob([text],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=filename; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function exportConfigs(){
+  if(!Object.keys(CONFIGS).length){ flashBtn(el('cfgExport'),'Empty'); return; }
+  download('steep-layouts.json',
+    JSON.stringify({_type:'steep-marketing-configs', _v:1, configs:CONFIGS}, null, 2));
+  flashBtn(el('cfgExport'),'Exported ✓');
+}
+function importConfigs(files){
+  [...files].forEach(file=>{
+    const rd=new FileReader();
+    rd.onload=()=>{
+      try{
+        const data=JSON.parse(rd.result);
+        let added=0, lastName='';
+        if(data && data.configs && typeof data.configs==='object'){        // a whole library
+          for(const [n,s] of Object.entries(data.configs)){ CONFIGS[n]=s; lastName=n; added++; }
+        }else if(data && data.state && data.layout){                       // a single snapshot
+          const n=file.name.replace(/\.json$/i,'');
+          CONFIGS[n]=data; lastName=n; added++;
+        }else{ alert('“'+file.name+'” is not a Steep layout file.'); return; }
+        persistConfigs(); refreshConfigSel(lastName);
+        if(added){ el('cfgName').value=lastName; flashBtn(el('cfgImport'),'Imported '+added); }
+      }catch(err){ alert('Could not read “'+file.name+'”: '+err); }
+    };
+    rd.readAsText(file);
+  });
+}
+el('cfgSave').onclick=saveConfig;
+el('cfgLoad').onclick=loadConfig;
+el('cfgDelete').onclick=deleteConfig;
+el('cfgExport').onclick=exportConfigs;
+el('cfgImport').onclick=()=>el('cfgFile').click();
+el('cfgFile').onchange=e=>{ importConfigs(e.target.files); e.target.value=''; };
+cfgSel.ondblclick=loadConfig;
 
 /* Reflect the current state into every control (used after restoring a saved layout) */
 function reflectControls(){
@@ -568,6 +698,33 @@ function bindResize(handle){
 bindDrag(layerLogo,'logo'); bindDrag(layerText,'text'); bindDrag(layerDevice,'device');
 document.querySelectorAll('.rz').forEach(bindResize);
 
+/* ---------- Export size helpers (Play Store wants ≤ 4 MB) ---------- */
+const SIZE_LIMIT = 4*1024*1024 - 96*1024;   // 4 MB minus a safety margin
+const canvasToBlob=(cv,type,q)=>new Promise(r=>cv.toBlob(r,type,q));
+function scaleCanvas(cv,factor){
+  const c=document.createElement('canvas');
+  c.width=Math.max(1,Math.round(cv.width*factor));
+  c.height=Math.max(1,Math.round(cv.height*factor));
+  const g=c.getContext('2d'); g.fillStyle='#0a1420'; g.fillRect(0,0,c.width,c.height); // JPEG has no alpha
+  g.drawImage(cv,0,0,c.width,c.height);
+  return c;
+}
+/* JPEG, lowering quality first then resolution until it fits under maxBytes. */
+async function encodeUnder(cv,maxBytes){
+  let work=scaleCanvas(cv,1);              // flatten onto opaque bg once
+  for(let pass=0; pass<7; pass++){
+    for(const q of [0.92,0.85,0.78,0.7,0.6,0.5]){
+      const b=await canvasToBlob(work,'image/jpeg',q);
+      if(b && b.size<=maxBytes) return {blob:b, ext:'jpg', q, scale:work.width/cv.width};
+    }
+    work=scaleCanvas(work,0.82);           // still too big → shrink ~18% and retry
+  }
+  return {blob:await canvasToBlob(work,'image/jpeg',0.5), ext:'jpg', q:0.5, scale:work.width/cv.width};
+}
+
+/* Keep the download button label in step with the chosen format. */
+el('smallFile').onchange=e=>{ el('downloadBtn').textContent = e.target.checked ? 'Download JPEG (≤4 MB)' : 'Download PNG'; };
+
 /* ---------- Download PNG (guides/handles stripped) ---------- */
 el('downloadBtn').onclick=async()=>{
   const btn=el('downloadBtn'), old=btn.textContent; btn.textContent='Rendering…'; btn.disabled=true;
@@ -580,6 +737,22 @@ el('downloadBtn').onclick=async()=>{
     canvas.classList.remove('guides'); canvas.classList.add('exporting'); canvas.style.transform='none';
     const out=await html2canvas(canvas,{useCORS:true,backgroundColor:null,width:CW,height:CH,scale:2,logging:false,
       onclone:(doc)=>{
+        // html2canvas ignores object-fit:cover on <img> and stretches the image to the
+        // element box (squashing the photo in tall frames). Swap each covered <img> for
+        // a background-image div — which it DOES size/position correctly — in the clone.
+        const win=doc.defaultView||window;
+        doc.querySelectorAll('#canvas img.bg, #canvas .phone .screen img, #canvas .laptop .disp img').forEach(img=>{
+          if(!img.src) return;
+          const pos = img.style.objectPosition || win.getComputedStyle(img).objectPosition || 'center';
+          const div = doc.createElement('div');
+          div.style.position='absolute'; div.style.inset='0';
+          div.style.width='100%'; div.style.height='100%';
+          div.style.backgroundImage='url("'+img.src+'")';
+          div.style.backgroundSize='cover';
+          div.style.backgroundRepeat='no-repeat';
+          div.style.backgroundPosition=pos;
+          img.parentNode.replaceChild(div, img);
+        });
         // html2canvas can't render inset or spread-only box-shadows with border-radius —
         // it draws them as a hard rectangle (the halo around the phone). Replace the
         // device shadows with a single soft, rounded drop shadow just for the capture.
@@ -593,17 +766,29 @@ el('downloadBtn').onclick=async()=>{
         });
       }});
     canvas.classList.remove('exporting'); if(hadGuides) canvas.classList.add('guides'); canvas.style.transform=prev; fit();
-    const a=document.createElement('a'); a.download='steep-'+state.ratio+'-'+Date.now()+'.png'; a.href=out.toDataURL('image/png'); a.click();
-  }catch(err){ alert('Download blocked (cross-origin image). Screenshot the framed canvas instead.\n\n'+err); }
-  finally{ btn.textContent=old; btn.disabled=false; }
+    const a=document.createElement('a'); a.download='steep-'+state.ratio+'-'+Date.now();
+    let flash=old;
+    if(el('smallFile').checked){
+      btn.textContent='Compressing…';
+      const {blob,ext,q,scale}=await encodeUnder(out, SIZE_LIMIT);
+      const url=URL.createObjectURL(blob);
+      a.download+='.'+ext; a.href=url; a.click(); setTimeout(()=>URL.revokeObjectURL(url),2000);
+      const mb=(blob.size/1048576).toFixed(2);
+      flash=mb+' MB'+(scale<0.999?' · '+Math.round(scale*200)+'%':'')+' · q'+Math.round(q*100);
+    }else{
+      a.download+='.png'; a.href=out.toDataURL('image/png'); a.click();
+    }
+    btn.textContent=flash; setTimeout(()=>{ btn.textContent=old; }, 1600);
+  }catch(err){ btn.textContent=old; alert('Download blocked (cross-origin image). Screenshot the framed canvas instead.\n\n'+err); }
+  finally{ btn.disabled=false; }
 };
 
 /* ---------- Init ---------- */
 state.head=el('headTxt').value;         // seed from the HTML defaults
 state.sub=el('subTxt').value;
-restoreSaved();                          // may overwrite state.* from a saved layout
+loadConfigs(); refreshConfigSel();       // populate the saved-configurations dropdown
 reflectControls();                       // push state back into every control
-loadRatioL();                            // saved geometry for this ratio, else auto-arrange
+loadRatioL();                            // auto-arrange geometry for this ratio
 render();
 discoverShots().then(()=>{ populateShotSelects(); buildDevice(); layout(); });
 </script>
