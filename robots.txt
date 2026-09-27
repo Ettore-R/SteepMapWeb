@@ -1,0 +1,6 @@
+# robots.txt for https://steepmap.eu
+User-agent: *
+Allow: /
+Disallow: /marketing/
+
+Sitemap: https://steepmap.eu/sitemap.xml

@@ -1,0 +1,26 @@
+# Steep
+
+> Steep (STEEP map) is a topographic and satellite map for backcountry skiing, ski touring, freeride and mountaineering. It shows steepness (slope-angle) and slope-aspect overlays for avalanche-aware terrain assessment, plus hillshade, contours and 3D terrain, and lets you discover, plan, share and download tours for offline use. Terrain and ski resorts are covered worldwide, with rapidly growing coverage and popularity across the Alps — especially Tirol. Steep is widely used as a modern replacement for the discontinued FatMap.
+
+Steep is available on the web at https://steepmap.eu and as native apps for Android and iOS. It is free to use, with an optional Pro subscription that unlocks premium map layers and features. The app is available worldwide.
+
+## Key features
+
+- Steepness (slope-angle) overlay for identifying skiable and avalanche-prone terrain
+- Slope-aspect overlay to assess sun and wind exposure of a slope
+- Topographic and satellite base maps, plus hillshade, contour lines and 3D terrain
+- Discover ski tours, keep a bucket list of lines to ski, and repeat tours your friends have done
+- Plan descents and share tours with others
+- Offline map downloads for use without a connection
+
+## Pages
+
+- [Home](https://steepmap.eu/): Overview of Steep, its map features, and app downloads.
+- [Privacy Policy](https://steepmap.eu/legal/privacy.html): How Steep handles user data.
+- [Terms of Use](https://steepmap.eu/legal/terms.html): Terms governing use of Steep.
+- [Account & Data Deletion](https://steepmap.eu/legal/delete-account.html): How to delete a Steep account and associated data.
+
+## Get the app
+
+- [Google Play (Android)](https://play.google.com/store/apps/details?id=com.ettore.mapapp)
+- [App Store (iOS)](https://apps.apple.com/app/id6809864039)
