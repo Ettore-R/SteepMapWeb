@@ -252,7 +252,7 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
       const ready = () => { if(done) return; done = true;
         reframe(); collapseAttrib();
         lockToTour();                     // confine panning/zoom to the tour area
-        startAutoSpin(map, PITCH); resolve(); };
+        map.__spin = startAutoSpin(map); map.__spin.start(); resolve(); };
       map.once('idle', ready);          // terrain loaded → recentre, then reveal + spin
       setTimeout(ready, 6000);          // safety net if idle is slow
     });
@@ -274,28 +274,31 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
 }
 
 /** Slowly orbits the camera around the view centre until the user interacts. */
-function startAutoSpin(map, pitch){
+function startAutoSpin(map){
   const SPIN_DPS = 3.2;                 // degrees per second (gentle)
-  let spinning = true, last = 0, raf = 0;
+  let spinning = false, last = 0, raf = 0, userStopped = false;
   const step = (t) => {
     if(!spinning) return;
     if(last) map.setBearing(map.getBearing() + SPIN_DPS * (t - last) / 1000);
     last = t;
     raf = requestAnimationFrame(step);
   };
-  const stop = () => {
+  // stop(true) = the viewer touched the map: don't restart on their behalf.
+  const stop = (byUser) => {
+    if(byUser) userStopped = true;
     if(!spinning) return;
-    spinning = false; cancelAnimationFrame(raf);
-    evs.forEach(e => el.removeEventListener(e, stop));
-    document.removeEventListener('visibilitychange', onHide);
+    spinning = false; last = 0; cancelAnimationFrame(raf);
   };
-  const onHide = () => { if(document.hidden) stop(); };
+  const start = () => {
+    if(spinning || userStopped) return;
+    spinning = true; last = 0; raf = requestAnimationFrame(step);
+  };
   const el = map.getCanvasContainer();
   const evs = ['mousedown','touchstart','wheel','keydown','pointerdown'];
-  evs.forEach(e => el.addEventListener(e, stop, { passive:true }));
-  document.addEventListener('visibilitychange', onHide);
-  map.__stopSpin = stop;   // let the page stop it too (e.g. when hiding the map)
-  raf = requestAnimationFrame(step);
+  evs.forEach(e => el.addEventListener(e, () => stop(true), { passive:true }));
+  document.addEventListener('visibilitychange', () => { if(document.hidden) stop(false); });
+  // The page can pause the orbit (e.g. while the photos are shown) and resume it.
+  return { start, stop: () => stop(false) };
 }
 
 // Prefetch the heavy map dependencies as soon as this module is imported, so

@@ -157,7 +157,6 @@
   #photostrip::-webkit-scrollbar{display:none;height:0;width:0}
   #photostrip img{height:100%;width:auto;flex:0 0 auto;display:block;user-select:none;-webkit-user-drag:none}
   .tourmap.photos #photostrip{display:flex}
-  .tourmap.photos #map{visibility:hidden}
 
   /* Modern overlay scrollbar — hovers over the photos, draggable, thin. */
   #photoscroll{position:absolute;left:8px;right:8px;bottom:2px;height:5px;z-index:5;display:none;
@@ -169,7 +168,7 @@
   #photoscroll .thumb:active,#photoscroll.dragging .thumb{cursor:grabbing;background:#fff}
 
   /* Cover / map toggle thumbnail (bottom-left) — larger on desktop */
-  #mediaToggle{position:absolute;left:14px;bottom:14px;z-index:4;width:238px;height:154px;
+  #mediaToggle{position:absolute;left:14px;bottom:14px;z-index:4;width:286px;height:185px;
     border-radius:12px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.92);
     box-shadow:0 8px 20px -6px rgba(0,0,0,.65);background:#1a2536 center/cover no-repeat;padding:0;appearance:none}
   #mediaToggle .mt-label{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:5px;
@@ -177,6 +176,23 @@
     background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0))}
   #mediaToggle .mt-label svg{width:14px;height:14px;flex:none}
   @media(max-width:560px){ #mediaToggle{width:112px;height:74px;left:12px;bottom:12px} }
+
+  /* Explore-map CTA (bottom-right) — same orange btn-sun style as the website */
+  #exploreMap{position:absolute;right:14px;bottom:14px;z-index:4;display:inline-flex;align-items:center;gap:.55rem;
+    padding:.72rem 1.25rem;border-radius:999px;border:0;cursor:pointer;text-decoration:none;white-space:nowrap;
+    font:700 .95rem "Inter",sans-serif;color:#3a1200;
+    background:linear-gradient(135deg,var(--sun) 0%,var(--sun-2) 100%);
+    box-shadow:0 14px 30px -10px rgba(255,106,61,.55);
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+  #exploreMap:hover{transform:translateY(-3px)}
+  /* Platform symbol with the website's dark glow behind it */
+  #exploreMap .ei{display:none;align-items:center;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7)) drop-shadow(0 0 2px rgba(0,0,0,.6))}
+  #exploreMap.has-icon .ei{display:inline-flex}
+  #exploreMap .ei svg{width:20px;height:20px;display:block}
+  .tourmap.photos #exploreMap{display:none}
+  /* Lift the map attribution so the "i" clears the Explore-map button */
+  .tourmap .maplibregl-ctrl-bottom-right{bottom:58px}
+  @media(max-width:560px){ #exploreMap{right:12px;bottom:12px;padding:9px 14px} }
 
   /* ---------- TITLE + AUTHOR ---------- */
   .lede{margin:1.6rem auto .2rem}
@@ -217,15 +233,16 @@
   .cta{background:linear-gradient(135deg,var(--navy),#0e1c2e);color:#fff;border-radius:var(--radius);
     padding:2rem 1.5rem;margin:2.5rem auto 1rem;text-align:center}
   .cta h2{font-size:1.5rem}
-  .cta p{margin:.6rem auto 1.4rem;max-width:46ch;color:rgba(255,255,255,.78)}
-  .btn-row{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
-  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.3rem;border-radius:12px;font-weight:700}
-  .btn-sun{background:linear-gradient(135deg,var(--sun),var(--sun-2));color:#fff}
-  .btn-ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#fff}
-  .store-row{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem}
-  .store{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:10px;
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);font-size:.9rem}
-  .store svg{width:18px;height:18px}
+  .cta p{margin:.6rem auto 1.6rem;max-width:46ch;color:rgba(255,255,255,.78)}
+  .btn-row{display:flex;justify-content:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:999px;font-weight:700}
+  .btn-sun{background:linear-gradient(135deg,var(--sun),var(--sun-2));color:#3a1200;box-shadow:0 14px 30px -10px rgba(255,106,61,.5)}
+  .store-row{display:flex;gap:.7rem;justify-content:center;margin-top:1.1rem}
+  .store{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-width:170px;padding:.65rem 1rem;border-radius:12px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);font-size:.9rem;color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
+  .store:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+  .store svg{width:18px;height:18px;flex:none}
+  @media(max-width:460px){ .store{min-width:0;flex:1} }
 
   /* Get-app modal — ported verbatim from the website (index.html #getModal) */
   .modal-back{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(6,12,22,.72);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease)}
@@ -267,7 +284,7 @@
       <span class="wm">STEEP<span class="wm-sub">map</span></span>
     </a>
     <nav class="links">
-      <a class="plain" href="/featured/">{{T_ALL_TOURS}}</a>
+      <a class="plain" href="/featured/" data-t="all_tours">{{T_ALL_TOURS}}</a>
       <label class="lang-switch" aria-label="Language">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20"/></svg>
         <select id="langSelect" aria-label="Language">
@@ -279,7 +296,7 @@
           <option value="ja">日本語</option>
         </select>
       </label>
-      <a class="nav-cta js-getapp" href="#get">{{T_GET_APP}}</a>
+      <a class="nav-cta js-getapp" href="#get" data-t="get_app">{{T_GET_APP}}</a>
     </nav>
   </div>
 </header>
@@ -292,14 +309,17 @@
   <!-- Cover thumbnail → tap to swap map ⇄ photo strip. The generator omits this
        whole block (MEDIA_TOGGLE_BLOCK) when the tour has no photos. -->
   {{MEDIA_TOGGLE_BLOCK}}
-  <div class="maploading" id="maploading" role="status">{{T_MAP_LOADING}}</div>
+  <!-- Explore-map CTA: desktop opens the get-app modal; mobile links to the store
+       for the detected platform (platform icon added on the left by JS). -->
+  <a id="exploreMap" href="#get" role="button"><span class="ei"></span><span data-t="explore_map">{{T_EXPLORE_MAP}}</span></a>
+  <div class="maploading" id="maploading" role="status" data-t="map_loading">{{T_MAP_LOADING}}</div>
 </section>
 
 <div class="wrap">
 
   <!-- TITLE + AUTHOR (below the map, like the app) -->
   <div class="lede">
-    <h1>{{TOUR_TITLE}}</h1>
+    <h1 data-t="title">{{TOUR_TITLE}}</h1>
     <div class="author">
       <img class="avatar" src="{{AUTHOR_AVATAR}}" alt="" width="34" height="34" loading="lazy" />
       <span class="name">{{AUTHOR_NAME}}</span>
@@ -311,40 +331,40 @@
   <!-- STATS GRID 4×2 — same cells, icons & style as the app's TourDetailView -->
   <div class="tour-stats-grid" aria-label="{{T_STATS}}">
     <!-- Row 1 -->
-    <div class="tour-stat" title="{{T_GRADE}}"><span class="val">{{GRADE}}</span></div>
-    <div class="tour-stat" title="{{T_STEEPNESS}}">
+    <div class="tour-stat" data-ta="grade" title="{{T_GRADE}}"><span class="val" data-t="grade_val">{{GRADE}}</span></div>
+    <div class="tour-stat" data-ta="steepness" title="{{T_STEEPNESS}}">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="4"/><line x1="4" y1="20" x2="20" y2="20"/><path d="M14 20 A10 10 0 0 0 11 13"/></svg>
       <span class="val">{{MAX_STEEP}}°</span>
     </div>
-    <div class="tour-stat" title="{{T_EXPOSURE}}">
+    <div class="tour-stat" data-ta="exposure" title="{{T_EXPOSURE}}">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L4 7v5c0 4.6 3.4 8.9 8 10 4.6-1.1 8-5.4 8-10V7L12 3z"/></svg>
       <span class="val">{{EXPOSURE}}</span>
     </div>
-    <div class="tour-stat" title="{{T_ASPECT}}">
+    <div class="tour-stat" data-ta="aspect" title="{{T_ASPECT}}">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
       <span class="val">{{ASPECT}}</span>
     </div>
     <!-- Row 2 -->
-    <div class="tour-stat" title="{{T_DISTANCE}}">
+    <div class="tour-stat" data-ta="distance" title="{{T_DISTANCE}}">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="7" x2="4" y2="17"/><line x1="20" y1="7" x2="20" y2="17"/></svg>
       <span class="val">{{DISTANCE_KM}} km</span>
     </div>
-    <div class="tour-stat" title="{{T_ELEV_GAIN}}">
+    <div class="tour-stat" data-ta="elev_gain" title="{{T_ELEV_GAIN}}">
       <svg width="15" height="15" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M0.52,58.53 L16.44,58.53 C16.44,58.53 40.51,13.95 46.00,4.28 C47.21,2.16 48.07,0.68 49.39,0.53 C50.77,0.37 52.57,4.37 52.57,4.37 L59.27,17.53"/><path d="M41.99,12.40 L47.09,18.53 L52.75,11.53 L59.27,17.53"/><polyline points="0.53,37.73 18.38,5.32 6.94,11.57"/><line x1="18.38" y1="5.32" x2="19.20" y2="18.33"/></svg>
       <span class="val">{{ELEV_GAIN_M}} m</span>
     </div>
-    <div class="tour-stat" title="{{T_LOW_POINT}}">
+    <div class="tour-stat" data-ta="low_point" title="{{T_LOW_POINT}}">
       <svg width="15" height="15" viewBox="0 0 62 60" fill="none" stroke="currentColor" stroke-width="4.65" stroke-linecap="round" stroke-linejoin="round"><path d="M51.43,58.53 L43.35,58.53 C43.35,58.53 19.28,13.95 13.79,4.28 C12.58,2.16 11.72,0.68 10.40,0.53 C9.02,0.37 7.23,4.37 7.23,4.37 L0.52,17.53"/><path d="M18.53,13.47 L13.23,18.53 L7.30,12.73 L0.52,17.70"/><polyline points="53.95,3.52 53.95,43.22 61.46,31.40"/><line x1="53.95" y1="43.22" x2="46.45" y2="31.40"/></svg>
       <span class="val">{{ALT_MIN_M}} m</span>
     </div>
-    <div class="tour-stat" title="{{T_HIGH_POINT}}">
+    <div class="tour-stat" data-ta="high_point" title="{{T_HIGH_POINT}}">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,21 12,6 22,21"/><line x1="12" y1="6" x2="12" y2="1"/><polyline points="12,1 19,3.5 12,6"/></svg>
       <span class="val">{{ALT_MAX_M}} m</span>
     </div>
   </div>
 
   <!-- DESCRIPTION (stored translation for {{LANG}}) -->
-  <section class="desc">
+  <section class="desc" data-t-html="description">
     {{DESCRIPTION_HTML}}
   </section>
 
@@ -353,11 +373,10 @@
 
   <!-- APP CTA — deep-links straight to this tour -->
   <section class="cta">
-    <h2>{{T_CTA_TITLE}}</h2>
-    <p>{{T_CTA_BODY}}</p>
+    <h2 data-t="cta_title">{{T_CTA_TITLE}}</h2>
+    <p data-t="cta_body">{{T_CTA_BODY}}</p>
     <div class="btn-row">
-      <a class="btn btn-sun" href="{{TOUR_DEEPLINK}}" rel="noopener">{{T_OPEN_TOUR}}</a>
-      <a class="btn btn-ghost" href="https://app.steepmap.eu/" target="_blank" rel="noopener">{{T_OPEN_WEB}}</a>
+      <a class="btn btn-sun" href="{{TOUR_DEEPLINK}}" rel="noopener" data-t="open_tour">{{T_OPEN_TOUR}}</a>
     </div>
     <div class="store-row">
       <a class="store" href="https://play.google.com/store/apps/details?id=com.ettore.mapapp" target="_blank" rel="noopener">
@@ -375,26 +394,26 @@
 
 <footer>
   <span>© Steep · STEEP map</span>
-  <span><a href="/legal/privacy.html">{{T_PRIVACY}}</a> · <a href="/legal/terms.html">{{T_TERMS}}</a></span>
+  <span><a href="/legal/privacy.html" data-t="privacy">{{T_PRIVACY}}</a> · <a href="/legal/terms.html" data-t="terms">{{T_TERMS}}</a></span>
 </footer>
 
 <!-- ======= GET-APP MODAL (same as the website) ======= -->
 <div class="modal-back" id="getModal" role="dialog" aria-modal="true" aria-labelledby="getModalTitle">
   <div class="modal">
     <button class="x" data-close aria-label="Close">&times;</button>
-    <h3 id="getModalTitle">{{T_MODAL_TITLE}}</h3>
+    <h3 id="getModalTitle" data-t="modal_title">{{T_MODAL_TITLE}}</h3>
     <div class="plat">
       <a class="plat-btn" href="https://app.steepmap.eu/" target="_blank" rel="noopener">
         <span class="ico"><img src="/media/brand/mark.svg" alt=""></span>
-        <span class="txt"><span class="pt">Web app</span><span class="ps">Open it in your browser</span></span>
+        <span class="txt"><span class="pt" data-t="m_web_t">{{T_M_WEB_T}}</span><span class="ps" data-t="m_web_s">{{T_M_WEB_S}}</span></span>
       </a>
       <a class="plat-btn" href="https://play.google.com/store/apps/details?id=com.ettore.mapapp" target="_blank" rel="noopener">
         <span class="ico"><svg viewBox="41 18 408 468" aria-hidden="true"><path fill="#00C3FF" d="M47.6 33.9C44 37.7 41.9 43.6 41.9 51.2v409.6c0 7.6 2.1 13.5 5.7 17.3l1.4 1.3 229.4-229.4v-5.4L48.9 32.6l-1.3 1.3z"/><path fill="#FFC900" d="M354.9 331.4l-76.5-76.5v-5.4l76.5-76.5 1.7 1L447 225.5c26 14.8 26 38.9 0 53.7l-90.3 51.3-1.8.9z"/><path fill="#FF3A44" d="M356.6 330.5L278.4 252.2 47.6 483c8.6 9.1 22.7 10.2 38.7 1.2l270.3-153.7z"/><path fill="#00E676" d="M356.6 173.7L86.3 20.1C70.3 11 56.2 12.2 47.6 21.3l230.8 230.9 78.2-78.5z"/></svg></span>
-        <span class="txt"><span class="pt">Android</span><span class="ps">Get it on Google Play</span></span>
+        <span class="txt"><span class="pt">Android</span><span class="ps" data-t="m_and_s">{{T_M_AND_S}}</span></span>
       </a>
       <span class="plat-btn disabled" data-platform="ios" role="img" aria-label="App Store — coming soon">
         <span class="ico"><svg viewBox="4.9 3.9 13.9 16.8" aria-hidden="true"><path fill="#fff" d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg></span>
-        <span class="txt"><span class="pt">iPhone &amp; iPad</span><span class="ps">Coming soon</span></span>
+        <span class="txt"><span class="pt">iPhone &amp; iPad</span><span class="ps" data-t="m_soon">{{T_M_SOON}}</span></span>
       </span>
     </div>
   </div>
@@ -407,17 +426,11 @@
   var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 40); };
   onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-  // Language switcher — jump to this tour's page in the chosen language.
-  // The generator injects the per-language URLs for this exact tour.
-  var LANG_URLS = {{LANG_ALTERNATES_JSON}};
-  var sel = document.getElementById('langSelect');
-  if (sel){
-    sel.value = '{{LANG}}';
-    sel.addEventListener('change', function(){
-      var u = LANG_URLS[this.value];
-      if (u) location.href = u;
-    });
-  }
+  // Language switcher: all languages' strings ship with the page, so switching
+  // updates the text in place (no reload, the map keeps running). See the module below.
+  window.STEEP_I18N = {{I18N_JSON}};
+  window.STEEP_CUR  = '{{LANG}}';
+  window.STEEP_URLS = {{LANG_ALTERNATES_JSON}};
 
   // ── Get-app modal (same behaviour as the website) ───────────────────────
   var getModal = document.getElementById('getModal');
@@ -436,6 +449,26 @@
   getModal.addEventListener('click', function(e){ if(e.target === getModal) closeModal(); });
   getModal.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && getModal.classList.contains('open')) closeModal(); });
+
+  // ── "Explore map" CTA: desktop → modal; mobile → straight to the store ──────
+  var explore = document.getElementById('exploreMap');
+  if (explore){
+    var UA = navigator.userAgent || '';
+    var isAndroid = /Android/i.test(UA);
+    var isiOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var APPSTORE_URL = 'https://apps.apple.com/app/id6809864039';
+    var PLAY_ICON = '<svg viewBox="41 18 408 468" aria-hidden="true"><path fill="#00C3FF" d="M47.6 33.9C44 37.7 41.9 43.6 41.9 51.2v409.6c0 7.6 2.1 13.5 5.7 17.3l1.4 1.3 229.4-229.4v-5.4L48.9 32.6l-1.3 1.3z"/><path fill="#FFC900" d="M354.9 331.4l-76.5-76.5v-5.4l76.5-76.5 1.7 1L447 225.5c26 14.8 26 38.9 0 53.7l-90.3 51.3-1.8.9z"/><path fill="#FF3A44" d="M356.6 330.5L278.4 252.2 47.6 483c8.6 9.1 22.7 10.2 38.7 1.2l270.3-153.7z"/><path fill="#00E676" d="M356.6 173.7L86.3 20.1C70.3 11 56.2 12.2 47.6 21.3l230.8 230.9 78.2-78.5z"/></svg>';
+    var APPLE_ICON = '<svg viewBox="4.9 3.9 13.9 16.8" aria-hidden="true"><path fill="#fff" d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg>';
+    if (isAndroid){
+      explore.classList.add('has-icon'); explore.querySelector('.ei').innerHTML = PLAY_ICON;
+      explore.setAttribute('href', PLAY_URL); explore.setAttribute('target','_blank'); explore.setAttribute('rel','noopener');
+    } else if (isiOS){
+      explore.classList.add('has-icon'); explore.querySelector('.ei').innerHTML = APPLE_ICON;
+      explore.setAttribute('href', APPSTORE_URL); explore.setAttribute('target','_blank'); explore.setAttribute('rel','noopener');
+    } else {
+      explore.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    }
+  }
 </script>
 
 <!-- 3D tour map — the shared Steep map engine (same style / DEM terrain /
@@ -445,71 +478,100 @@
   var TRACK   = {{TRACK_GEOJSON}};
   var PHOTOS  = {{PHOTOS_JSON}};
   var loading = document.getElementById('maploading');
-  var mapObj  = null;
+  var sec     = document.querySelector('.tourmap');
+  var strip   = document.getElementById('photostrip');
+  var toggle  = document.getElementById('mediaToggle');
+  var sel     = document.getElementById('langSelect');
+  var hasPhotos = !!(toggle && PHOTOS.length);
+  var mapObj = null, mapThumb = null;
+  var coverStyle = toggle ? toggle.style.backgroundImage : '';
+  var MAP_ICON   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>';
+  var PHOTO_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
 
-  // The map is the hero at the top of the page, so load it immediately (no
-  // scroll-into-view gate) to minimise time-to-first-tile.
-  createSteepTourMap({ container:'map', track:TRACK, center:{{MAP_CENTER}}, zoom:{{MAP_ZOOM}}, color:'{{TRACK_COLOR}}' })
-    .then(function(map){ mapObj = map; loading.classList.add('hidden'); })
-    .catch(function(e){ console.error('[steep-map]', e); loading.classList.add('hidden'); });
+  function L(){ return window.STEEP_I18N[window.STEEP_CUR]; }
 
-  // ── Map ⇄ photos toggle ─────────────────────────────────────────────────
-  var sec    = document.querySelector('.tourmap');
-  var strip  = document.getElementById('photostrip');
-  var toggle = document.getElementById('mediaToggle');
-  if (toggle && PHOTOS.length){
-    // Build the single-row photo strip (native aspect ratios, lazy-loaded)
+  // Toggle label / icon / thumbnail for the current view and language.
+  function refreshToggle(){
+    if (!hasPhotos) return;
+    var photosView = sec.classList.contains('photos');
+    var lbl = toggle.querySelector('.mt-count'), ic = toggle.querySelector('.mt-icon');
+    lbl.textContent = photosView ? L().show_map : PHOTOS.length + ' ' + L().photos;
+    ic.innerHTML = photosView ? MAP_ICON : PHOTO_ICON;
+    toggle.style.backgroundImage = (photosView && mapThumb) ? 'url(' + mapThumb + ')' : coverStyle;
+    toggle.setAttribute('aria-label', photosView ? L().show_map : L().photos);
+  }
+
+  // Switch every visible string to the chosen language in place. The map is not
+  // reloaded; the URL is updated so a refresh keeps the language.
+  function applyLang(lang){
+    var S = window.STEEP_I18N[lang]; if (!S) return;
+    window.STEEP_CUR = lang;
+    document.documentElement.lang = lang;
+    document.title = S.meta_title;
+    var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute('content', S.meta_desc);
+    document.querySelectorAll('[data-t]').forEach(function(el){ var k = el.getAttribute('data-t'); if (S[k] != null) el.textContent = S[k]; });
+    document.querySelectorAll('[data-t-html]').forEach(function(el){ var k = el.getAttribute('data-t-html'); if (S[k] != null) el.innerHTML = S[k]; });
+    document.querySelectorAll('[data-ta]').forEach(function(el){ var k = el.getAttribute('data-ta'); if (S[k] != null) el.setAttribute('title', S[k]); });
+    if (sel) sel.value = lang;
+    refreshToggle();
+  }
+  if (sel) sel.addEventListener('change', function(){
+    applyLang(this.value);
+    var u = window.STEEP_URLS[this.value];
+    if (u) history.replaceState(null, '', u);
+  });
+
+  // Photos are the default view: the map loads behind them, so there is no wait.
+  if (hasPhotos){
+    sec.classList.add('photos');
     PHOTOS.forEach(function(u, i){
       var im = document.createElement('img');
       im.src = u; im.alt = ''; im.loading = i < 2 ? 'eager' : 'lazy';
       strip.appendChild(im);
     });
-
-    var mapThumb = null;                 // cached screenshot of the map
-    var coverStyle = toggle.style.backgroundImage;   // cover photo set inline by the generator
-    var lblCount = toggle.querySelector('.mt-count');
-    var lblIcon  = toggle.querySelector('.mt-icon');
-
     toggle.addEventListener('click', async function(){
-      var goingToPhotos = !sec.classList.contains('photos');
-      if (goingToPhotos){
-        // Snapshot the map (while still visible) for the thumbnail, then hide it.
+      if (sec.classList.contains('photos')){
+        sec.classList.remove('photos');                      // show the map
+        if (mapObj && mapObj.__spin) mapObj.__spin.start();
+      } else {                                               // show the photos
         if (mapObj){
-          try { mapThumb = await mapObj.captureImage(); } catch(e){}
-          if (mapObj.__stopSpin) mapObj.__stopSpin();
+          if (mapObj.__spin) mapObj.__spin.stop();
+          try { var u = await mapObj.captureImage(); if (u) mapThumb = u; } catch(e){}
         }
-        sec.classList.add('photos');
-        if (mapThumb) toggle.style.backgroundImage = 'url(' + mapThumb + ')';
-        if (lblIcon)  lblIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>';
-        if (lblCount) lblCount.textContent = '{{T_SHOW_MAP}}';
-        strip.scrollLeft = 0;
-      } else {
-        sec.classList.remove('photos');
-        toggle.style.backgroundImage = coverStyle;
-        if (lblIcon)  lblIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
-        if (lblCount) lblCount.textContent = PHOTOS.length + ' {{T_PHOTOS}}';
+        sec.classList.add('photos'); strip.scrollLeft = 0;
       }
-      setTimeout(syncScroll, 60);
+      refreshToggle(); setTimeout(syncScroll, 60);
     });
+  }
 
-    // ── Custom overlay scrollbar for the photo strip ────────────────────────
-    var sbar = document.getElementById('photoscroll');
-    var sthumb = sbar ? sbar.querySelector('.thumb') : null;
-    function syncScroll(){
-      if (!sbar || !sthumb) return;
-      var vis = strip.clientWidth, total = strip.scrollWidth;
-      if (total <= vis + 1){ sbar.style.display = 'none'; return; }
-      sbar.style.display = sec.classList.contains('photos') ? 'block' : 'none';
-      var track = sbar.clientWidth;
-      var w = Math.max(36, track * vis / total);
-      var x = (track - w) * (strip.scrollLeft / (total - vis));
-      sthumb.style.width = w + 'px';
-      sthumb.style.transform = 'translateX(' + x + 'px)';
-    }
+  createSteepTourMap({ container:'map', track:TRACK, center:{{MAP_CENTER}}, zoom:{{MAP_ZOOM}}, color:'{{TRACK_COLOR}}' })
+    .then(function(map){
+      mapObj = map; loading.classList.add('hidden');
+      // Loaded while the photos are showing: keep it still and grab the thumbnail.
+      if (hasPhotos && sec.classList.contains('photos')){
+        if (map.__spin) map.__spin.stop();
+        map.captureImage().then(function(u){ if (u){ mapThumb = u; refreshToggle(); } });
+      }
+    })
+    .catch(function(e){ console.error('[steep-map]', e); loading.classList.add('hidden'); });
+
+  // Custom overlay scrollbar for the photo strip
+  var sbar = document.getElementById('photoscroll');
+  var sthumb = sbar ? sbar.querySelector('.thumb') : null;
+  function syncScroll(){
+    if (!sbar || !sthumb || !hasPhotos) return;
+    var vis = strip.clientWidth, total = strip.scrollWidth;
+    if (total <= vis + 1){ sbar.style.display = 'none'; return; }
+    sbar.style.display = sec.classList.contains('photos') ? 'block' : 'none';
+    var track = sbar.clientWidth;
+    var w = Math.max(36, track * vis / total);
+    var x = (track - w) * (strip.scrollLeft / (total - vis));
+    sthumb.style.width = w + 'px';
+    sthumb.style.transform = 'translateX(' + x + 'px)';
+  }
+  if (hasPhotos){
     strip.addEventListener('scroll', syncScroll, { passive:true });
     window.addEventListener('resize', syncScroll);
-
-    // Drag the thumb to scroll (pointer events → works with mouse & touch)
     if (sthumb){
       var dragging = false, startX = 0, startScroll = 0;
       sthumb.addEventListener('pointerdown', function(e){
@@ -526,7 +588,6 @@
       var endDrag = function(){ dragging = false; sbar.classList.remove('dragging'); };
       sthumb.addEventListener('pointerup', endDrag);
       sthumb.addEventListener('pointercancel', endDrag);
-      // Click on the track jumps the thumb there
       sbar.addEventListener('pointerdown', function(e){
         if (e.target !== sbar) return;
         var r = sbar.getBoundingClientRect();
