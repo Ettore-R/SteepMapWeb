@@ -158,21 +158,56 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
     },
     layers:[...base, STEEP_PEAKS_LAYER] };
 
+  // Camera clamp, applied inside the render pipeline (set once the track bounds
+  // are known). Doing it here — rather than in a 'move' handler — means panning
+  // is limited smoothly, without fighting the drag gesture (no jerk, no lock-up).
+  let camClamp = null;
+
   const map = new maplibregl.Map({
-    container, style, center, zoom, pitch:42, bearing:0, maxPitch:80,
+    container, style, center, zoom, pitch:47, bearing:0, maxPitch:80,
     attributionControl:{ compact:true },
     cooperativeGestures:true,   // page scroll isn't hijacked; ctrl/⌘+wheel zooms
     preserveDrawingBuffer:true, // lets the page grab a screenshot of the canvas
+    transformCameraUpdate: (next) => camClamp ? camClamp(next) : next,
   });
 
   // Framing is recomputed after 3D terrain is active: enabling terrain shifts where
   // a given point lands on screen, so a fit done in flat mode ends up off-centre.
   let trackBounds = null;
-  const PITCH = 42, FRAME = { padding:{top:140,bottom:55,left:50,right:50}, pitch:PITCH, bearing:0, maxZoom:12.4, duration:0 };
+  const PITCH = 47, FRAME = { padding:{top:140,bottom:55,left:50,right:50}, pitch:PITCH, bearing:0, maxZoom:13.0, duration:0 };
   const reframe = () => { if(trackBounds) map.fitBounds(trackBounds, FRAME); };
+
+  // Confine the viewer to the tour: can't zoom out past the opening view and
+  // can't pan the centre outside the tour's footprint (zoom-in stays free).
+  const lockToTour = () => {
+    if(!trackBounds) return;
+    const z0 = map.getZoom();
+    map.setMinZoom(Math.max(1, z0 - 0.1));   // no zooming out past the opening view
+    map.setMaxZoom(Math.min(18, z0 + 3.5));  // but allow a good amount of zoom-in
+    // maxBounds is unreliable on a pitched map (it's rejected when smaller than
+    // the tilted viewport), so clamp the camera centre into the tour footprint
+    // via transformCameraUpdate: the viewer can nudge around and zoom in, but
+    // never scrolls away from the tour — and the gesture never gets stuck.
+    const sw = trackBounds.getSouthWest(), ne = trackBounds.getNorthEast();
+    const fx = (ne.lng - sw.lng) * 0.15, fy = (ne.lat - sw.lat) * 0.15;
+    const W = sw.lng - fx, E = ne.lng + fx, S = sw.lat - fy, N = ne.lat + fy;
+    camClamp = (t) => {
+      const lng = Math.min(E, Math.max(W, t.center.lng));
+      const lat = Math.min(N, Math.max(S, t.center.lat));
+      // Return a fresh camera object (t.center is read-only); keep the rest as-is.
+      return { center: new maplibregl.LngLat(lng, lat), zoom: t.zoom, pitch: t.pitch, bearing: t.bearing, elevation: t.elevation };
+    };
+  };
+
+  // Keep the compact attribution control collapsed (just the "i"), never auto-expanded.
+  const collapseAttrib = () => {
+    const a = map.getContainer().querySelector('.maplibregl-ctrl-attrib');
+    if(a){ a.classList.remove('maplibregl-compact-show'); a.removeAttribute('open'); }
+  };
 
   await new Promise(resolve => {
     map.on('load', () => {
+      collapseAttrib(); setTimeout(collapseAttrib, 0);
       try { if(!map.hasImage(STEEP_PEAK_ICON)) map.addImage(STEEP_PEAK_ICON, makePeakTriangle()); } catch {}
 
       // 3D terrain (gentle exaggeration so steep couloirs don't force the camera
@@ -214,7 +249,10 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
       }
 
       let done = false;
-      const ready = () => { if(done) return; done = true; reframe(); startAutoSpin(map, PITCH); resolve(); };
+      const ready = () => { if(done) return; done = true;
+        reframe(); collapseAttrib();
+        lockToTour();                     // confine panning/zoom to the tour area
+        startAutoSpin(map, PITCH); resolve(); };
       map.once('idle', ready);          // terrain loaded → recentre, then reveal + spin
       setTimeout(ready, 6000);          // safety net if idle is slow
     });

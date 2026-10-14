@@ -141,6 +141,7 @@
 
   /* ---------- EDGE-TO-EDGE 3D MAP ---------- */
   .tourmap{position:relative;width:100%;height:clamp(340px,60vh,620px);background:#0a1420}
+  @media(max-width:560px){ .tourmap{height:calc(clamp(340px,60vh,620px) - 50px)} }
   .tourmap #map{position:absolute;inset:0}
   .tourmap .maplibregl-ctrl-attrib{font-size:10px}
   .maploading{position:absolute;inset:0;display:grid;place-items:center;color:#cfe0f5;
@@ -148,15 +149,27 @@
   .maploading.hidden{opacity:0;pointer-events:none}
 
   /* Photo strip — a single horizontal row of all photos at their native aspect,
-     shown in place of the map when the viewer taps the cover thumbnail. */
+     shown in place of the map when the viewer taps the cover thumbnail. The
+     native scrollbar is hidden; a custom overlay scrollbar is drawn instead. */
   #photostrip{position:absolute;inset:0;z-index:2;display:none;align-items:center;gap:6px;
-    background:#0a1420;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
-  #photostrip img{height:100%;width:auto;flex:0 0 auto;display:block;user-select:none}
+    background:#0a1420;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none}
+  #photostrip::-webkit-scrollbar{display:none;height:0;width:0}
+  #photostrip img{height:100%;width:auto;flex:0 0 auto;display:block;user-select:none;-webkit-user-drag:none}
   .tourmap.photos #photostrip{display:flex}
   .tourmap.photos #map{visibility:hidden}
 
-  /* Cover / map toggle thumbnail (bottom-left) */
-  #mediaToggle{position:absolute;left:14px;bottom:14px;z-index:4;width:132px;height:86px;
+  /* Modern overlay scrollbar — hovers over the photos, draggable, thin. */
+  #photoscroll{position:absolute;left:8px;right:8px;bottom:2px;height:5px;z-index:5;display:none;
+    border-radius:999px;background:rgba(10,20,32,.28);backdrop-filter:blur(2px);opacity:0;transition:opacity .25s}
+  .tourmap.photos #photoscroll{display:block}
+  .tourmap.photos:hover #photoscroll,#photoscroll.dragging,#photoscroll.active{opacity:1}
+  #photoscroll .thumb{position:absolute;top:0;height:100%;min-width:36px;border-radius:999px;
+    background:rgba(255,255,255,.85);box-shadow:0 1px 3px rgba(0,0,0,.35);cursor:grab}
+  #photoscroll .thumb:active,#photoscroll.dragging .thumb{cursor:grabbing;background:#fff}
+
+  /* Cover / map toggle thumbnail (bottom-left) — larger on desktop */
+  #mediaToggle{position:absolute;left:14px;bottom:14px;z-index:4;width:238px;height:154px;
     border-radius:12px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.92);
     box-shadow:0 8px 20px -6px rgba(0,0,0,.65);background:#1a2536 center/cover no-repeat;padding:0;appearance:none}
   #mediaToggle .mt-label{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:5px;
@@ -214,6 +227,24 @@
     background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);font-size:.9rem}
   .store svg{width:18px;height:18px}
 
+  /* Get-app modal — ported verbatim from the website (index.html #getModal) */
+  .modal-back{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(6,12,22,.72);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease)}
+  .modal-back.open{display:flex;opacity:1}
+  .modal{position:relative;width:100%;max-width:370px;background:linear-gradient(180deg,#10203400,#0a1420),radial-gradient(120% 120% at 80% 0%,#14304d,#0a1420);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:30px 24px;color:#fff;box-shadow:0 40px 90px -30px rgba(0,0,0,.85);transform:translateY(16px) scale(.98);transition:transform .35s var(--ease)}
+  .modal-back.open .modal{transform:none}
+  .modal .x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+  .modal .x:hover{background:rgba(255,255,255,.18)}
+  .modal h3{font-family:"Sora";font-size:1.55rem;margin-top:.2rem}
+  .plat{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+  .plat-btn{display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;padding:12px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);text-decoration:none;color:#fff;transition:transform .2s var(--ease),background .2s,border-color .2s}
+  .plat-btn:hover{background:rgba(255,255,255,.1);transform:translateY(-2px);border-color:rgba(124,192,255,.45)}
+  .plat-btn .ico{width:42px;height:42px;border-radius:11px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.07)}
+  .plat-btn .ico img,.plat-btn .ico svg{height:24px;width:auto;display:block}
+  .plat-btn .txt{display:flex;flex-direction:column;min-width:0}
+  .plat-btn .pt{font-family:"Sora";font-weight:700;font-size:1rem;line-height:1.15}
+  .plat-btn .ps{font-size:.8rem;color:rgba(255,255,255,.56);margin-top:2px}
+  .plat-btn.disabled{opacity:.5;cursor:default;pointer-events:none}
+
   footer{max-width:820px;margin:3rem auto 0;padding:1.5rem 1.25rem 3rem;border-top:1px solid var(--line);
     color:var(--slate);font-size:.88rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
   footer a{color:var(--blue)}
@@ -248,7 +279,7 @@
           <option value="ja">日本語</option>
         </select>
       </label>
-      <a class="nav-cta" href="{{TOUR_DEEPLINK}}">{{T_GET_APP}}</a>
+      <a class="nav-cta js-getapp" href="#get">{{T_GET_APP}}</a>
     </nav>
   </div>
 </header>
@@ -257,6 +288,7 @@
 <section class="tourmap" aria-label="{{TOUR_TITLE}} – 3D map">
   <div id="map"></div>
   <div id="photostrip" aria-label="{{T_PHOTOS}}"></div>
+  <div id="photoscroll" aria-hidden="true"><div class="thumb"></div></div>
   <!-- Cover thumbnail → tap to swap map ⇄ photo strip. The generator omits this
        whole block (MEDIA_TOGGLE_BLOCK) when the tour has no photos. -->
   {{MEDIA_TOGGLE_BLOCK}}
@@ -346,6 +378,28 @@
   <span><a href="/legal/privacy.html">{{T_PRIVACY}}</a> · <a href="/legal/terms.html">{{T_TERMS}}</a></span>
 </footer>
 
+<!-- ======= GET-APP MODAL (same as the website) ======= -->
+<div class="modal-back" id="getModal" role="dialog" aria-modal="true" aria-labelledby="getModalTitle">
+  <div class="modal">
+    <button class="x" data-close aria-label="Close">&times;</button>
+    <h3 id="getModalTitle">{{T_MODAL_TITLE}}</h3>
+    <div class="plat">
+      <a class="plat-btn" href="https://app.steepmap.eu/" target="_blank" rel="noopener">
+        <span class="ico"><img src="/media/brand/mark.svg" alt=""></span>
+        <span class="txt"><span class="pt">Web app</span><span class="ps">Open it in your browser</span></span>
+      </a>
+      <a class="plat-btn" href="https://play.google.com/store/apps/details?id=com.ettore.mapapp" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="41 18 408 468" aria-hidden="true"><path fill="#00C3FF" d="M47.6 33.9C44 37.7 41.9 43.6 41.9 51.2v409.6c0 7.6 2.1 13.5 5.7 17.3l1.4 1.3 229.4-229.4v-5.4L48.9 32.6l-1.3 1.3z"/><path fill="#FFC900" d="M354.9 331.4l-76.5-76.5v-5.4l76.5-76.5 1.7 1L447 225.5c26 14.8 26 38.9 0 53.7l-90.3 51.3-1.8.9z"/><path fill="#FF3A44" d="M356.6 330.5L278.4 252.2 47.6 483c8.6 9.1 22.7 10.2 38.7 1.2l270.3-153.7z"/><path fill="#00E676" d="M356.6 173.7L86.3 20.1C70.3 11 56.2 12.2 47.6 21.3l230.8 230.9 78.2-78.5z"/></svg></span>
+        <span class="txt"><span class="pt">Android</span><span class="ps">Get it on Google Play</span></span>
+      </a>
+      <span class="plat-btn disabled" data-platform="ios" role="img" aria-label="App Store — coming soon">
+        <span class="ico"><svg viewBox="4.9 3.9 13.9 16.8" aria-hidden="true"><path fill="#fff" d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg></span>
+        <span class="txt"><span class="pt">iPhone &amp; iPad</span><span class="ps">Coming soon</span></span>
+      </span>
+    </div>
+  </div>
+</div>
+
 <!-- ======= SCRIPTS ======= -->
 <script>
   // Sticky nav: transparent over the map, frosts white once scrolled (same as index.html)
@@ -364,6 +418,24 @@
       if (u) location.href = u;
     });
   }
+
+  // ── Get-app modal (same behaviour as the website) ───────────────────────
+  var getModal = document.getElementById('getModal');
+  var lastFocus = null;
+  function openModal(){ lastFocus = document.activeElement; getModal.classList.add('open'); document.body.style.overflow='hidden'; var x=getModal.querySelector('.x'); if(x) x.focus(); }
+  function closeModal(){ getModal.classList.remove('open'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.ettore.mapapp';
+  var IS_ANDROID = /Android/i.test(navigator.userAgent || '');
+  document.querySelectorAll('.js-getapp').forEach(function(b){
+    if (IS_ANDROID){           // store is live on Android → go straight to Google Play
+      b.setAttribute('href', PLAY_URL); b.setAttribute('target','_blank'); b.setAttribute('rel','noopener');
+    } else {
+      b.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    }
+  });
+  getModal.addEventListener('click', function(e){ if(e.target === getModal) closeModal(); });
+  getModal.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && getModal.classList.contains('open')) closeModal(); });
 </script>
 
 <!-- 3D tour map — the shared Steep map engine (same style / DEM terrain /
@@ -417,9 +489,53 @@
         if (lblIcon)  lblIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
         if (lblCount) lblCount.textContent = PHOTOS.length + ' {{T_PHOTOS}}';
       }
+      setTimeout(syncScroll, 60);
     });
+
+    // ── Custom overlay scrollbar for the photo strip ────────────────────────
+    var sbar = document.getElementById('photoscroll');
+    var sthumb = sbar ? sbar.querySelector('.thumb') : null;
+    function syncScroll(){
+      if (!sbar || !sthumb) return;
+      var vis = strip.clientWidth, total = strip.scrollWidth;
+      if (total <= vis + 1){ sbar.style.display = 'none'; return; }
+      sbar.style.display = sec.classList.contains('photos') ? 'block' : 'none';
+      var track = sbar.clientWidth;
+      var w = Math.max(36, track * vis / total);
+      var x = (track - w) * (strip.scrollLeft / (total - vis));
+      sthumb.style.width = w + 'px';
+      sthumb.style.transform = 'translateX(' + x + 'px)';
+    }
+    strip.addEventListener('scroll', syncScroll, { passive:true });
+    window.addEventListener('resize', syncScroll);
+
+    // Drag the thumb to scroll (pointer events → works with mouse & touch)
+    if (sthumb){
+      var dragging = false, startX = 0, startScroll = 0;
+      sthumb.addEventListener('pointerdown', function(e){
+        dragging = true; startX = e.clientX; startScroll = strip.scrollLeft;
+        sbar.classList.add('dragging'); sthumb.setPointerCapture(e.pointerId); e.preventDefault();
+      });
+      sthumb.addEventListener('pointermove', function(e){
+        if (!dragging) return;
+        var vis = strip.clientWidth, total = strip.scrollWidth, track = sbar.clientWidth;
+        var w = Math.max(36, track * vis / total);
+        var ratio = (total - vis) / (track - w);
+        strip.scrollLeft = startScroll + (e.clientX - startX) * ratio;
+      });
+      var endDrag = function(){ dragging = false; sbar.classList.remove('dragging'); };
+      sthumb.addEventListener('pointerup', endDrag);
+      sthumb.addEventListener('pointercancel', endDrag);
+      // Click on the track jumps the thumb there
+      sbar.addEventListener('pointerdown', function(e){
+        if (e.target !== sbar) return;
+        var r = sbar.getBoundingClientRect();
+        strip.scrollLeft = ((e.clientX - r.left) / r.width) * (strip.scrollWidth - strip.clientWidth);
+      });
+    }
   } else if (toggle){
     toggle.remove();
+    var sb = document.getElementById('photoscroll'); if (sb) sb.remove();
   }
 </script>
 
