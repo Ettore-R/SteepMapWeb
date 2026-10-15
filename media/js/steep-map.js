@@ -164,7 +164,7 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
   let camClamp = null;
 
   const map = new maplibregl.Map({
-    container, style, center, zoom, pitch:47, bearing:0, maxPitch:80,
+    container, style, center, zoom, pitch:57, bearing:0, maxPitch:80,
     attributionControl:{ compact:true },
     cooperativeGestures:true,   // page scroll isn't hijacked; ctrl/⌘+wheel zooms
     preserveDrawingBuffer:true, // lets the page grab a screenshot of the canvas
@@ -174,7 +174,7 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
   // Framing is recomputed after 3D terrain is active: enabling terrain shifts where
   // a given point lands on screen, so a fit done in flat mode ends up off-centre.
   let trackBounds = null;
-  const PITCH = 47, FRAME = { padding:{top:140,bottom:55,left:50,right:50}, pitch:PITCH, bearing:0, maxZoom:13.0, duration:0 };
+  const PITCH = 57, FRAME = { padding:{top:140,bottom:55,left:50,right:50}, pitch:PITCH, bearing:0, maxZoom:13.0, duration:0 };
   const reframe = () => { if(trackBounds) map.fitBounds(trackBounds, FRAME); };
 
   // Confine the viewer to the tour: can't zoom out past the opening view and
@@ -298,7 +298,8 @@ function startAutoSpin(map){
   evs.forEach(e => el.addEventListener(e, () => stop(true), { passive:true }));
   document.addEventListener('visibilitychange', () => { if(document.hidden) stop(false); });
   // The page can pause the orbit (e.g. while the photos are shown) and resume it.
-  return { start, stop: () => stop(false) };
+  // resume() also clears a stop caused by the viewer, so reopening the map restarts the orbit.
+  return { start, stop: () => stop(false), resume: () => { userStopped = false; start(); } };
 }
 
 // Prefetch the heavy map dependencies as soon as this module is imported, so

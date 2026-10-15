@@ -167,6 +167,18 @@
     background:rgba(255,255,255,.85);box-shadow:0 1px 3px rgba(0,0,0,.35);cursor:grab}
   #photoscroll .thumb:active,#photoscroll.dragging .thumb{cursor:grabbing;background:#fff}
 
+  /* Previous / next arrows on the photo strip — circular, shown in photo view */
+  .pv-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);background:rgba(10,20,32,.55);color:#fff;display:none;place-items:center;
+    cursor:pointer;padding:0;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    box-shadow:0 6px 18px -6px rgba(0,0,0,.6);transition:background .2s,opacity .2s}
+  .pv-arrow svg{width:20px;height:20px;display:block}
+  .pv-arrow:hover{background:rgba(10,20,32,.8)}
+  .pv-arrow:disabled{opacity:0;pointer-events:none}
+  .tourmap.photos .pv-arrow{display:grid}
+  .pv-prev{left:12px} .pv-next{right:12px}
+  @media(max-width:560px){ .pv-arrow{width:36px;height:36px} .pv-prev{left:8px} .pv-next{right:8px} }
+
   /* Cover / map toggle thumbnail (bottom-left) — larger on desktop */
   #mediaToggle{position:absolute;left:14px;bottom:14px;z-index:4;width:286px;height:185px;
     border-radius:12px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.92);
@@ -306,6 +318,8 @@
   <div id="map"></div>
   <div id="photostrip" aria-label="{{T_PHOTOS}}"></div>
   <div id="photoscroll" aria-hidden="true"><div class="thumb"></div></div>
+  <button class="pv-arrow pv-prev" type="button" aria-label="Previous" data-ta="prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="pv-arrow pv-next" type="button" aria-label="Next" data-ta="next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
   <!-- Cover thumbnail → tap to swap map ⇄ photo strip. The generator omits this
        whole block (MEDIA_TOGGLE_BLOCK) when the tour has no photos. -->
   {{MEDIA_TOGGLE_BLOCK}}
@@ -532,7 +546,7 @@
     toggle.addEventListener('click', async function(){
       if (sec.classList.contains('photos')){
         sec.classList.remove('photos');                      // show the map
-        if (mapObj && mapObj.__spin) mapObj.__spin.start();
+        if (mapObj && mapObj.__spin) mapObj.__spin.resume();
       } else {                                               // show the photos
         if (mapObj){
           if (mapObj.__spin) mapObj.__spin.stop();
@@ -571,6 +585,18 @@
   }
   if (hasPhotos){
     strip.addEventListener('scroll', syncScroll, { passive:true });
+    var pvPrev = document.querySelector('.pv-prev'), pvNext = document.querySelector('.pv-next');
+    function stepBy(dir){ strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior: 'smooth' }); }
+    pvPrev.addEventListener('click', function(){ stepBy(-1); });
+    pvNext.addEventListener('click', function(){ stepBy(1); });
+    function syncArrows(){
+      var max = strip.scrollWidth - strip.clientWidth;
+      pvPrev.disabled = strip.scrollLeft <= 2;
+      pvNext.disabled = strip.scrollLeft >= max - 2;
+    }
+    strip.addEventListener('scroll', syncArrows, { passive:true });
+    window.addEventListener('resize', syncArrows);
+    syncArrows();
     window.addEventListener('resize', syncScroll);
     if (sthumb){
       var dragging = false, startX = 0, startScroll = 0;
