@@ -104,7 +104,7 @@
   header.nav.scrolled::before{opacity:0}
   .brand,nav.links a.plain,.lang-switch{text-shadow:0 1px 12px rgba(5,12,22,.5)}
   header.nav.scrolled .brand,header.nav.scrolled nav.links a.plain,header.nav.scrolled .lang-switch{text-shadow:none}
-  .brand{min-width:0;display:flex;align-items:center;gap:.6rem;font-family:"Sora";font-weight:800;font-size:1.15rem;color:#fff;transition:color .3s}
+  .brand{min-width:0;flex:none;display:flex;align-items:center;gap:.6rem;font-family:"Sora";font-weight:800;font-size:1.15rem;color:#fff;transition:color .3s}
   .brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#1e2e53,#142142);display:grid;place-items:center;box-shadow:0 8px 18px -6px rgba(20,33,66,.7);flex:none}
   .brand .mark svg{width:22px;height:22px}
   .brand .wm{letter-spacing:.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -309,7 +309,7 @@
       <span class="wm">STEEP<span class="wm-sub">map</span></span>
     </a>
     <nav class="links">
-      <a class="plain" href="/featured/" data-t="all_tours">{{T_ALL_TOURS}}</a>
+      <a class="plain" href="#" data-open-featured data-t="all_tours">{{T_ALL_TOURS}}</a>
       <label class="lang-switch" aria-label="Language">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20"/></svg>
         <select id="langSelect" aria-label="Language">
@@ -500,6 +500,7 @@
 
 <!-- 3D tour map — the shared Steep map engine (same style / DEM terrain /
      contours / peaks as the website). Lazy-loaded when scrolled into view. -->
+<script src="/media/js/featured-modal.js" defer></script>
 <script type="module">
   import { createSteepTourMap } from '/media/js/steep-map.js?v={{ASSET_VER}}';
   var TRACK   = {{TRACK_GEOJSON}};
@@ -510,6 +511,7 @@
   var toggle  = document.getElementById('mediaToggle');
   var sel     = document.getElementById('langSelect');
   var hasPhotos = !!(toggle && PHOTOS.length);
+  if (sel) sel.value = window.STEEP_CUR;   // start on this page's language
   var mapObj = null, mapThumb = null;
   var photosTouched = false;   // any interaction with the photos cancels the automatic reveal
   var coverStyle = toggle ? 'url(' + toggle.getAttribute('data-cover') + ')' : '';
@@ -566,6 +568,7 @@
     document.querySelectorAll('[data-t-html]').forEach(function(el){ var k = el.getAttribute('data-t-html'); if (S[k] != null) el.innerHTML = S[k]; });
     document.querySelectorAll('[data-ta]').forEach(function(el){ var k = el.getAttribute('data-ta'); if (S[k] != null) el.setAttribute('title', S[k]); });
     if (sel) sel.value = lang;
+    strip.querySelectorAll('img').forEach(function(im){ im.alt = S.title; });
     refreshToggle();
   }
   if (sel) sel.addEventListener('change', function(){
@@ -580,7 +583,7 @@
     refreshToggle();   // label + icon for the photo view from the start
     PHOTOS.forEach(function(u, i){
       var im = document.createElement('img');
-      im.src = u; im.alt = ''; im.loading = i < 2 ? 'eager' : 'lazy';
+      im.src = u; im.alt = L().title; im.loading = i < 2 ? 'eager' : 'lazy';
       strip.appendChild(im);
     });
     toggle.addEventListener('click', async function(){

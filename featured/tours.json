@@ -1,0 +1,108 @@
+{
+ "labels": {
+  "en": {
+   "title": "Featured tours",
+   "search": "Search",
+   "no_results": "No tours found"
+  },
+  "de": {
+   "title": "Ausgewählte Touren",
+   "search": "Suchen",
+   "no_results": "Keine Touren gefunden"
+  },
+  "fr": {
+   "title": "Sorties en vedette",
+   "search": "Rechercher",
+   "no_results": "Aucune sortie trouvée"
+  },
+  "it": {
+   "title": "Tour in evidenza",
+   "search": "Cerca",
+   "no_results": "Nessun tour trovato"
+  },
+  "es": {
+   "title": "Rutas destacadas",
+   "search": "Buscar",
+   "no_results": "No se encontraron rutas"
+  },
+  "ja": {
+   "title": "注目のツアー",
+   "search": "検索",
+   "no_results": "ツアーが見つかりません"
+  }
+ },
+ "tours": {
+  "en": [
+   {
+    "title": "Serles North Couloir",
+    "url": "/featured/serles-north-couloir.html",
+    "photo": "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_1bb22b59-43ad-4f03-83c8-ca0b0ce69909.jpg"
+   },
+   {
+    "title": "Zuckerhütl from Grawa Alm",
+    "url": "/featured/zuckerhuetl-from-grawa-alm.html",
+    "photo": "https://media.steepmap.eu/figures/0841457b-2711-4cdd-902c-1b0deffd069e_a473b702-68d2-4c3c-a445-a0e9fb8ee1c9.jpg"
+   }
+  ],
+  "de": [
+   {
+    "title": "Serles Nordkamin",
+    "url": "/de/featured/serles-north-couloir.html",
+    "photo": "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_1bb22b59-43ad-4f03-83c8-ca0b0ce69909.jpg"
+   },
+   {
+    "title": "Zuckerhütl von Grawa Alm",
+    "url": "/de/featured/zuckerhuetl-from-grawa-alm.html",
+    "photo": "https://media.steepmap.eu/figures/0841457b-2711-4cdd-902c-1b0deffd069e_a473b702-68d2-4c3c-a445-a0e9fb8ee1c9.jpg"
+   }
+  ],
+  "fr": [
+   {
+    "title": "Serles Couloir Nord",
+    "url": "/fr/featured/serles-north-couloir.html",
+    "photo": "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_1bb22b59-43ad-4f03-83c8-ca0b0ce69909.jpg"
+   },
+   {
+    "title": "Zuckerhütl depuis Grawa Alm",
+    "url": "/fr/featured/zuckerhuetl-from-grawa-alm.html",
+    "photo": "https://media.steepmap.eu/figures/0841457b-2711-4cdd-902c-1b0deffd069e_a473b702-68d2-4c3c-a445-a0e9fb8ee1c9.jpg"
+   }
+  ],
+  "it": [
+   {
+    "title": "Canalone Nord di Serles",
+    "url": "/it/featured/serles-north-couloir.html",
+    "photo": "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_1bb22b59-43ad-4f03-83c8-ca0b0ce69909.jpg"
+   },
+   {
+    "title": "Zuckerhütl da Grawa Alm",
+    "url": "/it/featured/zuckerhuetl-from-grawa-alm.html",
+    "photo": "https://media.steepmap.eu/figures/0841457b-2711-4cdd-902c-1b0deffd069e_a473b702-68d2-4c3c-a445-a0e9fb8ee1c9.jpg"
+   }
+  ],
+  "es": [
+   {
+    "title": "Couloir Norte de Serles",
+    "url": "/es/featured/serles-north-couloir.html",
+    "photo": "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_1bb22b59-43ad-4f03-83c8-ca0b0ce69909.jpg"
+   },
+   {
+    "title": "Zuckerhütl desde Grawa Alm",
+    "url": "/es/featured/zuckerhuetl-from-grawa-alm.html",
+    "photo": "https://media.steepmap.eu/figures/0841457b-2711-4cdd-902c-1b0deffd069e_a473b702-68d2-4c3c-a445-a0e9fb8ee1c9.jpg"
+   }
+  ],
+  "ja": [
+   {
+    "title": "Serles北クーロア",
+    "url": "/ja/featured/serles-north-couloir.html",
+    "photo": "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_1bb22b59-43ad-4f03-83c8-ca0b0ce69909.jpg"
+   },
+   {
+    "title": "Zuckerhütl from Grawa Alm",
+    "url": "/ja/featured/zuckerhuetl-from-grawa-alm.html",
+    "photo": "https://media.steepmap.eu/figures/0841457b-2711-4cdd-902c-1b0deffd069e_a473b702-68d2-4c3c-a445-a0e9fb8ee1c9.jpg"
+   }
+  ]
+ }
+}

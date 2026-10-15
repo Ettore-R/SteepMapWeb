@@ -1,0 +1,24 @@
+/* Featured-tours picker modal (shared by the website and the featured tour pages). */
+.feat-back{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:24px;
+  background:rgba(6,12,22,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .3s}
+.feat-back.open{display:flex;opacity:1}
+.feat-modal{position:relative;width:100%;max-width:420px;max-height:min(80vh,640px);display:flex;flex-direction:column;
+  background:radial-gradient(120% 120% at 80% 0%,#14304d,#0a1420);border:1px solid rgba(255,255,255,.12);
+  border-radius:24px;padding:26px 20px 16px;color:#fff;box-shadow:0 40px 90px -30px rgba(0,0,0,.85);
+  transform:translateY(16px) scale(.98);transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.feat-back.open .feat-modal{transform:none}
+.feat-title{font-family:"Sora",sans-serif;font-size:1.4rem;font-weight:700;margin:0 0 14px 4px;letter-spacing:-.01em}
+.feat-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.08);
+  color:#fff;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+.feat-x:hover{background:rgba(255,255,255,.18)}
+.feat-search{width:100%;box-sizing:border-box;padding:.72rem .95rem;border-radius:12px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);color:#fff;font:500 .95rem "Inter",sans-serif;outline:none;margin-bottom:12px}
+.feat-search::placeholder{color:rgba(255,255,255,.45)}
+.feat-search:focus{border-color:rgba(124,192,255,.6)}
+.feat-list{list-style:none;margin:0;padding:2px 2px 4px;overflow:auto;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
+.feat-list a{display:flex;align-items:center;gap:12px;padding:8px;border-radius:14px;background:rgba(255,255,255,.04);
+  color:#fff;text-decoration:none;transition:background .2s}
+.feat-list a:hover,.feat-list a:focus-visible{background:rgba(255,255,255,.1);outline:none}
+.feat-list img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:none;background:#1a2536}
+.feat-list span{font-weight:600;font-size:1rem;line-height:1.25}
+.feat-empty{text-align:center;color:rgba(255,255,255,.6);padding:18px 0;margin:0}

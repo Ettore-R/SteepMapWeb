@@ -26,7 +26,7 @@ GRADE_KEY   = {0: "easy", 10: "medium", 20: "hard", 30: "veryHard"}  # (kept for
 # ── UI label catalog ────────────────────────────────────────────────────────
 # en is the base; other languages fall back to en for any missing key.
 T = {
- "en": {"all_tours":"Featured tours","get_app":"Get the app","modal_title":"Get STEEP map",
+ "en": {"all_tours":"Featured tours","search":"Search","no_results":"No tours found","get_app":"Get the app","modal_title":"Get STEEP map",
    "map_loading":"Loading 3D map…","stats":"Tour stats","grade":"Grade","steepness":"Max steepness",
    "exposure":"Exposure","aspect":"Aspect","distance":"Distance","elev_gain":"Elevation gain",
    "low_point":"Lowest point","high_point":"Highest point","cta_title":"Take this tour with you",
@@ -37,7 +37,7 @@ T = {
    "grade_label":{"Easy":"Easy","Medium":"Medium","Hard":"Hard","Very Hard":"Very Hard"},
    "meta_suffix":"ski tour | Steep",
    "meta_desc":"{title} ski tour: {km} km, {gain} m ascent, up to {steep}° ({grade}). See the tour and take it with you in the Steep app."},
- "de": {"all_tours":"Ausgewählte Touren","get_app":"App holen","modal_title":"STEEP map holen",
+ "de": {"all_tours":"Ausgewählte Touren","search":"Suchen","no_results":"Keine Touren gefunden","get_app":"App holen","modal_title":"STEEP map holen",
    "map_loading":"3D-Karte wird geladen…","stats":"Tourdaten","grade":"Schwierigkeit","steepness":"Max. Steilheit",
    "exposure":"Exposition","aspect":"Ausrichtung","distance":"Distanz","elev_gain":"Höhenmeter",
    "low_point":"Tiefster Punkt","high_point":"Höchster Punkt","cta_title":"Nimm diese Tour mit",
@@ -48,7 +48,7 @@ T = {
    "grade_label":{"Easy":"Leicht","Medium":"Mittel","Hard":"Schwer","Very Hard":"Sehr schwer"},
    "meta_suffix":"Skitour | Steep",
    "meta_desc":"{title} Skitour: {km} km, {gain} Hm, bis zu {steep}° ({grade}). Sieh dir die Tour an und nimm sie mit der Steep-App mit."},
- "fr": {"all_tours":"Sorties en vedette","get_app":"Obtenir l'app","modal_title":"Obtenir STEEP map",
+ "fr": {"all_tours":"Sorties en vedette","search":"Rechercher","no_results":"Aucune sortie trouvée","get_app":"Obtenir l'app","modal_title":"Obtenir STEEP map",
    "map_loading":"Chargement de la carte 3D…","stats":"Infos de la sortie","grade":"Difficulté","steepness":"Pente max.",
    "exposure":"Exposition","aspect":"Orientation","distance":"Distance","elev_gain":"Dénivelé positif",
    "low_point":"Point le plus bas","high_point":"Point le plus haut","cta_title":"Emportez cette sortie",
@@ -59,7 +59,7 @@ T = {
    "grade_label":{"Easy":"Facile","Medium":"Moyen","Hard":"Difficile","Very Hard":"Très difficile"},
    "meta_suffix":"sortie à ski | Steep",
    "meta_desc":"{title} sortie à ski : {km} km, {gain} m de dénivelé, jusqu'à {steep}° ({grade}). Découvrez la sortie et emportez-la dans l'app Steep."},
- "it": {"all_tours":"Tour in evidenza","get_app":"Scarica l'app","modal_title":"Scarica STEEP map",
+ "it": {"all_tours":"Tour in evidenza","search":"Cerca","no_results":"Nessun tour trovato","get_app":"Scarica l'app","modal_title":"Scarica STEEP map",
    "map_loading":"Caricamento mappa 3D…","stats":"Dati del tour","grade":"Difficoltà","steepness":"Pendenza max",
    "exposure":"Esposizione","aspect":"Orientamento","distance":"Distanza","elev_gain":"Dislivello positivo",
    "low_point":"Punto più basso","high_point":"Punto più alto","cta_title":"Porta con te questo tour",
@@ -70,7 +70,7 @@ T = {
    "grade_label":{"Easy":"Facile","Medium":"Medio","Hard":"Difficile","Very Hard":"Molto difficile"},
    "meta_suffix":"sci alpinismo | Steep",
    "meta_desc":"{title} tour sci: {km} km, {gain} m di dislivello, fino a {steep}° ({grade}). Guarda il tour e portalo con te nell'app Steep."},
- "es": {"all_tours":"Rutas destacadas","get_app":"Obtener la app","modal_title":"Obtener STEEP map",
+ "es": {"all_tours":"Rutas destacadas","search":"Buscar","no_results":"No se encontraron rutas","get_app":"Obtener la app","modal_title":"Obtener STEEP map",
    "map_loading":"Cargando mapa 3D…","stats":"Datos de la ruta","grade":"Dificultad","steepness":"Pendiente máx.",
    "exposure":"Exposición","aspect":"Orientación","distance":"Distancia","elev_gain":"Desnivel positivo",
    "low_point":"Punto más bajo","high_point":"Punto más alto","cta_title":"Llévate esta ruta",
@@ -81,7 +81,7 @@ T = {
    "grade_label":{"Easy":"Fácil","Medium":"Media","Hard":"Difícil","Very Hard":"Muy difícil"},
    "meta_suffix":"ruta de esquí | Steep",
    "meta_desc":"{title} ruta de esquí: {km} km, {gain} m de desnivel, hasta {steep}° ({grade}). Mira la ruta y llévatela en la app Steep."},
- "ja": {"all_tours":"注目のツアー","get_app":"アプリを入手","modal_title":"STEEP map を入手",
+ "ja": {"all_tours":"注目のツアー","search":"検索","no_results":"ツアーが見つかりません","get_app":"アプリを入手","modal_title":"STEEP map を入手",
    "map_loading":"3Dマップを読み込み中…","stats":"ツアー情報","grade":"グレード","steepness":"最大斜度",
    "exposure":"露出度","aspect":"斜面方位","distance":"距離","elev_gain":"獲得標高",
    "low_point":"最低地点","high_point":"最高地点","cta_title":"このツアーを持ち歩こう",
@@ -193,12 +193,49 @@ def render(tour, lang, template):
         raise SystemExit(f"[{slug}/{lang}] unreplaced tokens: {left}")
     return html, page_path(slug, lang)
 
+def write_picker(tours):
+    """featured/tours.json: what the "Featured tours" picker shows, per language."""
+    labels = {lg: {"title": T[lg]["all_tours"], "search": T[lg]["search"], "no_results": T[lg]["no_results"]}
+              for lg in LANGS}
+    lists = {}
+    for lg in LANGS:
+        lists[lg] = [{
+            "title": tr.get("title_i18n", {}).get(lg) or tr["title"],
+            "url": "/" + page_path(tr["slug"], lg),
+            "photo": tr["photos"][0] if tr.get("photos") else "",
+        } for tr in tours]
+    out = os.path.join(ROOT, "featured", "tours.json")
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump({"labels": labels, "tours": lists}, f, ensure_ascii=False, indent=1)
+    print(f"  picker: {len(tours)} tours x {len(LANGS)} languages")
+
+def load_tours():
+    manifest_path = os.path.join(ROOT, "data", "featured", "manifest.json")
+    if os.path.exists(manifest_path):
+        slugs = [e["slug"] for e in json.load(open(manifest_path, encoding="utf-8"))["tours"]]
+    else:
+        slugs = [os.path.splitext(os.path.basename(f))[0]
+                 for f in sorted(glob.glob(os.path.join(ROOT, "data", "featured", "*.json")))]
+    return [json.load(open(os.path.join(ROOT, "data", "featured", f"{sl}.json"), encoding="utf-8")) for sl in slugs]
+
+def update_sitemap(tours):
+    path = os.path.join(ROOT, "sitemap.xml")
+    xml = open(path, encoding="utf-8").read()
+    xml = re.sub(r"\s*<url>\s*<loc>[^<]*/featured/[^<]*</loc>.*?</url>", "", xml, flags=re.S)
+    today = time.strftime("%Y-%m-%d")
+    entries = [(f"{SITE}/{page_path(tr['slug'], lg)}", 0.7) for lg in LANGS for tr in tours]
+    block = "".join(
+        f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>weekly</changefreq>\n"
+        f"    <priority>{pr}</priority>\n  </url>\n" for u, pr in entries)
+    xml = xml.replace("</urlset>", block + "</urlset>")
+    open(path, "w", encoding="utf-8").write(xml)
+    print(f"  sitemap: {len(entries)} tour entries")
+
 def main():
     template = open(os.path.join(ROOT, "featured", "_template.html"), encoding="utf-8").read()
-    data_files = glob.glob(os.path.join(ROOT, "data", "featured", "*.json"))
+    tours = load_tours()
     count = 0
-    for f in data_files:
-        tour = json.load(open(f, encoding="utf-8"))
+    for tour in tours:
         for lang in LANGS:
             html, rel = render(tour, lang, template)
             out = os.path.join(ROOT, rel)
@@ -206,7 +243,9 @@ def main():
             open(out, "w", encoding="utf-8").write(html)
             count += 1
         print(f"  {tour['slug']}: {len(LANGS)} languages")
-    print(f"Generated {count} pages from {len(data_files)} tour(s).")
+    write_picker(tours)
+    update_sitemap(tours)
+    print(f"Generated {count} pages from {len(tours)} tour(s).")
 
 if __name__ == "__main__":
     main()
