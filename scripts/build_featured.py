@@ -204,7 +204,7 @@ def render(tour, lang, template):
 
     photos = tour.get("photos", [])
     track_color = GRADE_COLOR.get(s["grade"], "#3b82f6")
-    ogimg = photos[0] if photos else f"{SITE}/media/brand/og-cover.jpg"
+    ogimg = f"{SITE}/media/og/{slug}.jpg"   # 1200x630 card from scripts/make_share_images.py
     lat, lng = tour["center"][1], tour["center"][0]
     trip = {
         "@context": "https://schema.org", "@type": "TouristTrip", "name": title,
