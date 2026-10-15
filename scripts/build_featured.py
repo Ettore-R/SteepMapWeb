@@ -152,7 +152,7 @@ def render(tour, lang, template):
 
     gallery = ""  # photos live in the in-map strip; no separate bottom gallery
     toggle = (f'<button id="mediaToggle" type="button" aria-label="{t(lang,"photos")}" '
-              f'style="background-image:url(\'{photos[0]}\')"><span class="mt-label">'
+              f'data-cover="{photos[0]}"><span class="mt-label">'
               f'<span class="mt-icon">{PHOTO_ICON}</span>'
               f'<span class="mt-count">{len(photos)} {t(lang,"photos")}</span></span></button>') if photos else ""
     desc_html = "<p>" + desc_txt.replace("\n", "</p><p>") + "</p>" if desc_txt else ""

@@ -175,7 +175,9 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
   // a given point lands on screen, so a fit done in flat mode ends up off-centre.
   let trackBounds = null;
   const PITCH = 57, FRAME = { padding:{top:140,bottom:55,left:50,right:50}, pitch:PITCH, bearing:0, maxZoom:13.0, duration:0 };
-  const reframe = () => { if(trackBounds) map.fitBounds(trackBounds, FRAME); };
+  // Re-measure the canvas before framing: a fit computed against a stale size comes out
+  // zoomed in too far, and the view then jumps when the real size is applied.
+  const reframe = () => { map.resize(); if(trackBounds) map.fitBounds(trackBounds, FRAME); };
 
   // Confine the viewer to the tour: can't zoom out past the opening view and
   // can't pan the centre outside the tour's footprint (zoom-in stays free).
@@ -252,6 +254,7 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
       const ready = () => { if(done) return; done = true;
         reframe(); collapseAttrib();
         lockToTour();                     // confine panning/zoom to the tour area
+        map.__reframe = reframe;   // let the page re-apply the framing before a reveal
         map.__spin = startAutoSpin(map); map.__spin.start(); resolve(); };
       map.once('idle', ready);          // terrain loaded → recentre, then reveal + spin
       setTimeout(ready, 6000);          // safety net if idle is slow
