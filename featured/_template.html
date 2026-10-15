@@ -151,7 +151,8 @@
     background:#0a1420;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;-ms-overflow-style:none}
   #photostrip::-webkit-scrollbar{display:none;height:0;width:0}
-  #photostrip img{height:100%;width:auto;flex:0 0 auto;display:block;user-select:none;-webkit-user-drag:none}
+  /* max-width:none: the global img rule would cap the width on phones and squeeze the photo */
+  #photostrip img{height:100%;width:auto;max-width:none;flex:0 0 auto;display:block;user-select:none;-webkit-user-drag:none}
   .tourmap.photos #photostrip{display:flex}
 
   /* Modern overlay scrollbar — hovers over the photos, draggable, thin. */
