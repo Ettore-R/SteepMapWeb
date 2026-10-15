@@ -166,7 +166,7 @@ export async function createSteepTourMap({ container, track, center, zoom = 13, 
   const map = new maplibregl.Map({
     container, style, center, zoom, pitch:57, bearing:0, maxPitch:80,
     attributionControl:{ compact:true },
-    cooperativeGestures:true,   // page scroll isn't hijacked; ctrl/⌘+wheel zooms
+    cooperativeGestures:false,  // drag to pan and wheel to zoom work directly (no Ctrl needed)
     preserveDrawingBuffer:true, // lets the page grab a screenshot of the canvas
     transformCameraUpdate: (next) => camClamp ? camClamp(next) : next,
   });

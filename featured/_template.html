@@ -186,6 +186,12 @@
   .tourmap.revealing .pv-arrow,.tourmap.revealing #photoscroll{opacity:0 !important;transition:opacity .3s;pointer-events:none}
   @media (prefers-reduced-motion: reduce){ .tourmap.revealing #photostrip{transition:none} }
 
+  /* Spinner on the toggle while the map preview is being made */
+  #mediaToggle.is-loading::before{content:"";position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;
+    border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;z-index:1;animation:mt-spin .9s linear infinite}
+  @keyframes mt-spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion: reduce){ #mediaToggle.is-loading::before{animation-duration:2.4s} }
+
   /* Cover / map toggle thumbnail (bottom-left) — larger on desktop */
   #mediaToggle{position:absolute;left:14px;bottom:14px;z-index:4;width:286px;height:185px;
     border-radius:12px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.92);
@@ -522,6 +528,7 @@
     // The picture always matches the label: photo view = map preview ('Show map'),
     // map view = cover photo ('N photos'). Until the map preview exists, a plain tile.
     toggle.style.backgroundImage = photosView ? (mapThumb ? 'url(' + mapThumb + ')' : 'none') : coverStyle;
+    toggle.classList.toggle('is-loading', photosView && !mapThumb);
     toggle.setAttribute('aria-label', photosView ? L().show_map : L().photos);
   }
 
@@ -606,7 +613,7 @@
         });
       }
     })
-    .catch(function(e){ console.error('[steep-map]', e); loading.classList.add('hidden'); });
+    .catch(function(e){ console.error('[steep-map]', e); loading.classList.add('hidden'); if (toggle) toggle.classList.remove('is-loading'); });
 
   // Custom overlay scrollbar for the photo strip
   var sbar = document.getElementById('photoscroll');
