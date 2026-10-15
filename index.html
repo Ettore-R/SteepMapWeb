@@ -161,7 +161,7 @@
   }
   /* Let the brand give way before the fixed CTA/globe do, and never wrap or
      overhang: it truncates instead of pushing the bar past the screen edge. */
-  .brand{min-width:0}
+  .brand{min-width:0;flex:none}
   .brand .wm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .brand{display:flex;align-items:center;gap:.6rem;font-family:"Sora";font-weight:800;font-size:1.15rem;color:#fff;transition:color .3s}
   .brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#1e2e53,#142142);display:grid;place-items:center;box-shadow:0 8px 18px -6px rgba(20,33,66,.7);flex:none}
@@ -202,7 +202,6 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235b6b7d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   }
   @media(max-width:820px){
-    nav.links a:not(.nav-cta){display:none}
     /* Collapse the language switcher to just the globe so the full language
        name doesn't widen (and overflow) the bar on phones. The native <select>
        stays, sitting invisibly on top of the globe, so tapping the icon still
@@ -640,7 +639,26 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
   .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.scroll-hint{display:none}}
+
+  /* Medium screens: tighter spacing so the whole bar still fits (the logo must not shrink) */
+  @media(max-width:1100px){ nav.links{gap:1.1rem} }
+  /* The five text links live in .nav-items: inline on desktop; on small screens they
+     become a panel under the bar (tapping the logo), so the language picker and the
+     "Get the app" button never move. */
+  .nav-items{display:contents}
+  @media(max-width:820px){
+    .nav-items{position:absolute;top:100%;left:0;right:0;display:flex;flex-direction:column;align-items:stretch;
+      padding:6px 0 14px;background:rgba(10,20,32,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      box-shadow:0 18px 30px -18px rgba(0,0,0,.6);opacity:0;visibility:hidden;transform:translateY(-10px);
+      transition:opacity .25s ease,transform .25s ease,visibility .25s}
+    .nav-items a{display:block;padding:13px 24px;font-size:1rem}
+    header.nav.menu-open .nav-items{opacity:1;visibility:visible;transform:none}
+    header.nav.scrolled .nav-items{background:rgba(255,255,255,.97)}
+  }
+  .footer-featured{margin-top:1rem;font-size:.9rem;line-height:1.7;opacity:.8}
+  .footer-featured a{text-decoration:underline;text-underline-offset:3px}
 </style>
+<link rel="stylesheet" href="/media/css/featured-modal.css" />
 </head>
 <body>
 
@@ -660,10 +678,13 @@
       <span class="wm">STEEP<span class="wm-sub">map</span></span>
     </a>
     <nav class="links">
+      <div class="nav-items">
       <a href="#features" data-i18n="nav.features">Features</a>
       <a href="#maps" data-i18n="nav.map">Our Map</a>
       <a href="#overlays" data-i18n="nav.pro">Pro Features</a>
       <a href="#about" data-i18n="nav.about">About us</a>
+      <a href="#" data-open-featured data-i18n="nav.featured">Featured tours</a>
+      </div>
       <label class="lang-switch" aria-label="Language">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20"/></svg>
         <select id="langSelect">
@@ -1092,6 +1113,7 @@
       <h5 data-i18n="footer.product">Product</h5>
       <a href="#features" data-i18n="nav.features">Features</a>
       <a href="#maps" data-i18n="nav.map">Our Map</a>
+      <a href="#" data-open-featured data-i18n="nav.featured">Featured tours</a>
       <a href="#overlays" data-i18n="nav.pro">Pro Features</a>
       <a href="#about" data-i18n="nav.about">About us</a>
       <a href="#get" data-i18n="nav.getapp">Get the app</a>
@@ -1111,6 +1133,9 @@
     <span>© <span id="year"></span> <span data-i18n="footer.rights">STEEP map · Ettore Rasca. All rights reserved.</span></span>
     <span id="photoCredit">Scenery photography from <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Unsplash</a>.</span>
   </div>
+  <!-- featured-links:start -->
+    <nav class="footer-featured" aria-label="Featured tours"><span>Featured tours:</span> <a href="/featured/serles-north-couloir.html">Serles North Couloir</a> · <a href="/featured/zuckerhuetl-from-grawa-alm.html">Zuckerhütl from Grawa Alm</a> · <a href="/featured/verso-la-cima-soliva.html">Verso la Cima Soliva</a> · <a href="/featured/la-grave-pan-de-redeau.html">La Grave - Pan de Redeau</a> · <a href="/featured/tomastinden-nw-couloir.html">Tomastinden NW Couloir</a></nav>
+    <!-- featured-links:end -->
 </footer>
 
 <script>
@@ -1375,6 +1400,7 @@
       'nav.map': `Unsere Karte`,
       'nav.pro': `Pro-Funktionen`,
       'nav.about': `Über uns`,
+      'nav.featured': `Ausgewählte Touren`,
       'nav.getapp': `App holen`,
       'hero.eyebrow': `Das Backcountry, kartiert`,
       'hero.h1': `Finde deine nächste Line<br><span class="g">im Backcountry.</span>`,
@@ -1503,6 +1529,7 @@
       'nav.map': `Notre carte`,
       'nav.pro': `Fonctions Pro`,
       'nav.about': `À propos`,
+      'nav.featured': `Sorties en vedette`,
       'nav.getapp': `Obtenir l'appli`,
       'hero.eyebrow': `Le backcountry, cartographié`,
       'hero.h1': `Trouvez votre prochaine ligne<br><span class="g">dans le backcountry.</span>`,
@@ -1631,6 +1658,7 @@
       'nav.map': `La nostra mappa`,
       'nav.pro': `Funzioni Pro`,
       'nav.about': `Chi siamo`,
+      'nav.featured': `Tour in evidenza`,
       'nav.getapp': `Scarica l'app`,
       'hero.eyebrow': `Il backcountry, mappato`,
       'hero.h1': `Trova la tua prossima linea<br><span class="g">nel backcountry.</span>`,
@@ -1759,6 +1787,7 @@
       'nav.map': `Nuestro mapa`,
       'nav.pro': `Funciones Pro`,
       'nav.about': `Quiénes somos`,
+      'nav.featured': `Rutas destacadas`,
       'nav.getapp': `Descargar la app`,
       'hero.eyebrow': `El backcountry, cartografiado`,
       'hero.h1': `Encuentra tu próxima línea<br><span class="g">en el backcountry.</span>`,
@@ -1887,6 +1916,7 @@
       'nav.map': `マップ`,
       'nav.pro': `Pro機能`,
       'nav.about': `私たちについて`,
+      'nav.featured': `注目のツアー`,
       'nav.getapp': `アプリを入手`,
       'hero.eyebrow': `バックカントリーをマップに`,
       'hero.h1': `次のラインを見つけよう<br><span class="g">バックカントリーで。</span>`,
@@ -2372,5 +2402,21 @@
   }
 })();
 </script>
+<script>
+// Small screens: the logo toggles the nav items panel; tapping outside or an item closes it.
+(function(){
+  var nav = document.getElementById('nav');
+  var brand = nav && nav.querySelector('a.brand');
+  if (!brand) return;
+  brand.addEventListener('click', function(e){
+    if (window.innerWidth <= 820){ e.preventDefault(); nav.classList.toggle('menu-open'); }
+  });
+  document.addEventListener('click', function(e){
+    if (!nav.classList.contains('menu-open')) return;
+    if (!nav.contains(e.target) || (e.target.closest && e.target.closest('nav.links a'))) nav.classList.remove('menu-open');
+  });
+})();
+</script>
+<script src="/media/js/featured-modal.js" defer></script>
 </body>
 </html>

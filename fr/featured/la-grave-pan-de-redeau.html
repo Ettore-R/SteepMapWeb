@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  FEATURED TOUR PAGE – TEMPLATE  (ETT-11)
+  ----------------------------------------------------------------------------
+  Not served directly. scripts/build_featured.py renders one static page per
+  featured tour, per language, substituting the {{TOKENS}} below from the
+  exported JSON (data/featured/*.json).
+
+  Output:  EN (default) -> /featured/la-grave-pan-de-redeau.html
+           other langs  -> /fr/featured/la-grave-pan-de-redeau.html   (de fr it es ja)
+
+  Tokens:
+    PAGE    fr la-grave-pan-de-redeau https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html <link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="x-default" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html" />
+    SEO     La Grave – Pan de Redeau sortie à ski à Hautes-Alpes | Steep La Grave – Pan de Redeau à Hautes-Alpes : 6.4 km, 216 m de dénivelé, jusqu'à 62° (Très difficile). Le Pan de Rideau est une véritable aventure à La Grave où… https://steepmap.eu/media/og/la-grave-pan-de-redeau.jpg <script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "TouristTrip", "name": "La Grave – Pan de Redeau", "description": "La Grave – Pan de Redeau à Hautes-Alpes : 6.4 km, 216 m de dénivelé, jusqu'à 62° (Très difficile). Le Pan de Rideau est une véritable aventure à La Grave où…", "image": ["https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_8127725c-eb78-4b78-85f0-db867f2d49f3.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_1017cea5-f69f-4a9a-8c79-fe3d910a9cfc.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_5e2b7ff9-1e13-48b3-8b76-0fd26755a143.jpg"], "touristType": "Ski touring / backcountry skiing", "url": "https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html", "inLanguage": "fr", "location": {"@type": "Place", "name": "La Grave, Hautes-Alpes, France", "geo": {"@type": "GeoCoordinates", "latitude": 45.02071, "longitude": 6.281833}}, "provider": {"@type": "Organization", "name": "Steep", "url": "https://steepmap.eu/"}}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "STEEP map", "item": "https://steepmap.eu/"}, {"@type": "ListItem", "position": 2, "name": "La Grave – Pan de Redeau", "item": "https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"}]}
+</script>
+    MAP     {"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[6.263269, 45.009955], [6.263302, 45.009849], [6.263334, 45.009744], [6.263365, 45.009638], [6.263396, 45.009533], [6.263428, 45.009427], [6.263461, 45.009322], [6.263495, 45.009216], [6.263531, 45.009112], [6.26357, 45.009007], [6.263611, 45.008903], [6.263659, 45.008801], [6.263715, 45.0087], [6.26378, 45.008603], [6.263859, 45.00851], [6.26395, 45.008424], [6.264045, 45.00834], [6.264139, 45.008255], [6.26423, 45.008168], [6.264319, 45.00808], [6.264407, 45.007992], [6.264495, 45.007904], [6.264583, 45.007816], [6.264672, 45.007728], [6.264762, 45.007641], [6.264854, 45.007555], [6.264948, 45.00747], [6.265045, 45.007386], [6.265145, 45.007305], [6.26525, 45.007226], [6.26536, 45.007152], [6.265479, 45.007084], [6.265604, 45.007023], [6.265739, 45.006972], [6.26588, 45.006932], [6.266025, 45.006898], [6.26617, 45.006864], [6.266315, 45.006829], [6.266457, 45.00679], [6.266598, 45.006748], [6.266736, 45.006703], [6.266874, 45.006657], [6.267013, 45.006611], [6.267151, 45.006566], [6.26729, 45.006521], [6.267429, 45.006477], [6.267568, 45.006432], [6.267707, 45.006387], [6.267846, 45.006342], [6.267984, 45.006297], [6.268123, 45.006252], [6.268261, 45.006206], [6.268399, 45.00616], [6.268537, 45.006114], [6.268675, 45.006067], [6.268812, 45.00602], [6.268949, 45.005972], [6.269085, 45.005923], [6.269221, 45.005874], [6.269356, 45.005824], [6.269491, 45.005773], [6.269625, 45.005722], [6.269758, 45.005669], [6.269891, 45.005616], [6.270022, 45.005561], [6.270152, 45.005505], [6.270281, 45.005447], [6.270409, 45.005388], [6.270536, 45.005328], [6.270662, 45.005267], [6.270788, 45.005206], [6.270913, 45.005144], [6.271037, 45.005081], [6.271161, 45.005018], [6.271284, 45.004954], [6.271407, 45.00489], [6.27153, 45.004826], [6.271652, 45.004762], [6.271775, 45.004697], [6.271897, 45.004633], [6.272019, 45.004568], [6.272141, 45.004504], [6.272264, 45.004439], [6.272386, 45.004375], [6.272509, 45.004311], [6.272633, 45.004247], [6.272756, 45.004184], [6.272881, 45.004122], [6.273007, 45.004061], [6.273134, 45.004001], [6.273263, 45.003943], [6.273394, 45.003888], [6.273526, 45.003834], [6.273661, 45.003783], [6.273798, 45.003736], [6.273937, 45.003691], [6.274079, 45.003652], [6.274223, 45.003617], [6.27437, 45.003587], [6.274518, 45.00356], [6.274665, 45.003531], [6.274815, 45.003521], [6.274939, 45.00358], [6.275091, 45.00358], [6.275239, 45.003555], [6.275383, 45.003519], [6.275522, 45.003474], [6.275661, 45.003429], [6.275803, 45.00339], [6.275948, 45.003357], [6.276097, 45.003334], [6.276247, 45.003315], [6.276398, 45.003299], [6.27655, 45.003286], [6.276702, 45.003276], [6.276854, 45.003268], [6.277007, 45.003264], [6.277159, 45.003265], [6.277312, 45.003265], [6.277464, 45.003268], [6.277616, 45.003279], [6.277765, 45.003303], [6.277902, 45.003349], [6.278017, 45.00342], [6.278103, 45.003508], [6.278173, 45.003604], [6.278234, 45.003703], [6.278292, 45.003803], [6.278352, 45.003902], [6.278423, 45.003998], [6.278504, 45.004089], [6.278591, 45.004178], [6.278696, 45.004256], [6.27883, 45.004305], [6.278982, 45.004298], [6.279133, 45.004298], [6.279261, 45.004353], [6.279357, 45.004437], [6.279443, 45.004526], [6.279521, 45.004619], [6.27959, 45.004715], [6.279649, 45.004815], [6.279696, 45.004917], [6.279728, 45.005023], [6.279742, 45.00513], [6.279748, 45.005238], [6.279747, 45.005346], [6.279738, 45.005454], [6.279722, 45.005561], [6.279697, 45.005668], [6.279663, 45.005773], [6.279621, 45.005876], [6.27957, 45.005978], [6.279511, 45.006078], [6.279444, 45.006175], [6.279367, 45.006268], [6.279282, 45.006357], [6.279191, 45.006444], [6.279097, 45.006529], [6.279, 45.006613], [6.278902, 45.006695], [6.278802, 45.006777], [6.278702, 45.006858], [6.278602, 45.00694], [6.278502, 45.007021], [6.278404, 45.007104], [6.278307, 45.007187], [6.278212, 45.007272], [6.278122, 45.007359], [6.278036, 45.007448], [6.277954, 45.007539], [6.277874, 45.007631], [6.277795, 45.007724], [6.277719, 45.007817], [6.277645, 45.007911], [6.277572, 45.008006], [6.277502, 45.008102], [6.277435, 45.008199], [6.277371, 45.008297], [6.277311, 45.008396], [6.277255, 45.008497], [6.277205, 45.008599], [6.277163, 45.008702], [6.277134, 45.008808], [6.277121, 45.008916], [6.277123, 45.009023], [6.277139, 45.009131], [6.277164, 45.009237], [6.277192, 45.009343], [6.277217, 45.00945], [6.277234, 45.009557], [6.277255, 45.009664], [6.277282, 45.00977], [6.277312, 45.009876], [6.277341, 45.009982], [6.277365, 45.010088], [6.277378, 45.010196], [6.277371, 45.010304], [6.277335, 45.010408], [6.277275, 45.010507], [6.277206, 45.010604], [6.277146, 45.010703], [6.277098, 45.010805], [6.27704, 45.010905], [6.276987, 45.011006], [6.276952, 45.011111], [6.276945, 45.011219], [6.276967, 45.011325], [6.276996, 45.011431], [6.27703, 45.011537], [6.27707, 45.011641], [6.27712, 45.011743], [6.27718, 45.011842], [6.277252, 45.011937], [6.277335, 45.012027], [6.27743, 45.012112], [6.277536, 45.01219], [6.277649, 45.012262], [6.277767, 45.01233], [6.277889, 45.012395], [6.278014, 45.012457], [6.278142, 45.012516], [6.278271, 45.012573], [6.278403, 45.012629], [6.278535, 45.012682], [6.278669, 45.012734], [6.278803, 45.012786], [6.278938, 45.012836], [6.279074, 45.012885], [6.279211, 45.012933], [6.279347, 45.012981], [6.279485, 45.013028], [6.279623, 45.013074], [6.279763, 45.013118], [6.279903, 45.013159], [6.280045, 45.013199], [6.280187, 45.013239], [6.28033, 45.013277], [6.280473, 45.013314], [6.280617, 45.013351], [6.28076, 45.013388], [6.280904, 45.013425], [6.281047, 45.013461], [6.281191, 45.013498], [6.281334, 45.013535], [6.281477, 45.013573], [6.28162, 45.013611], [6.281762, 45.013651], [6.281904, 45.013691], [6.282045, 45.013732], [6.282185, 45.013775], [6.282324, 45.01382], [6.282461, 45.013867], [6.282597, 45.013916], [6.282732, 45.013966], [6.282868, 45.014015], [6.283004, 45.014064], [6.28314, 45.014114], [6.283275, 45.014164], [6.283409, 45.014215], [6.283541, 45.01427], [6.283671, 45.014327], [6.283797, 45.014387], [6.283921, 45.01445], [6.284042, 45.014516], [6.28416, 45.014585], [6.284275, 45.014655], [6.284388, 45.014728], [6.284499, 45.014802], [6.284609, 45.014877], [6.284717, 45.014953], [6.284824, 45.01503], [6.284929, 45.015108], [6.285032, 45.015188], [6.285134, 45.015269], [6.285234, 45.01535], [6.285334, 45.015432], [6.285432, 45.015514], [6.28553, 45.015597], [6.285627, 45.01568], [6.285724, 45.015764], [6.28582, 45.015848], [6.285916, 45.015932], [6.286011, 45.016016], [6.286106, 45.016101], [6.2862, 45.016185], [6.286295, 45.01627], [6.286389, 45.016355], [6.286483, 45.01644], [6.286578, 45.016525], [6.286671, 45.01661], [6.286765, 45.016695], [6.286859, 45.01678], [6.286953, 45.016865], [6.287047, 45.01695], [6.287141, 45.017035], [6.287236, 45.01712], [6.28733, 45.017205], [6.287425, 45.017289], [6.28752, 45.017374], [6.287615, 45.017458], [6.28771, 45.017543], [6.287806, 45.017627], [6.287902, 45.01771], [6.287999, 45.017794], [6.288097, 45.017877], [6.288195, 45.017959], [6.288294, 45.018042], [6.288394, 45.018123], [6.288495, 45.018204], [6.288597, 45.018285], [6.288698, 45.018365], [6.2888, 45.018445], [6.288902, 45.018526], [6.289004, 45.018606], [6.289107, 45.018686], [6.28921, 45.018766], [6.289313, 45.018845], [6.289417, 45.018924], [6.289521, 45.019003], [6.289626, 45.019081], [6.289732, 45.019159], [6.289838, 45.019237], [6.289945, 45.019314], [6.290053, 45.01939], [6.290162, 45.019466], [6.290272, 45.019541], [6.290383, 45.019615], [6.290495, 45.019688], [6.290608, 45.019761], [6.290722, 45.019832], [6.290837, 45.019903], [6.290954, 45.019973], [6.291071, 45.020042], [6.29119, 45.02011], [6.29131, 45.020177], [6.291431, 45.020242], [6.291555, 45.020305], [6.29168, 45.020367], [6.291807, 45.020427], [6.291935, 45.020486], [6.292064, 45.020543], [6.292195, 45.020599], [6.292326, 45.020654], [6.292459, 45.020708], [6.292591, 45.020761], [6.292725, 45.020813], [6.292858, 45.020866], [6.292992, 45.020917], [6.293126, 45.020969], [6.29326, 45.021021], [6.293394, 45.021073], [6.293528, 45.021125], [6.293661, 45.021178], [6.293794, 45.021231], [6.293926, 45.021285], [6.294057, 45.021341], [6.294186, 45.021398], [6.294315, 45.021456], [6.294442, 45.021516], [6.294568, 45.021577], [6.294694, 45.021637], [6.294821, 45.021697], [6.294948, 45.021757], [6.295076, 45.021817], [6.295203, 45.021876], [6.29533, 45.021936], [6.295456, 45.021997], [6.295581, 45.022059], [6.295706, 45.022121], [6.295829, 45.022185], [6.295951, 45.02225], [6.296071, 45.022317], [6.296188, 45.022385], [6.296304, 45.022456], [6.296418, 45.022528], [6.296529, 45.022602], [6.296638, 45.022678], [6.296744, 45.022755], [6.296848, 45.022834], [6.29695, 45.022914], [6.297049, 45.022996], [6.297147, 45.023079], [6.297243, 45.023163], [6.297337, 45.023248], [6.29743, 45.023334], [6.297522, 45.02342], [6.297613, 45.023507], [6.297702, 45.023594], [6.297791, 45.023682], [6.297878, 45.02377], [6.297965, 45.023859], [6.298051, 45.023949], [6.298136, 45.024038], [6.29822, 45.024128], [6.298304, 45.024219], [6.298387, 45.024309], [6.298469, 45.0244], [6.29855, 45.024492], [6.29863, 45.024583], [6.29871, 45.024675], [6.298789, 45.024768], [6.298867, 45.02486], [6.298944, 45.024954], [6.299021, 45.025047], [6.299096, 45.025141], [6.299171, 45.025235], [6.299244, 45.025329], [6.299317, 45.025424], [6.299388, 45.02552], [6.299458, 45.025616], [6.299526, 45.025713], [6.299592, 45.02581], [6.299656, 45.025908], [6.299718, 45.026006], [6.299779, 45.026105], [6.299837, 45.026205], [6.299893, 45.026306], [6.299946, 45.026407], [6.299998, 45.026508], [6.300046, 45.026611], [6.300092, 45.026714], [6.300136, 45.026817], [6.300176, 45.026921], [6.300214, 45.027026], [6.300248, 45.027131], [6.30028, 45.027236], [6.300308, 45.027342], [6.300334, 45.027449], [6.300356, 45.027556], [6.300375, 45.027663], [6.30039, 45.02777], [6.300396, 45.027878], [6.300395, 45.027986], [6.300386, 45.028093], [6.300371, 45.028201], [6.30035, 45.028308], [6.300324, 45.028414], [6.300294, 45.02852], [6.300261, 45.028625], [6.300225, 45.02873], [6.300189, 45.028835], [6.300153, 45.02894], [6.300117, 45.029045], [6.300085, 45.02915], [6.300056, 45.029256], [6.300034, 45.029363], [6.300014, 45.02947], [6.299993, 45.029577], [6.299971, 45.029684], [6.29995, 45.029791], [6.29993, 45.029898], [6.299911, 45.030005], [6.299895, 45.030112], [6.299882, 45.03022], [6.299873, 45.030327], [6.299868, 45.030435], [6.299865, 45.030543], [6.299868, 45.030651], [6.299876, 45.030759], [6.299887, 45.030866], [6.299901, 45.030974], [6.299917, 45.031081], [6.299934, 45.031188], [6.299951, 45.031296], [6.299968, 45.031403], [6.299984, 45.03151], [6.299998, 45.031618], [6.30001, 45.031725], [6.300018, 45.031833], [6.300023, 45.031941], [6.300022, 45.032049], [6.300013, 45.032156], [6.3, 45.032264], [6.299984, 45.032371], [6.299963, 45.032478], [6.299939, 45.032585], [6.299909, 45.032691], [6.299874, 45.032796], [6.299833, 45.0329], [6.299786, 45.033002], [6.299734, 45.033104], [6.299678, 45.033204], [6.299616, 45.033303], [6.299551, 45.0334], [6.299478, 45.033495], [6.299398, 45.033587], [6.299314, 45.033677], [6.299226, 45.033765], [6.299135, 45.033852], [6.299042, 45.033938], [6.298948, 45.034023], [6.298854, 45.034108], [6.29876, 45.034193], [6.298667, 45.034279], [6.298576, 45.034365], [6.298487, 45.034453], [6.298401, 45.034542], [6.298321, 45.034634], [6.298246, 45.034728], [6.298177, 45.034824], [6.29811, 45.034921], [6.298047, 45.035019], [6.297987, 45.035119], [6.29793, 45.035219], [6.297877, 45.03532], [6.297828, 45.035422], [6.297783, 45.035525], [6.297743, 45.035629], [6.297708, 45.035734], [6.297678, 45.03584], [6.297654, 45.035947], [6.29764, 45.036054], [6.297635, 45.036162], [6.29764, 45.03627], [6.297654, 45.036377], [6.297677, 45.036484], [6.297705, 45.03659], [6.297737, 45.036696], [6.297771, 45.036801], [6.297805, 45.036906], [6.297839, 45.037011], [6.297876, 45.037116], [6.297916, 45.03722], [6.297959, 45.037324], [6.298003, 45.037427], [6.298049, 45.03753], [6.298096, 45.037633], [6.298144, 45.037735], [6.298192, 45.037837], [6.298241, 45.03794], [6.298289, 45.038042], [6.298336, 45.038145], [6.298342, 45.038157]]}}  (GeoJSON LineString of the tour track)
+            [6.281833, 45.02071] 13
+    HEADER  La Grave – Pan de Redeau La Grave, Hautes-Alpes, France Ettore Rasca https://media.steepmap.eu/profile_pictures/94e929eb-7fbe-43cf-bdb7-bedfd6030e4a/avatar.jpg 14 Sep 2026
+    STATS   Très difficile 62 E3 N, NE
+            6.4 216 1704 3399
+    BODY    <p>Le Pan de Rideau est une véritable aventure à La Grave où l'approche commence presque ridiculement détendue avant que les choses ne deviennent sérieuses très rapidement. La traversée du glacier ensoleillé vers l'entrée est relativement plate et offre un départ agréable et facile. Puis on passe du côté nord, et soudain tout devient sombre, raide et assez intimidant.</p><p></p><p>Le vrai défi commence avec la traversée d'entrée. Elle dépasse les 60° d'inclinaison, mesure environ 100 m de long et se situe directement au-dessus du vide. Selon les conditions, cela peut facilement être la partie la plus effrayante de toute la ligne. Lors de notre passage, il y avait très peu de neige, si bien qu'à mi‑traversée nous avons dû grimper sur des rochers avec les skis aux pieds. Enlever les skis n’est pas vraiment une option, car à cet angle et avec cette exposition, si vous sortez des fixations il n’y a aucun moyen sûr de les remonter.</p><p></p><p>Avec autant de rocher exposé, nous avons décidé d’utiliser une corde pour la première partie de la traversée. Une personne ne skiait pas la ligne et assurait les autres depuis un rocher, protégeant approximativement les 60 m premiers de la traversée. Cela ne rend évidemment pas l’ensemble totalement sûr – la traversée fait environ 100 m – mais cela réduit les conséquences sur la section protégée à un impressionnant pendule de 60 m. Cela nous a semblé une amélioration raisonnable.</p><p></p><p>Une fois la traversée passée, les premiers virages sont raides et exposés, avant que la ligne ne s’ouvre progressivement sur le glacier du Râteau. Même quand le terrain devient moins pentu, il ne vous laisse pas vraiment vous détendre. La pente vous oblige à rester concentré jusqu’au bergschrund, qui peut devenir un autre obstacle majeur en conditions de faible neige et devoir être franchi.</p><p></p><p>Le reste de la ligne n’est pas moins exigeant. Le ski est raide et soutenu, l’exposition reste toujours en arrière‑plan, il n’y a donc aucun moment où l’on peut complètement se déconnecter. Sur une bonne neige nord‑exposée c’est une descente incroyable, mais les conditions font une énorme différence dans la sensation globale.</p> 
+    CTA     https://app.steepmap.eu/?tour=043741b3-0461-46ed-b94c-c09b1c9d22c0  (= https://app.steepmap.eu/?tour={{TOUR_ID}})
+    I18N    {{T_*}}  short UI labels supplied per-language by the generator.
+
+  ============================================================================
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+<title>La Grave – Pan de Redeau sortie à ski à Hautes-Alpes | Steep</title>
+<meta name="description" content="La Grave – Pan de Redeau à Hautes-Alpes : 6.4 km, 216 m de dénivelé, jusqu'à 62° (Très difficile). Le Pan de Rideau est une véritable aventure à La Grave où…" />
+<meta name="theme-color" content="#0a1420" />
+<meta name="author" content="Steep" />
+<meta name="robots" content="index, follow" />
+
+<link rel="canonical" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html" />
+<link rel="alternate" hreflang="x-default" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Steep" />
+<meta property="og:url" content="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html" />
+<meta property="og:locale" content="fr" />
+<meta property="og:title" content="La Grave – Pan de Redeau · Steep" />
+<meta property="og:description" content="La Grave – Pan de Redeau à Hautes-Alpes : 6.4 km, 216 m de dénivelé, jusqu'à 62° (Très difficile). Le Pan de Rideau est une véritable aventure à La Grave où…" />
+<meta property="og:image" content="https://steepmap.eu/media/og/la-grave-pan-de-redeau.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="La Grave – Pan de Redeau · Steep" />
+<meta name="twitter:description" content="La Grave – Pan de Redeau à Hautes-Alpes : 6.4 km, 216 m de dénivelé, jusqu'à 62° (Très difficile). Le Pan de Rideau est une véritable aventure à La Grave où…" />
+<meta name="twitter:image" content="https://steepmap.eu/media/og/la-grave-pan-de-redeau.jpg" />
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "TouristTrip", "name": "La Grave – Pan de Redeau", "description": "La Grave – Pan de Redeau à Hautes-Alpes : 6.4 km, 216 m de dénivelé, jusqu'à 62° (Très difficile). Le Pan de Rideau est une véritable aventure à La Grave où…", "image": ["https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_8127725c-eb78-4b78-85f0-db867f2d49f3.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_1017cea5-f69f-4a9a-8c79-fe3d910a9cfc.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_5e2b7ff9-1e13-48b3-8b76-0fd26755a143.jpg"], "touristType": "Ski touring / backcountry skiing", "url": "https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html", "inLanguage": "fr", "location": {"@type": "Place", "name": "La Grave, Hautes-Alpes, France", "geo": {"@type": "GeoCoordinates", "latitude": 45.02071, "longitude": 6.281833}}, "provider": {"@type": "Organization", "name": "Steep", "url": "https://steepmap.eu/"}}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "STEEP map", "item": "https://steepmap.eu/"}, {"@type": "ListItem", "position": 2, "name": "La Grave – Pan de Redeau", "item": "https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"}]}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="/media/brand/icon.svg?v=2" />
+<link rel="apple-touch-icon" href="/media/brand/apple-touch-icon.png?v=2" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+<!-- Warm up the map's connections so its first tiles/scripts arrive fast -->
+<link rel="preconnect" href="https://cdn.steepmap.eu" crossorigin />
+<link rel="preconnect" href="https://steep-dem.ettore-rasca.workers.dev" crossorigin />
+<link rel="preconnect" href="https://unpkg.com" crossorigin />
+<link rel="preconnect" href="https://esm.sh" crossorigin />
+<link rel="modulepreload" href="/media/js/steep-map.js?v=1792064087" />
+
+<style>
+  :root{
+    --blue:#3b82f6; --navy:#0a1420; --ink:#0b1622; --slate:#5b6b7d;
+    --snow:#f6f8fb; --cloud:#eef2f7; --line:rgba(16,32,52,.10);
+    --sun:#ff8a4c; --sun-2:#ff6a3d; --maxw:1180px; --radius:18px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --surface-1:#fff; --surface-2:#f1f4f8; --surface-3:#e9edf3;
+    --text-secondary:#334155; --text-tertiary:#475569; --text-muted:#64748b;
+    --border-default:rgba(16,32,52,.12);
+    color-scheme: light dark;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:clip}
+  body{margin:0;font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--snow);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  h1,h2,h3{font-family:"Sora","Inter",sans-serif;line-height:1.1;letter-spacing:-.02em;margin:0}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:0 1.25rem}
+
+  /* ---------- NAV (copied styling + scroll animation from index.html) ---------- */
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:50;overflow-x:clip;
+    transition:background .3s,box-shadow .3s,backdrop-filter .3s}
+  header.nav .bar{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:16px 24px;max-width:var(--maxw);margin:0 auto}
+  /* Dark halo along the whole top edge so the bright chrome stays readable over
+     the map; it fades out once the bar frosts in on scroll. */
+  header.nav::before{content:"";position:absolute;inset:0 0 auto 0;height:100%;z-index:0;pointer-events:none;
+    background:linear-gradient(to bottom,rgba(5,12,22,.62),rgba(5,12,22,0));transition:opacity .3s}
+  header.nav.scrolled::before{opacity:0}
+  .brand,nav.links a.plain,.lang-switch{text-shadow:0 1px 12px rgba(5,12,22,.5)}
+  header.nav.scrolled .brand,header.nav.scrolled nav.links a.plain,header.nav.scrolled .lang-switch{text-shadow:none}
+  .brand{min-width:0;flex:none;display:flex;align-items:center;gap:.6rem;font-family:"Sora";font-weight:800;font-size:1.15rem;color:#fff;transition:color .3s}
+  .brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#1e2e53,#142142);display:grid;place-items:center;box-shadow:0 8px 18px -6px rgba(20,33,66,.7);flex:none}
+  .brand .mark svg{width:22px;height:22px}
+  .brand .wm{letter-spacing:.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .brand .wm-sub{font-weight:500;font-size:.62em;letter-spacing:.05em;opacity:.62;margin-left:.3em}
+  nav.links{display:flex;align-items:center;gap:1.6rem}
+  nav.links a.plain{font-weight:600;font-size:.95rem;color:rgba(255,255,255,.9);transition:color .2s;white-space:nowrap}
+  nav.links a.plain:hover{color:#fff}
+  .nav-cta{padding:.6rem 1.2rem;border-radius:999px;background:var(--blue);color:#fff !important;font-size:.9rem;font-weight:600;flex:none}
+  header.nav.scrolled{background:rgba(255,255,255,.82);backdrop-filter:blur(14px) saturate(140%);box-shadow:0 1px 0 var(--line),0 10px 30px -18px rgba(11,34,66,.3)}
+  header.nav.scrolled .brand{color:var(--ink)}
+  header.nav.scrolled nav.links a.plain{color:var(--slate)}
+  header.nav.scrolled nav.links a.plain:hover{color:var(--ink)}
+
+  /* Language switcher — same compact globe + native <select> as the website */
+  .lang-switch{display:inline-flex;align-items:center;gap:.35rem;flex:none;color:rgba(255,255,255,.9);cursor:pointer;transition:color .2s}
+  .lang-switch:hover{color:#fff}
+  .lang-switch svg{width:18px;height:18px;flex:none}
+  .lang-switch select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background:transparent;border:0;
+    color:inherit;font:inherit;font-weight:600;font-size:.95rem;padding:.15rem 1.1rem .15rem .1rem;margin:0;cursor:pointer;line-height:1;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .1rem center}
+  .lang-switch select:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+  .lang-switch select option{color:#0b1622;background:#fff}
+  header.nav.scrolled .lang-switch{color:var(--slate)}
+  header.nav.scrolled .lang-switch:hover{color:var(--ink)}
+  header.nav.scrolled .lang-switch select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235b6b7d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
+  @media(max-width:620px){
+    nav.links a.plain{display:none}
+    .lang-switch{position:relative;padding:4px}
+    .lang-switch svg{width:22px;height:22px}
+    .lang-switch select{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;opacity:0;background-image:none}
+  }
+
+  /* ---------- EDGE-TO-EDGE 3D MAP ---------- */
+  .tourmap{position:relative;width:100%;height:clamp(340px,60vh,620px);background:#0a1420}
+  @media(max-width:560px){ .tourmap{height:calc(clamp(340px,60vh,620px) - 50px)} }
+  .tourmap #map{position:absolute;inset:0}
+  .tourmap .maplibregl-ctrl-attrib{font-size:10px}
+  .maploading{position:absolute;inset:0;display:grid;place-items:center;color:#cfe0f5;
+    font-size:.9rem;background:linear-gradient(135deg,#0a1420,#0e1c2e);z-index:1;transition:opacity .4s}
+  .maploading.hidden{opacity:0;pointer-events:none}
+
+  /* Photo strip — a single horizontal row of all photos at their native aspect,
+     shown in place of the map when the viewer taps the cover thumbnail. The
+     native scrollbar is hidden; a custom overlay scrollbar is drawn instead. */
+  #photostrip{position:absolute;inset:0;z-index:2;display:none;align-items:center;gap:6px;
+    background:#0a1420;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none}
+  #photostrip::-webkit-scrollbar{display:none;height:0;width:0}
+  #photostrip img{height:100%;width:auto;flex:0 0 auto;display:block;user-select:none;-webkit-user-drag:none}
+  .tourmap.photos #photostrip{display:flex}
+
+  /* Modern overlay scrollbar — hovers over the photos, draggable, thin. */
+  #photoscroll{position:absolute;left:8px;right:8px;bottom:2px;height:5px;z-index:5;display:none;
+    border-radius:999px;background:rgba(10,20,32,.28);backdrop-filter:blur(2px);opacity:0;transition:opacity .25s}
+  .tourmap.photos #photoscroll{display:block}
+  .tourmap.photos:hover #photoscroll,#photoscroll.dragging,#photoscroll.active{opacity:1}
+  #photoscroll .thumb{position:absolute;top:0;height:100%;min-width:36px;border-radius:999px;
+    background:rgba(255,255,255,.85);box-shadow:0 1px 3px rgba(0,0,0,.35);cursor:grab}
+  #photoscroll .thumb:active,#photoscroll.dragging .thumb{cursor:grabbing;background:#fff}
+
+  /* Previous / next arrows on the photo strip — circular, shown in photo view */
+  .pv-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:42px;height:42px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);background:rgba(10,20,32,.55);color:#fff;display:none;place-items:center;
+    cursor:pointer;padding:0;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    box-shadow:0 6px 18px -6px rgba(0,0,0,.6);transition:background .2s,opacity .2s}
+  .pv-arrow svg{width:20px;height:20px;display:block}
+  .pv-arrow:hover{background:rgba(10,20,32,.8)}
+  .pv-arrow:disabled{opacity:0;pointer-events:none}
+  .tourmap.photos .pv-arrow{display:grid}
+  .pv-prev{left:12px} .pv-next{right:12px}
+  @media(max-width:560px){ .pv-arrow{width:36px;height:36px} .pv-prev{left:8px} .pv-next{right:8px} }
+
+  /* Reveal: once the map is ready the photos slide away (unless the viewer already used them) */
+  /* Clip the map area during the reveal so the photos drop out behind the page's bottom edge */
+  .tourmap.revealing{overflow:hidden}
+  .tourmap.revealing #photostrip{transform:translateY(102%);transition:transform .8s cubic-bezier(.22,.61,.36,1)}
+  .tourmap.revealing .pv-arrow,.tourmap.revealing #photoscroll{opacity:0 !important;transition:opacity .3s;pointer-events:none}
+  @media (prefers-reduced-motion: reduce){ .tourmap.revealing #photostrip{transition:none} }
+
+  /* Spinner on the toggle while the map preview is being made */
+  #mediaToggle.is-loading::before{content:"";position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;
+    border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;z-index:1;animation:mt-spin .9s linear infinite}
+  @keyframes mt-spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion: reduce){ #mediaToggle.is-loading::before{animation-duration:2.4s} }
+
+  /* Cover / map toggle thumbnail (bottom-left) — larger on desktop */
+  #mediaToggle{position:absolute;left:14px;bottom:14px;z-index:4;width:286px;height:185px;
+    border-radius:12px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.92);
+    box-shadow:0 8px 20px -6px rgba(0,0,0,.65);background:#1a2536 center/cover no-repeat;padding:0;appearance:none}
+  #mediaToggle .mt-label{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:5px;
+    padding:5px 8px;font:700 12.5px "Inter",sans-serif;color:#fff;
+    background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0))}
+  #mediaToggle .mt-label svg{width:14px;height:14px;flex:none}
+  @media(max-width:560px){ #mediaToggle{width:112px;height:74px;left:12px;bottom:12px} }
+
+  /* Explore-map CTA (bottom-right) — same orange btn-sun style as the website */
+  #exploreMap{position:absolute;right:14px;bottom:14px;z-index:4;display:inline-flex;align-items:center;gap:.55rem;
+    padding:.72rem 1.25rem;border-radius:999px;border:0;cursor:pointer;text-decoration:none;white-space:nowrap;
+    font:700 .95rem "Inter",sans-serif;color:#3a1200;
+    background:linear-gradient(135deg,var(--sun) 0%,var(--sun-2) 100%);
+    box-shadow:0 14px 30px -10px rgba(255,106,61,.55);
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+  #exploreMap:hover{transform:translateY(-3px)}
+  /* Platform symbol with the website's dark glow behind it */
+  #exploreMap .ei{display:none;align-items:center;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7)) drop-shadow(0 0 2px rgba(0,0,0,.6))}
+  #exploreMap.has-icon .ei{display:inline-flex}
+  #exploreMap .ei svg{width:20px;height:20px;display:block}
+  .tourmap.photos #exploreMap{display:none}
+  /* Lift the map attribution so the "i" clears the Explore-map button */
+  .tourmap .maplibregl-ctrl-bottom-right{bottom:58px}
+  @media(max-width:560px){ #exploreMap{right:12px;bottom:12px;padding:9px 14px} }
+
+  /* ---------- TITLE + AUTHOR ---------- */
+  .lede{margin:1.6rem auto .2rem}
+  .lede .region{font-weight:600;color:var(--slate);font-size:.92rem;letter-spacing:.02em;text-transform:uppercase}
+  .lede h1{font-size:clamp(1.7rem,4.4vw,2.5rem);margin-top:.35rem}
+
+  /* Author row — mirrors the app's tour-detail__author */
+  .author{display:flex;align-items:center;gap:9px;margin:.9rem auto 0;
+    font-family:"Inter",sans-serif;font-size:15px;color:var(--text-muted)}
+  .author .avatar{flex:none;width:34px;height:34px;border-radius:50%;object-fit:cover;
+    background:var(--surface-3);display:grid;place-items:center;color:var(--text-tertiary)}
+  .author .name{font-weight:600;font-size:15.5px;color:var(--text-tertiary)}
+  .author .sep{color:#d1d5db}
+  .author .date{font-weight:400}
+
+  /* ---------- STATS GRID 4×2 (app style: compact icon + value cells) ---------- */
+  .tour-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);margin:1.4rem auto 0;
+    background:var(--surface-1);border:1px solid var(--border-default);border-radius:14px;overflow:hidden}
+  .tour-stat{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 4px;
+    font-size:13px;font-weight:500;color:var(--text-secondary);
+    border-right:1px solid var(--border-default);border-bottom:1px solid var(--border-default);min-width:0;overflow:hidden}
+  .tour-stat svg{flex:none;color:var(--text-tertiary)}
+  .tour-stat .val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .tour-stat:nth-child(4n){border-right:none}
+  .tour-stat:nth-last-child(-n+4){border-bottom:none}
+  /* Stay 4×2 at every width — tighten the cells instead of reflowing to 2 columns */
+  @media(max-width:560px){
+    .tour-stat{flex-direction:column;gap:3px;padding:10px 2px;font-size:11.5px}
+    .tour-stat svg{width:13px;height:13px}
+  }
+
+  .desc{margin:1.8rem auto;font-size:1.05rem}
+  .desc p{margin:0 0 1rem}
+
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.6rem;margin:1.6rem auto}
+  .gallery img{width:100%;height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+
+  .cta{background:linear-gradient(135deg,var(--navy),#0e1c2e);color:#fff;border-radius:var(--radius);
+    padding:2rem 1.5rem;margin:2.5rem auto 1rem;text-align:center}
+  .cta h2{font-size:1.5rem}
+  .cta p{margin:.6rem auto 1.6rem;max-width:46ch;color:rgba(255,255,255,.78)}
+  .btn-row{display:flex;justify-content:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:999px;font-weight:700}
+  .btn-sun{background:linear-gradient(135deg,var(--sun),var(--sun-2));color:#3a1200;box-shadow:0 14px 30px -10px rgba(255,106,61,.5)}
+  .store-row{display:flex;gap:.7rem;justify-content:center;margin-top:1.1rem}
+  .store{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-width:170px;padding:.65rem 1rem;border-radius:12px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);font-size:.9rem;color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
+  .store:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+  .store svg{width:18px;height:18px;flex:none}
+  @media(max-width:460px){ .store{min-width:0;flex:1} }
+
+  /* Get-app modal — ported verbatim from the website (index.html #getModal) */
+  .modal-back{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(6,12,22,.72);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease)}
+  .modal-back.open{display:flex;opacity:1}
+  .modal{position:relative;width:100%;max-width:370px;background:linear-gradient(180deg,#10203400,#0a1420),radial-gradient(120% 120% at 80% 0%,#14304d,#0a1420);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:30px 24px;color:#fff;box-shadow:0 40px 90px -30px rgba(0,0,0,.85);transform:translateY(16px) scale(.98);transition:transform .35s var(--ease)}
+  .modal-back.open .modal{transform:none}
+  .modal .x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+  .modal .x:hover{background:rgba(255,255,255,.18)}
+  .modal h3{font-family:"Sora";font-size:1.55rem;margin-top:.2rem}
+  .plat{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+  .plat-btn{display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;padding:12px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);text-decoration:none;color:#fff;transition:transform .2s var(--ease),background .2s,border-color .2s}
+  .plat-btn:hover{background:rgba(255,255,255,.1);transform:translateY(-2px);border-color:rgba(124,192,255,.45)}
+  .plat-btn .ico{width:42px;height:42px;border-radius:11px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.07)}
+  .plat-btn .ico img,.plat-btn .ico svg{height:24px;width:auto;display:block}
+  .plat-btn .txt{display:flex;flex-direction:column;min-width:0}
+  .plat-btn .pt{font-family:"Sora";font-weight:700;font-size:1rem;line-height:1.15}
+  .plat-btn .ps{font-size:.8rem;color:rgba(255,255,255,.56);margin-top:2px}
+  .plat-btn.disabled{opacity:.5;cursor:default;pointer-events:none}
+
+  /* Screen-reader-only headings (structure for search engines and assistive tech) */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  /* "More featured tours" links at the end of each tour */
+  .more-tours{max-width:820px;margin:2.5rem auto 0;padding:0 1.25rem}
+  .more-tours h2{font-family:"Sora",sans-serif;font-size:1.1rem;margin-bottom:.6rem}
+  .more-tours ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+  .more-tours a{color:var(--blue);font-weight:600}
+  .more-tours span{color:var(--slate);font-size:.9rem}
+  footer{max-width:820px;margin:3rem auto 0;padding:1.5rem 1.25rem 3rem;border-top:1px solid var(--line);
+    color:var(--slate);font-size:.88rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+  footer a{color:var(--blue)}
+
+  @media (prefers-color-scheme: dark){
+    body{background:#0f1115;color:#e6e6e6}
+    :root{--surface-1:#171a21;--surface-2:#1d2129;--surface-3:#232833;
+      --text-secondary:#cbd5e1;--text-tertiary:#aab6c6;--text-muted:#8b97a7;--border-default:rgba(255,255,255,.09);--line:rgba(255,255,255,.09)}
+    .gallery img{border-color:rgba(255,255,255,.08)}
+  }
+</style>
+<link rel="stylesheet" href="/media/css/featured-modal.css" />
+</head>
+<body>
+
+<!-- ======= NAV (transparent over the map, frosts white on scroll) ======= -->
+<header class="nav" id="nav">
+  <div class="bar">
+    <a class="brand" href="/">
+      <span class="mark"><svg viewBox="0 0 340 274" aria-hidden="true"><defs><linearGradient id="mk" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0" gradientTransform="matrix(0,121.597885,-121.597885,0,401.3321,369.5805)"><stop offset="0" stop-color="#f3f3f5"/><stop offset="1" stop-color="#8d8dc7"/></linearGradient></defs><g transform="translate(-241.38996,-233.630384)"><g transform="matrix(3.958426,0,0,3.958426,-1183.643245,-1143.945213)"><path d="M360,417L403,348.011C403,348.011 406.104,353.064 407.95,355.942C414.399,366 413.646,372.724 408.306,381.311L386,417L360,417Z" fill="url(#mk)"/></g><g transform="matrix(3.958426,0,0,3.958426,-1179.684819,-1143.945213)"><path d="M392,417L421.306,369.49C421.306,369.49 437.639,395.623 442.588,403.541C445.206,407.729 447.694,416.751 437,417C428.278,417.203 392,417 392,417Z" fill="url(#mk)"/></g></g></svg></span>
+      <span class="wm">STEEP<span class="wm-sub">map</span></span>
+    </a>
+    <nav class="links">
+      <a class="plain" href="#" data-open-featured data-t="all_tours">Sorties en vedette</a>
+      <label class="lang-switch" aria-label="Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20"/></svg>
+        <select id="langSelect" aria-label="Language">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="it">Italiano</option>
+          <option value="es">Español</option>
+          <option value="ja">日本語</option>
+        </select>
+      </label>
+      <a class="nav-cta js-getapp" href="#get" data-t="get_app">Obtenir l'app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ======= EDGE-TO-EDGE 3D MAP ======= -->
+<section class="tourmap" aria-label="La Grave – Pan de Redeau – 3D map">
+  <div id="map"></div>
+  <div id="photostrip" aria-label="photos"></div>
+  <div id="photoscroll" aria-hidden="true"><div class="thumb"></div></div>
+  <button class="pv-arrow pv-prev" type="button" aria-label="Previous" data-ta="prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="pv-arrow pv-next" type="button" aria-label="Next" data-ta="next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <!-- Cover thumbnail → tap to swap map ⇄ photo strip. The generator omits this
+       whole block (MEDIA_TOGGLE_BLOCK) when the tour has no photos. -->
+  <button id="mediaToggle" type="button" aria-label="photos" data-cover="https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_8127725c-eb78-4b78-85f0-db867f2d49f3.jpg"><span class="mt-label"><span class="mt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="mt-count">6 photos</span></span></button>
+  <!-- Explore-map CTA: desktop opens the get-app modal; mobile links to the store
+       for the detected platform (platform icon added on the left by JS). -->
+  <a id="exploreMap" href="#get" role="button"><span class="ei"></span><span data-t="explore_map">Explorer la carte</span></a>
+  <div class="maploading" id="maploading" role="status" data-t="map_loading">Chargement de la carte 3D…</div>
+</section>
+
+<div class="wrap">
+
+  <!-- TITLE + AUTHOR (below the map, like the app) -->
+  <div class="lede">
+    <h1 data-t="title">La Grave – Pan de Redeau</h1>
+    <div class="region" data-t="region">La Grave, Hautes-Alpes, France</div>
+    <div class="author">
+      <img class="avatar" src="https://media.steepmap.eu/profile_pictures/94e929eb-7fbe-43cf-bdb7-bedfd6030e4a/avatar.jpg" alt="" width="34" height="34" loading="lazy" />
+      <span class="name">Ettore Rasca</span>
+      <span class="sep">·</span>
+      <span class="date">14 Sep 2026</span>
+    </div>
+  </div>
+
+  <!-- STATS GRID 4×2 — same cells, icons & style as the app's TourDetailView -->
+  <h2 class="sr-only" data-t="stats">Infos de la sortie</h2>
+  <div class="tour-stats-grid" aria-label="Infos de la sortie">
+    <!-- Row 1 -->
+    <div class="tour-stat" data-ta="grade" title="Difficulté"><span class="val" data-t="grade_val">Très difficile</span></div>
+    <div class="tour-stat" data-ta="steepness" title="Pente max.">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="4"/><line x1="4" y1="20" x2="20" y2="20"/><path d="M14 20 A10 10 0 0 0 11 13"/></svg>
+      <span class="val">62°</span>
+    </div>
+    <div class="tour-stat" data-ta="exposure" title="Exposition">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L4 7v5c0 4.6 3.4 8.9 8 10 4.6-1.1 8-5.4 8-10V7L12 3z"/></svg>
+      <span class="val">E3</span>
+    </div>
+    <div class="tour-stat" data-ta="aspect" title="Orientation">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      <span class="val">N, NE</span>
+    </div>
+    <!-- Row 2 -->
+    <div class="tour-stat" data-ta="distance" title="Distance">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="7" x2="4" y2="17"/><line x1="20" y1="7" x2="20" y2="17"/></svg>
+      <span class="val">6.4 km</span>
+    </div>
+    <div class="tour-stat" data-ta="elev_gain" title="Dénivelé positif">
+      <svg width="15" height="15" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M0.52,58.53 L16.44,58.53 C16.44,58.53 40.51,13.95 46.00,4.28 C47.21,2.16 48.07,0.68 49.39,0.53 C50.77,0.37 52.57,4.37 52.57,4.37 L59.27,17.53"/><path d="M41.99,12.40 L47.09,18.53 L52.75,11.53 L59.27,17.53"/><polyline points="0.53,37.73 18.38,5.32 6.94,11.57"/><line x1="18.38" y1="5.32" x2="19.20" y2="18.33"/></svg>
+      <span class="val">216 m</span>
+    </div>
+    <div class="tour-stat" data-ta="low_point" title="Point le plus bas">
+      <svg width="15" height="15" viewBox="0 0 62 60" fill="none" stroke="currentColor" stroke-width="4.65" stroke-linecap="round" stroke-linejoin="round"><path d="M51.43,58.53 L43.35,58.53 C43.35,58.53 19.28,13.95 13.79,4.28 C12.58,2.16 11.72,0.68 10.40,0.53 C9.02,0.37 7.23,4.37 7.23,4.37 L0.52,17.53"/><path d="M18.53,13.47 L13.23,18.53 L7.30,12.73 L0.52,17.70"/><polyline points="53.95,3.52 53.95,43.22 61.46,31.40"/><line x1="53.95" y1="43.22" x2="46.45" y2="31.40"/></svg>
+      <span class="val">1704 m</span>
+    </div>
+    <div class="tour-stat" data-ta="high_point" title="Point le plus haut">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,21 12,6 22,21"/><line x1="12" y1="6" x2="12" y2="1"/><polyline points="12,1 19,3.5 12,6"/></svg>
+      <span class="val">3399 m</span>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION (stored translation for fr) -->
+  <h2 class="sr-only" data-t="about">À propos de cette sortie</h2>
+  <section class="desc" data-t-html="description">
+    <p>Le Pan de Rideau est une véritable aventure à La Grave où l'approche commence presque ridiculement détendue avant que les choses ne deviennent sérieuses très rapidement. La traversée du glacier ensoleillé vers l'entrée est relativement plate et offre un départ agréable et facile. Puis on passe du côté nord, et soudain tout devient sombre, raide et assez intimidant.</p><p></p><p>Le vrai défi commence avec la traversée d'entrée. Elle dépasse les 60° d'inclinaison, mesure environ 100 m de long et se situe directement au-dessus du vide. Selon les conditions, cela peut facilement être la partie la plus effrayante de toute la ligne. Lors de notre passage, il y avait très peu de neige, si bien qu'à mi‑traversée nous avons dû grimper sur des rochers avec les skis aux pieds. Enlever les skis n’est pas vraiment une option, car à cet angle et avec cette exposition, si vous sortez des fixations il n’y a aucun moyen sûr de les remonter.</p><p></p><p>Avec autant de rocher exposé, nous avons décidé d’utiliser une corde pour la première partie de la traversée. Une personne ne skiait pas la ligne et assurait les autres depuis un rocher, protégeant approximativement les 60 m premiers de la traversée. Cela ne rend évidemment pas l’ensemble totalement sûr – la traversée fait environ 100 m – mais cela réduit les conséquences sur la section protégée à un impressionnant pendule de 60 m. Cela nous a semblé une amélioration raisonnable.</p><p></p><p>Une fois la traversée passée, les premiers virages sont raides et exposés, avant que la ligne ne s’ouvre progressivement sur le glacier du Râteau. Même quand le terrain devient moins pentu, il ne vous laisse pas vraiment vous détendre. La pente vous oblige à rester concentré jusqu’au bergschrund, qui peut devenir un autre obstacle majeur en conditions de faible neige et devoir être franchi.</p><p></p><p>Le reste de la ligne n’est pas moins exigeant. Le ski est raide et soutenu, l’exposition reste toujours en arrière‑plan, il n’y a donc aucun moment où l’on peut complètement se déconnecter. Sur une bonne neige nord‑exposée c’est une descente incroyable, mais les conditions font une énorme différence dans la sensation globale.</p>
+  </section>
+
+  <!-- PHOTO GALLERY (all tour photos; whole block omitted if none) -->
+  
+
+  <!-- APP CTA — deep-links straight to this tour -->
+  <section class="cta">
+    <h2 data-t="cta_title">Emportez cette sortie</h2>
+    <p data-t="cta_body">Ouvrez cette sortie exacte dans Steep pour la suivre hors ligne, avec les calques de pente et d'exposition, le relief 3D et la trace GPS.</p>
+    <div class="btn-row">
+      <a class="btn btn-sun" href="https://app.steepmap.eu/?tour=043741b3-0461-46ed-b94c-c09b1c9d22c0" rel="noopener" data-t="open_tour">Ouvrir dans Steep</a>
+    </div>
+    <div class="store-row">
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.ettore.mapapp" target="_blank" rel="noopener">
+        <svg viewBox="41 18 408 468" aria-hidden="true"><path fill="#00C3FF" d="M47.6 33.9C44 37.7 41.9 43.6 41.9 51.2v409.6c0 7.6 2.1 13.5 5.7 17.3l1.4 1.3 229.4-229.4v-5.4L48.9 32.6l-1.3 1.3z"/><path fill="#FFC900" d="M354.9 331.4l-76.5-76.5v-5.4l76.5-76.5 1.7 1L447 225.5c26 14.8 26 38.9 0 53.7l-90.3 51.3-1.8.9z"/><path fill="#FF3A44" d="M356.6 330.5L278.4 252.2 47.6 483c8.6 9.1 22.7 10.2 38.7 1.2l270.3-153.7z"/><path fill="#00E676" d="M356.6 173.7L86.3 20.1C70.3 11 56.2 12.2 47.6 21.3l230.8 230.9 78.2-78.5z"/></svg>
+        Google Play
+      </a>
+      <a class="store" href="https://apps.apple.com/app/id6809864039" target="_blank" rel="noopener">
+        <svg viewBox="4.9 3.9 13.9 16.8" aria-hidden="true"><path fill="#fff" d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg>
+        App Store
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<nav class="more-tours" aria-label="Plus de sorties en vedette"><h2>Plus de sorties en vedette</h2><ul><li><a href="/fr/featured/serles-north-couloir.html">Serles Couloir Nord</a><span> · Stubai Alps</span></li><li><a href="/fr/featured/zuckerhuetl-from-grawa-alm.html">Zuckerhütl depuis Grawa Alm</a><span> · Stubai Alps</span></li><li><a href="/fr/featured/tomastinden-nw-couloir.html">Tomastinden Couloir NW</a><span> · Troms</span></li></ul></nav>
+
+<footer>
+  <span>© Steep · STEEP map</span>
+  <span><a href="/legal/privacy.html" data-t="privacy">Confidentialité</a> · <a href="/legal/terms.html" data-t="terms">Conditions</a></span>
+</footer>
+
+<!-- ======= GET-APP MODAL (same as the website) ======= -->
+<div class="modal-back" id="getModal" role="dialog" aria-modal="true" aria-labelledby="getModalTitle">
+  <div class="modal">
+    <button class="x" data-close aria-label="Close">&times;</button>
+    <h3 id="getModalTitle" data-t="modal_title">Obtenir STEEP map</h3>
+    <div class="plat">
+      <a class="plat-btn" href="https://app.steepmap.eu/" target="_blank" rel="noopener">
+        <span class="ico"><img src="/media/brand/mark.svg" alt=""></span>
+        <span class="txt"><span class="pt" data-t="m_web_t">Application web</span><span class="ps" data-t="m_web_s">Ouvrir dans le navigateur</span></span>
+      </a>
+      <a class="plat-btn" href="https://play.google.com/store/apps/details?id=com.ettore.mapapp" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="41 18 408 468" aria-hidden="true"><path fill="#00C3FF" d="M47.6 33.9C44 37.7 41.9 43.6 41.9 51.2v409.6c0 7.6 2.1 13.5 5.7 17.3l1.4 1.3 229.4-229.4v-5.4L48.9 32.6l-1.3 1.3z"/><path fill="#FFC900" d="M354.9 331.4l-76.5-76.5v-5.4l76.5-76.5 1.7 1L447 225.5c26 14.8 26 38.9 0 53.7l-90.3 51.3-1.8.9z"/><path fill="#FF3A44" d="M356.6 330.5L278.4 252.2 47.6 483c8.6 9.1 22.7 10.2 38.7 1.2l270.3-153.7z"/><path fill="#00E676" d="M356.6 173.7L86.3 20.1C70.3 11 56.2 12.2 47.6 21.3l230.8 230.9 78.2-78.5z"/></svg></span>
+        <span class="txt"><span class="pt">Android</span><span class="ps" data-t="m_and_s">Disponible sur Google Play</span></span>
+      </a>
+      <span class="plat-btn disabled" data-platform="ios" role="img" aria-label="App Store — coming soon">
+        <span class="ico"><svg viewBox="4.9 3.9 13.9 16.8" aria-hidden="true"><path fill="#fff" d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg></span>
+        <span class="txt"><span class="pt">iPhone &amp; iPad</span><span class="ps" data-t="m_soon">Bientôt disponible</span></span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ======= SCRIPTS ======= -->
+<script>
+  // Sticky nav: transparent over the map, frosts white once scrolled (same as index.html)
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 40); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Language switcher: all languages' strings ship with the page, so switching
+  // updates the text in place (no reload, the map keeps running). See the module below.
+  window.STEEP_I18N = {"en": {"all_tours": "Featured tours", "search": "Search", "no_results": "No tours found", "get_app": "Get the app", "modal_title": "Get STEEP map", "map_loading": "Loading 3D map…", "stats": "Tour stats", "grade": "Grade", "steepness": "Max steepness", "exposure": "Exposure", "aspect": "Aspect", "distance": "Distance", "elev_gain": "Elevation gain", "low_point": "Lowest point", "high_point": "Highest point", "cta_title": "Take this tour with you", "cta_body": "Open this exact tour in Steep to navigate it offline, with slope-angle and aspect overlays, 3D terrain and the GPS track.", "open_tour": "Open this tour in Steep", "show_map": "Show map", "prev": "Previous", "next": "Next", "photos": "photos", "explore_map": "Explore map", "privacy": "Privacy", "terms": "Terms", "m_web_t": "Web app", "m_web_s": "Open it in your browser", "m_and_s": "Get it on Google Play", "m_soon": "Coming soon", "about": "About this tour", "more_tours": "More featured tours", "title": "La Grave - Pan de Redeau", "region": "La Grave, Hautes-Alpes, France", "description": "<p>The Pan de Rideau is a proper La Grave adventure where the approach starts off almost ridiculously relaxed before things get serious very quickly. The sunny-side glacier crossing towards the entrance is relatively flat and makes for a pleasant, easygoing start. Then you cross onto the north side, and suddenly everything becomes dark, steep and rather intimidating.<\/p><p><\/p><p>The real challenge starts with the entrance traverse. It is more than 60° steep, around 100 m long, and runs directly above the abyss. Depending on conditions, this can easily be the scariest part of the whole line. When we did it, there was very little snow, so halfway across we ended up scrambling over rocks with the skis on our feet. There, taking the skis off isn't really an option, as at that angle and with that exposure if you're out of your bindings there is no safe way to get back in.<\/p><p><\/p><p>With so much rock exposed, we decided to use a rope for the first part of the traverse. One person did not ski the line and instead belayed the others from a rock, protecting roughly the first 60 m of the traverse. This obviously doesn't make the whole thing incredibly safe - the traverse is around 100 m long - but it reduced the consequences on the protected section to a rather impressive 60 m pendulum. This felt like a reasonable improvement.<\/p><p><\/p><p>Once you finally get through the traverse, the first turns are steep and exposed, before the line gradually opens onto the Râteau Glacier. Even when the terrain starts getting less steep, though, it doesn't exactly let you relax. The slope keeps you concentrated all the way down to a bergschrund, which can become another proper obstacle in low-snow conditions and may need to be gapped.<\/p><p><\/p><p>The rest of the line is no joke either. The skiing is steep and sustained, with the exposure always there in the background, so there isn't really a point where you can completely switch off. On good north-facing snow it is an incredible descent, but the conditions make a huge difference to how the whole thing feels.<\/p>", "grade_val": "Very Hard", "meta_title": "La Grave - Pan de Redeau ski tour in Hautes-Alpes | Steep", "meta_desc": "La Grave - Pan de Redeau in Hautes-Alpes: 6.4 km, 216 m ascent, up to 62° (Very Hard). The Pan de Rideau is a proper La Grave adventure where the approach…"}, "de": {"all_tours": "Ausgewählte Touren", "search": "Suchen", "no_results": "Keine Touren gefunden", "get_app": "App holen", "modal_title": "STEEP map holen", "map_loading": "3D-Karte wird geladen…", "stats": "Tourdaten", "grade": "Schwierigkeit", "steepness": "Max. Steilheit", "exposure": "Exposition", "aspect": "Ausrichtung", "distance": "Distanz", "elev_gain": "Höhenmeter", "low_point": "Tiefster Punkt", "high_point": "Höchster Punkt", "cta_title": "Nimm diese Tour mit", "cta_body": "Öffne genau diese Tour in Steep, um sie offline zu navigieren – mit Hangneigungs- und Expositions-Overlays, 3D-Gelände und dem GPS-Track.", "open_tour": "Tour in Steep öffnen", "show_map": "Karte zeigen", "prev": "Zurück", "next": "Weiter", "photos": "Fotos", "explore_map": "Karte erkunden", "privacy": "Datenschutz", "terms": "AGB", "m_web_t": "Web-App", "m_web_s": "Im Browser öffnen", "m_and_s": "Bei Google Play", "m_soon": "Demnächst", "about": "Über diese Tour", "more_tours": "Weitere ausgewählte Touren", "title": "La Grave – Pan de Redeau", "region": "La Grave, Hautes-Alpes, Frankreich", "description": "<p>Der Pan de Rideau ist ein echtes La Grave‑Abenteuer, bei dem der Anstieg zunächst fast lächerlich entspannt beginnt, bevor es sehr schnell ernst wird. Die sonnenbeschienene Gletscherüberquerung zum Einstieg ist relativ flach und sorgt für einen angenehmen, lockeren Start. Dann gelangt man auf die Nordseite, und plötzlich wird alles dunkel, steil und ziemlich einschüchternd.<\/p><p><\/p><p>Die eigentliche Herausforderung beginnt mit dem Einstiegstraverse. Es ist mehr als 60° steil, etwa 100 m lang und verläuft direkt über dem Abgrund. Je nach Bedingungen kann das leicht der gruseligste Teil der gesamten Linie sein. Als wir es machten, lag nur wenig Schnee, sodass wir zur Hälfte des Traverses über Felsen klettern mussten, mit den Skiern an den Füßen. Dort die Skier abzunehmen ist keine Option, denn bei diesem Winkel und dieser Exposition gibt es keinen sicheren Weg, wieder in die Bindungen zu kommen, wenn man sie einmal ausgeklinkt hat.<\/p><p><\/p><p>Da so viel Fels freiliegt, haben wir für den ersten Teil des Traverses ein Seil verwendet. Eine Person fuhr die Linie nicht und sicherte die anderen von einem Felsen aus, wobei etwa die ersten 60 m des Traverses geschützt wurden. Das macht die Strecke natürlich nicht völlig sicher – das Traverse ist rund 100 m lang – aber es reduziert die Konsequenzen im gesicherten Abschnitt auf ein beeindruckendes 60‑Meter‑Pendell. Das fühlte sich nach einer vernünftigen Verbesserung an.<\/p><p><\/p><p>Sobald man das Traverse hinter sich hat, sind die ersten Kurven steil und exponiert, bevor die Linie allmählich zum Râteau‑Gletscher hin öffnet. Auch wenn das Terrain weniger steil wird, lässt es einen nicht wirklich entspannen. Der Hang hält die Konzentration bis zum Bergschrund, der bei wenig Schnee zu einem weiteren echten Hindernis werden kann und eventuell überbrückt werden muss.<\/p><p><\/p><p>Der Rest der Linie ist ebenfalls kein Scherz. Das Skifahren ist steil und ausdauernd, die Exposition bleibt stets im Hintergrund, sodass es keinen Moment gibt, in dem man komplett abschalten kann. Auf gutem Nordschnee ist es ein unglaublicher Abstieg, aber die Bedingungen machen einen riesigen Unterschied, wie das Ganze wirkt.<\/p>", "grade_val": "Sehr schwer", "meta_title": "La Grave – Pan de Redeau Skitour in Hautes-Alpes | Steep", "meta_desc": "La Grave – Pan de Redeau in Hautes-Alpes: 6.4 km, 216 Hm, bis zu 62° (Sehr schwer). Der Pan de Rideau ist ein echtes La Grave‑Abenteuer, bei dem der Anstieg…"}, "fr": {"all_tours": "Sorties en vedette", "search": "Rechercher", "no_results": "Aucune sortie trouvée", "get_app": "Obtenir l'app", "modal_title": "Obtenir STEEP map", "map_loading": "Chargement de la carte 3D…", "stats": "Infos de la sortie", "grade": "Difficulté", "steepness": "Pente max.", "exposure": "Exposition", "aspect": "Orientation", "distance": "Distance", "elev_gain": "Dénivelé positif", "low_point": "Point le plus bas", "high_point": "Point le plus haut", "cta_title": "Emportez cette sortie", "cta_body": "Ouvrez cette sortie exacte dans Steep pour la suivre hors ligne, avec les calques de pente et d'exposition, le relief 3D et la trace GPS.", "open_tour": "Ouvrir dans Steep", "show_map": "Voir la carte", "prev": "Précédent", "next": "Suivant", "photos": "photos", "explore_map": "Explorer la carte", "privacy": "Confidentialité", "terms": "Conditions", "m_web_t": "Application web", "m_web_s": "Ouvrir dans le navigateur", "m_and_s": "Disponible sur Google Play", "m_soon": "Bientôt disponible", "about": "À propos de cette sortie", "more_tours": "Plus de sorties en vedette", "title": "La Grave – Pan de Redeau", "region": "La Grave, Hautes-Alpes, France", "description": "<p>Le Pan de Rideau est une véritable aventure à La Grave où l'approche commence presque ridiculement détendue avant que les choses ne deviennent sérieuses très rapidement. La traversée du glacier ensoleillé vers l'entrée est relativement plate et offre un départ agréable et facile. Puis on passe du côté nord, et soudain tout devient sombre, raide et assez intimidant.<\/p><p><\/p><p>Le vrai défi commence avec la traversée d'entrée. Elle dépasse les 60° d'inclinaison, mesure environ 100 m de long et se situe directement au-dessus du vide. Selon les conditions, cela peut facilement être la partie la plus effrayante de toute la ligne. Lors de notre passage, il y avait très peu de neige, si bien qu'à mi‑traversée nous avons dû grimper sur des rochers avec les skis aux pieds. Enlever les skis n’est pas vraiment une option, car à cet angle et avec cette exposition, si vous sortez des fixations il n’y a aucun moyen sûr de les remonter.<\/p><p><\/p><p>Avec autant de rocher exposé, nous avons décidé d’utiliser une corde pour la première partie de la traversée. Une personne ne skiait pas la ligne et assurait les autres depuis un rocher, protégeant approximativement les 60 m premiers de la traversée. Cela ne rend évidemment pas l’ensemble totalement sûr – la traversée fait environ 100 m – mais cela réduit les conséquences sur la section protégée à un impressionnant pendule de 60 m. Cela nous a semblé une amélioration raisonnable.<\/p><p><\/p><p>Une fois la traversée passée, les premiers virages sont raides et exposés, avant que la ligne ne s’ouvre progressivement sur le glacier du Râteau. Même quand le terrain devient moins pentu, il ne vous laisse pas vraiment vous détendre. La pente vous oblige à rester concentré jusqu’au bergschrund, qui peut devenir un autre obstacle majeur en conditions de faible neige et devoir être franchi.<\/p><p><\/p><p>Le reste de la ligne n’est pas moins exigeant. Le ski est raide et soutenu, l’exposition reste toujours en arrière‑plan, il n’y a donc aucun moment où l’on peut complètement se déconnecter. Sur une bonne neige nord‑exposée c’est une descente incroyable, mais les conditions font une énorme différence dans la sensation globale.<\/p>", "grade_val": "Très difficile", "meta_title": "La Grave – Pan de Redeau sortie à ski à Hautes-Alpes | Steep", "meta_desc": "La Grave – Pan de Redeau à Hautes-Alpes : 6.4 km, 216 m de dénivelé, jusqu'à 62° (Très difficile). Le Pan de Rideau est une véritable aventure à La Grave où…"}, "it": {"all_tours": "Tour in evidenza", "search": "Cerca", "no_results": "Nessun tour trovato", "get_app": "Scarica l'app", "modal_title": "Scarica STEEP map", "map_loading": "Caricamento mappa 3D…", "stats": "Dati del tour", "grade": "Difficoltà", "steepness": "Pendenza max", "exposure": "Esposizione", "aspect": "Orientamento", "distance": "Distanza", "elev_gain": "Dislivello positivo", "low_point": "Punto più basso", "high_point": "Punto più alto", "cta_title": "Porta con te questo tour", "cta_body": "Apri esattamente questo tour in Steep per seguirlo offline, con i livelli di pendenza ed esposizione, il terreno 3D e la traccia GPS.", "open_tour": "Apri in Steep", "show_map": "Mostra mappa", "prev": "Precedente", "next": "Successiva", "photos": "foto", "explore_map": "Esplora la mappa", "privacy": "Privacy", "terms": "Termini", "m_web_t": "App web", "m_web_s": "Aprila nel browser", "m_and_s": "Scaricala su Google Play", "m_soon": "Prossimamente", "about": "Informazioni sul tour", "more_tours": "Altri tour in evidenza", "title": "La Grave – Pan de Redeau", "region": "La Grave, Hautes-Alpes, Francia", "description": "<p>Il Pan de Rideau è una vera avventura a La Grave dove l'approccio inizia quasi ridicolmente rilassato prima che le cose diventino serie molto rapidamente. L'attraversamento del ghiacciaio soleggiato verso l'ingresso è relativamente pianeggiante e offre un inizio piacevole e senza fretta. Poi si passa al lato nord e, improvvisamente, tutto diventa buio, ripido e piuttosto intimidatorio.<\/p><p><\/p><p>La vera sfida inizia con la traversata d'ingresso. È più di 60° di pendenza, lunga circa 100 m e si trova direttamente sopra l'abisso. A seconda delle condizioni, può facilmente essere la parte più spaventosa dell'intera linea. Quando l'abbiamo fatta, c'era pochissima neve, così a metà traversata siamo finiti a scalare sui massi con gli sci ai piedi. Togliere gli sci non è davvero un'opzione, perché a quell'angolo e con quella esposizione, se si esce dagli attacchi non c'è modo sicuro di rientrare.<\/p><p><\/p><p>Con così tanta roccia esposta, abbiamo deciso di usare una corda per la prima parte della traversata. Una persona non ha sciato la linea e ha assicurato gli altri da una roccia, proteggendo circa i primi 60 m della traversata. Ovviamente questo non rende l'intera cosa estremamente sicura – la traversata è lunga circa 100 m – ma ha ridotto le conseguenze nella sezione protetta a un pendolo di circa 60 m, un miglioramento ragionevole.<\/p><p><\/p><p>Una volta superata la traversata, le prime curve sono ripide ed esposte, prima che la linea si apra gradualmente sul ghiacciaio del Râteau. Anche quando il terreno diventa meno ripido, non ti permette di rilassarti. La pendenza ti costringe a rimanere concentrato fino al bergschrund, che in condizioni di poca neve può diventare un altro vero ostacolo da superare.<\/p><p><\/p><p>Il resto della linea non è uno scherzo. Lo sci è ripido e continuo, l'esposizione è sempre presente sullo sfondo, quindi non c'è davvero un momento in cui si può spegnere completamente. Su buona neve a nord è una discesa incredibile, ma le condizioni fanno una enorme differenza nella sensazione complessiva.<\/p>", "grade_val": "Molto difficile", "meta_title": "La Grave – Pan de Redeau tour sci in Hautes-Alpes | Steep", "meta_desc": "La Grave – Pan de Redeau a Hautes-Alpes: 6.4 km, 216 m di dislivello, fino a 62° (Molto difficile). Il Pan de Rideau è una vera avventura a La Grave dove…"}, "es": {"all_tours": "Rutas destacadas", "search": "Buscar", "no_results": "No se encontraron rutas", "get_app": "Obtener la app", "modal_title": "Obtener STEEP map", "map_loading": "Cargando mapa 3D…", "stats": "Datos de la ruta", "grade": "Dificultad", "steepness": "Pendiente máx.", "exposure": "Exposición", "aspect": "Orientación", "distance": "Distancia", "elev_gain": "Desnivel positivo", "low_point": "Punto más bajo", "high_point": "Punto más alto", "cta_title": "Llévate esta ruta", "cta_body": "Abre esta misma ruta en Steep para seguirla sin conexión, con las capas de pendiente y orientación, el terreno 3D y el track GPS.", "open_tour": "Abrir en Steep", "show_map": "Ver mapa", "prev": "Anterior", "next": "Siguiente", "photos": "fotos", "explore_map": "Explorar el mapa", "privacy": "Privacidad", "terms": "Términos", "m_web_t": "App web", "m_web_s": "Ábrela en tu navegador", "m_and_s": "Disponible en Google Play", "m_soon": "Próximamente", "about": "Sobre esta ruta", "more_tours": "Más rutas destacadas", "title": "La Grave – Pan de Redeau", "region": "La Grave, Hautes-Alpes, Francia", "description": "<p>El Pan de Rideau es una auténtica aventura en La Grave donde el acceso comienza casi ridículamente relajado antes de que las cosas se pongan serias muy rápido. El cruce del glaciar soleado hacia la entrada es relativamente plano y ofrece un comienzo agradable y sin prisas. Luego se pasa al lado norte y, de repente, todo se vuelve oscuro, empinado y bastante intimidante.<\/p><p><\/p><p>El verdadero reto comienza con la travesía de entrada. Tiene más de 60° de inclinación, unos 100 m de longitud y se sitúa directamente sobre el abismo. Según las condiciones, puede ser fácilmente la parte más aterradora de toda la línea. Cuando la hicimos, había muy poca nieve, de modo que a mitad de la travesía terminamos trepando rocas con los esquís puestos. Quitar los esquís no es una opción, ya que con ese ángulo y esa exposición, si sales de las fijaciones no hay forma segura de volver a entrar.<\/p><p><\/p><p>Con tanta roca expuesta, decidimos usar una cuerda para la primera parte de la travesía. Una persona no esquiaba la línea y aseguraba a los demás desde una roca, protegiendo aproximadamente los primeros 60 m de la travesía. Evidentemente esto no hace que todo sea extremadamente seguro – la travesía mide unos 100 m – pero reduce las consecuencias en la sección protegida a un impresionante péndulo de 60 m. Nos pareció una mejora razonable.<\/p><p><\/p><p>Una vez superada la travesía, las primeras curvas son empinadas y expuestas, antes de que la línea se abra gradualmente hacia el glaciar Râteau. Incluso cuando el terreno se vuelve menos empinado, no te deja realmente relajarte. La pendiente te obliga a mantener la concentración hasta el bergschrund, que en condiciones de poca nieve puede convertirse en otro obstáculo serio y quizá deba ser sorteado.<\/p><p><\/p><p>El resto de la línea tampoco es una broma. El esquí es empinado y sostenido, la exposición está siempre presente en el fondo, por lo que no hay un momento en que puedas desconectar por completo. Con buena nieve orientada al norte es un descenso increíble, pero las condiciones hacen una gran diferencia en cómo se siente todo.<\/p>", "grade_val": "Muy difícil", "meta_title": "La Grave – Pan de Redeau ruta de esquí en Hautes-Alpes | Steep", "meta_desc": "La Grave – Pan de Redeau en Hautes-Alpes: 6.4 km, 216 m de desnivel, hasta 62° (Muy difícil). El Pan de Rideau es una auténtica aventura en La Grave donde el…"}, "ja": {"all_tours": "注目のツアー", "search": "検索", "no_results": "ツアーが見つかりません", "get_app": "アプリを入手", "modal_title": "STEEP map を入手", "map_loading": "3Dマップを読み込み中…", "stats": "ツアー情報", "grade": "グレード", "steepness": "最大斜度", "exposure": "露出度", "aspect": "斜面方位", "distance": "距離", "elev_gain": "獲得標高", "low_point": "最低地点", "high_point": "最高地点", "cta_title": "このツアーを持ち歩こう", "cta_body": "このツアーをそのまま Steep で開けば、斜度・方位オーバーレイ、3D地形、GPSトラックとともにオフラインでナビゲーションできます。", "open_tour": "Steep で開く", "show_map": "マップを表示", "prev": "前へ", "next": "次へ", "photos": "枚の写真", "explore_map": "マップを見る", "privacy": "プライバシー", "terms": "利用規約", "m_web_t": "ウェブアプリ", "m_web_s": "ブラウザで開く", "m_and_s": "Google Play で入手", "m_soon": "近日公開", "about": "このツアーについて", "more_tours": "他の注目のツアー", "title": "La Grave - Pan de Redeau", "region": "La Grave, Hautes-Alpes, フランス", "description": "<p>Pan de Rideau は、La Grave での本格的な冒険です。アプローチは最初はほとんど冗談のようにリラックスしていますが、すぐに本格的になります。入口へ向かう日向側の氷河横断は比較的平坦で、快適でゆったりしたスタートが楽しめます。その後、北側に入ると、一気に暗く、急斜面でかなり威圧的になります。<\/p><p><\/p><p>本格的なチャレンジは入口のトラバースから始まります。勾配は 60° を超え、長さは約 100 m、そして深い切れ目の上を直接走ります。コンディション次第では、ライン全体で最も怖い部分になることもあります。私たちが挑んだときは雪がほとんどなく、トラバースの途中でスキーを履いたまま岩を登ることになりました。その角度とエクスポージャーでは、スキーを外す選択肢は実質的にありません。バインディングから外れたら、安全に再装着する方法がありません。<\/p><p><\/p><p>岩が多く露出していたため、トラバースの最初の区間はロープを使用しました。1 名がスキーをしないでロックポイントから他のメンバーをビレイし、約最初の 60 m を保護しました。もちろん、全体が完全に安全になるわけではありません（トラバース全体は約 100 m）。しかし、保護された区間でのリスクは、約 60 m のペンデュラムにまで減らすことができ、妥当な改善と感じました。<\/p><p><\/p><p>トラバースを抜けると、最初のターンは急斜面でエクスポージャーが高く、徐々に Râteau 氷河へと開けていきます。地形が緩やかになっても、リラックスできる余地はほとんどありません。斜面はバーグシュルンドまで集中力を要求し、雪が少ないとここが別の大きな障害となり、ギャップが必要になることがあります。<\/p><p><\/p><p>残りのラインも決して甘くありません。スキーは急斜面が続き、常にエクスポージャーが背景にありますので、完全にオフにできる瞬間はありません。北向きの良好なパウダーでは素晴らしい降下ですが、コンディションが全体の感触に大きく影響します。<\/p>", "grade_val": "最上級", "meta_title": "La Grave - Pan de Redeau（Hautes-Alpes）のスキーツアー | Steep", "meta_desc": "Hautes-AlpesのLa Grave - Pan de Redeau：6.4 km、獲得標高 216 m、最大 62°（最上級）。Pan de Rideau は、La Grave…"}};
+  window.STEEP_CUR  = 'fr';
+  window.STEEP_URLS = {"en": "/featured/la-grave-pan-de-redeau.html", "de": "/de/featured/la-grave-pan-de-redeau.html", "fr": "/fr/featured/la-grave-pan-de-redeau.html", "it": "/it/featured/la-grave-pan-de-redeau.html", "es": "/es/featured/la-grave-pan-de-redeau.html", "ja": "/ja/featured/la-grave-pan-de-redeau.html"};
+
+  // ── Get-app modal (same behaviour as the website) ───────────────────────
+  var getModal = document.getElementById('getModal');
+  var lastFocus = null;
+  function openModal(){ lastFocus = document.activeElement; getModal.classList.add('open'); document.body.style.overflow='hidden'; var x=getModal.querySelector('.x'); if(x) x.focus(); }
+  function closeModal(){ getModal.classList.remove('open'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.ettore.mapapp';
+  var IS_ANDROID = /Android/i.test(navigator.userAgent || '');
+  document.querySelectorAll('.js-getapp').forEach(function(b){
+    if (IS_ANDROID){           // store is live on Android → go straight to Google Play
+      b.setAttribute('href', PLAY_URL); b.setAttribute('target','_blank'); b.setAttribute('rel','noopener');
+    } else {
+      b.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    }
+  });
+  getModal.addEventListener('click', function(e){ if(e.target === getModal) closeModal(); });
+  getModal.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && getModal.classList.contains('open')) closeModal(); });
+
+  // ── "Explore map" CTA: desktop → modal; mobile → straight to the store ──────
+  var explore = document.getElementById('exploreMap');
+  if (explore){
+    var UA = navigator.userAgent || '';
+    var isAndroid = /Android/i.test(UA);
+    var isiOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var APPSTORE_URL = 'https://apps.apple.com/app/id6809864039';
+    var PLAY_ICON = '<svg viewBox="41 18 408 468" aria-hidden="true"><path fill="#00C3FF" d="M47.6 33.9C44 37.7 41.9 43.6 41.9 51.2v409.6c0 7.6 2.1 13.5 5.7 17.3l1.4 1.3 229.4-229.4v-5.4L48.9 32.6l-1.3 1.3z"/><path fill="#FFC900" d="M354.9 331.4l-76.5-76.5v-5.4l76.5-76.5 1.7 1L447 225.5c26 14.8 26 38.9 0 53.7l-90.3 51.3-1.8.9z"/><path fill="#FF3A44" d="M356.6 330.5L278.4 252.2 47.6 483c8.6 9.1 22.7 10.2 38.7 1.2l270.3-153.7z"/><path fill="#00E676" d="M356.6 173.7L86.3 20.1C70.3 11 56.2 12.2 47.6 21.3l230.8 230.9 78.2-78.5z"/></svg>';
+    var APPLE_ICON = '<svg viewBox="4.9 3.9 13.9 16.8" aria-hidden="true"><path fill="#fff" d="M16.37 12.6c-.02-2.05 1.67-3.03 1.75-3.08-.95-1.4-2.44-1.59-2.97-1.61-1.26-.13-2.47.74-3.11.74-.64 0-1.63-.72-2.68-.7-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.4 6.9c.56-.68.94-1.63.83-2.58-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.12z"/></svg>';
+    if (isAndroid){
+      explore.classList.add('has-icon'); explore.querySelector('.ei').innerHTML = PLAY_ICON;
+      explore.setAttribute('href', PLAY_URL); explore.setAttribute('target','_blank'); explore.setAttribute('rel','noopener');
+    } else if (isiOS){
+      explore.classList.add('has-icon'); explore.querySelector('.ei').innerHTML = APPLE_ICON;
+      explore.setAttribute('href', APPSTORE_URL); explore.setAttribute('target','_blank'); explore.setAttribute('rel','noopener');
+    } else {
+      explore.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    }
+  }
+</script>
+
+<!-- 3D tour map — the shared Steep map engine (same style / DEM terrain /
+     contours / peaks as the website). Lazy-loaded when scrolled into view. -->
+<script src="/media/js/featured-modal.js" defer></script>
+<script type="module">
+  import { createSteepTourMap } from '/media/js/steep-map.js?v=1792064087';
+  var TRACK   = {"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[6.263269, 45.009955], [6.263302, 45.009849], [6.263334, 45.009744], [6.263365, 45.009638], [6.263396, 45.009533], [6.263428, 45.009427], [6.263461, 45.009322], [6.263495, 45.009216], [6.263531, 45.009112], [6.26357, 45.009007], [6.263611, 45.008903], [6.263659, 45.008801], [6.263715, 45.0087], [6.26378, 45.008603], [6.263859, 45.00851], [6.26395, 45.008424], [6.264045, 45.00834], [6.264139, 45.008255], [6.26423, 45.008168], [6.264319, 45.00808], [6.264407, 45.007992], [6.264495, 45.007904], [6.264583, 45.007816], [6.264672, 45.007728], [6.264762, 45.007641], [6.264854, 45.007555], [6.264948, 45.00747], [6.265045, 45.007386], [6.265145, 45.007305], [6.26525, 45.007226], [6.26536, 45.007152], [6.265479, 45.007084], [6.265604, 45.007023], [6.265739, 45.006972], [6.26588, 45.006932], [6.266025, 45.006898], [6.26617, 45.006864], [6.266315, 45.006829], [6.266457, 45.00679], [6.266598, 45.006748], [6.266736, 45.006703], [6.266874, 45.006657], [6.267013, 45.006611], [6.267151, 45.006566], [6.26729, 45.006521], [6.267429, 45.006477], [6.267568, 45.006432], [6.267707, 45.006387], [6.267846, 45.006342], [6.267984, 45.006297], [6.268123, 45.006252], [6.268261, 45.006206], [6.268399, 45.00616], [6.268537, 45.006114], [6.268675, 45.006067], [6.268812, 45.00602], [6.268949, 45.005972], [6.269085, 45.005923], [6.269221, 45.005874], [6.269356, 45.005824], [6.269491, 45.005773], [6.269625, 45.005722], [6.269758, 45.005669], [6.269891, 45.005616], [6.270022, 45.005561], [6.270152, 45.005505], [6.270281, 45.005447], [6.270409, 45.005388], [6.270536, 45.005328], [6.270662, 45.005267], [6.270788, 45.005206], [6.270913, 45.005144], [6.271037, 45.005081], [6.271161, 45.005018], [6.271284, 45.004954], [6.271407, 45.00489], [6.27153, 45.004826], [6.271652, 45.004762], [6.271775, 45.004697], [6.271897, 45.004633], [6.272019, 45.004568], [6.272141, 45.004504], [6.272264, 45.004439], [6.272386, 45.004375], [6.272509, 45.004311], [6.272633, 45.004247], [6.272756, 45.004184], [6.272881, 45.004122], [6.273007, 45.004061], [6.273134, 45.004001], [6.273263, 45.003943], [6.273394, 45.003888], [6.273526, 45.003834], [6.273661, 45.003783], [6.273798, 45.003736], [6.273937, 45.003691], [6.274079, 45.003652], [6.274223, 45.003617], [6.27437, 45.003587], [6.274518, 45.00356], [6.274665, 45.003531], [6.274815, 45.003521], [6.274939, 45.00358], [6.275091, 45.00358], [6.275239, 45.003555], [6.275383, 45.003519], [6.275522, 45.003474], [6.275661, 45.003429], [6.275803, 45.00339], [6.275948, 45.003357], [6.276097, 45.003334], [6.276247, 45.003315], [6.276398, 45.003299], [6.27655, 45.003286], [6.276702, 45.003276], [6.276854, 45.003268], [6.277007, 45.003264], [6.277159, 45.003265], [6.277312, 45.003265], [6.277464, 45.003268], [6.277616, 45.003279], [6.277765, 45.003303], [6.277902, 45.003349], [6.278017, 45.00342], [6.278103, 45.003508], [6.278173, 45.003604], [6.278234, 45.003703], [6.278292, 45.003803], [6.278352, 45.003902], [6.278423, 45.003998], [6.278504, 45.004089], [6.278591, 45.004178], [6.278696, 45.004256], [6.27883, 45.004305], [6.278982, 45.004298], [6.279133, 45.004298], [6.279261, 45.004353], [6.279357, 45.004437], [6.279443, 45.004526], [6.279521, 45.004619], [6.27959, 45.004715], [6.279649, 45.004815], [6.279696, 45.004917], [6.279728, 45.005023], [6.279742, 45.00513], [6.279748, 45.005238], [6.279747, 45.005346], [6.279738, 45.005454], [6.279722, 45.005561], [6.279697, 45.005668], [6.279663, 45.005773], [6.279621, 45.005876], [6.27957, 45.005978], [6.279511, 45.006078], [6.279444, 45.006175], [6.279367, 45.006268], [6.279282, 45.006357], [6.279191, 45.006444], [6.279097, 45.006529], [6.279, 45.006613], [6.278902, 45.006695], [6.278802, 45.006777], [6.278702, 45.006858], [6.278602, 45.00694], [6.278502, 45.007021], [6.278404, 45.007104], [6.278307, 45.007187], [6.278212, 45.007272], [6.278122, 45.007359], [6.278036, 45.007448], [6.277954, 45.007539], [6.277874, 45.007631], [6.277795, 45.007724], [6.277719, 45.007817], [6.277645, 45.007911], [6.277572, 45.008006], [6.277502, 45.008102], [6.277435, 45.008199], [6.277371, 45.008297], [6.277311, 45.008396], [6.277255, 45.008497], [6.277205, 45.008599], [6.277163, 45.008702], [6.277134, 45.008808], [6.277121, 45.008916], [6.277123, 45.009023], [6.277139, 45.009131], [6.277164, 45.009237], [6.277192, 45.009343], [6.277217, 45.00945], [6.277234, 45.009557], [6.277255, 45.009664], [6.277282, 45.00977], [6.277312, 45.009876], [6.277341, 45.009982], [6.277365, 45.010088], [6.277378, 45.010196], [6.277371, 45.010304], [6.277335, 45.010408], [6.277275, 45.010507], [6.277206, 45.010604], [6.277146, 45.010703], [6.277098, 45.010805], [6.27704, 45.010905], [6.276987, 45.011006], [6.276952, 45.011111], [6.276945, 45.011219], [6.276967, 45.011325], [6.276996, 45.011431], [6.27703, 45.011537], [6.27707, 45.011641], [6.27712, 45.011743], [6.27718, 45.011842], [6.277252, 45.011937], [6.277335, 45.012027], [6.27743, 45.012112], [6.277536, 45.01219], [6.277649, 45.012262], [6.277767, 45.01233], [6.277889, 45.012395], [6.278014, 45.012457], [6.278142, 45.012516], [6.278271, 45.012573], [6.278403, 45.012629], [6.278535, 45.012682], [6.278669, 45.012734], [6.278803, 45.012786], [6.278938, 45.012836], [6.279074, 45.012885], [6.279211, 45.012933], [6.279347, 45.012981], [6.279485, 45.013028], [6.279623, 45.013074], [6.279763, 45.013118], [6.279903, 45.013159], [6.280045, 45.013199], [6.280187, 45.013239], [6.28033, 45.013277], [6.280473, 45.013314], [6.280617, 45.013351], [6.28076, 45.013388], [6.280904, 45.013425], [6.281047, 45.013461], [6.281191, 45.013498], [6.281334, 45.013535], [6.281477, 45.013573], [6.28162, 45.013611], [6.281762, 45.013651], [6.281904, 45.013691], [6.282045, 45.013732], [6.282185, 45.013775], [6.282324, 45.01382], [6.282461, 45.013867], [6.282597, 45.013916], [6.282732, 45.013966], [6.282868, 45.014015], [6.283004, 45.014064], [6.28314, 45.014114], [6.283275, 45.014164], [6.283409, 45.014215], [6.283541, 45.01427], [6.283671, 45.014327], [6.283797, 45.014387], [6.283921, 45.01445], [6.284042, 45.014516], [6.28416, 45.014585], [6.284275, 45.014655], [6.284388, 45.014728], [6.284499, 45.014802], [6.284609, 45.014877], [6.284717, 45.014953], [6.284824, 45.01503], [6.284929, 45.015108], [6.285032, 45.015188], [6.285134, 45.015269], [6.285234, 45.01535], [6.285334, 45.015432], [6.285432, 45.015514], [6.28553, 45.015597], [6.285627, 45.01568], [6.285724, 45.015764], [6.28582, 45.015848], [6.285916, 45.015932], [6.286011, 45.016016], [6.286106, 45.016101], [6.2862, 45.016185], [6.286295, 45.01627], [6.286389, 45.016355], [6.286483, 45.01644], [6.286578, 45.016525], [6.286671, 45.01661], [6.286765, 45.016695], [6.286859, 45.01678], [6.286953, 45.016865], [6.287047, 45.01695], [6.287141, 45.017035], [6.287236, 45.01712], [6.28733, 45.017205], [6.287425, 45.017289], [6.28752, 45.017374], [6.287615, 45.017458], [6.28771, 45.017543], [6.287806, 45.017627], [6.287902, 45.01771], [6.287999, 45.017794], [6.288097, 45.017877], [6.288195, 45.017959], [6.288294, 45.018042], [6.288394, 45.018123], [6.288495, 45.018204], [6.288597, 45.018285], [6.288698, 45.018365], [6.2888, 45.018445], [6.288902, 45.018526], [6.289004, 45.018606], [6.289107, 45.018686], [6.28921, 45.018766], [6.289313, 45.018845], [6.289417, 45.018924], [6.289521, 45.019003], [6.289626, 45.019081], [6.289732, 45.019159], [6.289838, 45.019237], [6.289945, 45.019314], [6.290053, 45.01939], [6.290162, 45.019466], [6.290272, 45.019541], [6.290383, 45.019615], [6.290495, 45.019688], [6.290608, 45.019761], [6.290722, 45.019832], [6.290837, 45.019903], [6.290954, 45.019973], [6.291071, 45.020042], [6.29119, 45.02011], [6.29131, 45.020177], [6.291431, 45.020242], [6.291555, 45.020305], [6.29168, 45.020367], [6.291807, 45.020427], [6.291935, 45.020486], [6.292064, 45.020543], [6.292195, 45.020599], [6.292326, 45.020654], [6.292459, 45.020708], [6.292591, 45.020761], [6.292725, 45.020813], [6.292858, 45.020866], [6.292992, 45.020917], [6.293126, 45.020969], [6.29326, 45.021021], [6.293394, 45.021073], [6.293528, 45.021125], [6.293661, 45.021178], [6.293794, 45.021231], [6.293926, 45.021285], [6.294057, 45.021341], [6.294186, 45.021398], [6.294315, 45.021456], [6.294442, 45.021516], [6.294568, 45.021577], [6.294694, 45.021637], [6.294821, 45.021697], [6.294948, 45.021757], [6.295076, 45.021817], [6.295203, 45.021876], [6.29533, 45.021936], [6.295456, 45.021997], [6.295581, 45.022059], [6.295706, 45.022121], [6.295829, 45.022185], [6.295951, 45.02225], [6.296071, 45.022317], [6.296188, 45.022385], [6.296304, 45.022456], [6.296418, 45.022528], [6.296529, 45.022602], [6.296638, 45.022678], [6.296744, 45.022755], [6.296848, 45.022834], [6.29695, 45.022914], [6.297049, 45.022996], [6.297147, 45.023079], [6.297243, 45.023163], [6.297337, 45.023248], [6.29743, 45.023334], [6.297522, 45.02342], [6.297613, 45.023507], [6.297702, 45.023594], [6.297791, 45.023682], [6.297878, 45.02377], [6.297965, 45.023859], [6.298051, 45.023949], [6.298136, 45.024038], [6.29822, 45.024128], [6.298304, 45.024219], [6.298387, 45.024309], [6.298469, 45.0244], [6.29855, 45.024492], [6.29863, 45.024583], [6.29871, 45.024675], [6.298789, 45.024768], [6.298867, 45.02486], [6.298944, 45.024954], [6.299021, 45.025047], [6.299096, 45.025141], [6.299171, 45.025235], [6.299244, 45.025329], [6.299317, 45.025424], [6.299388, 45.02552], [6.299458, 45.025616], [6.299526, 45.025713], [6.299592, 45.02581], [6.299656, 45.025908], [6.299718, 45.026006], [6.299779, 45.026105], [6.299837, 45.026205], [6.299893, 45.026306], [6.299946, 45.026407], [6.299998, 45.026508], [6.300046, 45.026611], [6.300092, 45.026714], [6.300136, 45.026817], [6.300176, 45.026921], [6.300214, 45.027026], [6.300248, 45.027131], [6.30028, 45.027236], [6.300308, 45.027342], [6.300334, 45.027449], [6.300356, 45.027556], [6.300375, 45.027663], [6.30039, 45.02777], [6.300396, 45.027878], [6.300395, 45.027986], [6.300386, 45.028093], [6.300371, 45.028201], [6.30035, 45.028308], [6.300324, 45.028414], [6.300294, 45.02852], [6.300261, 45.028625], [6.300225, 45.02873], [6.300189, 45.028835], [6.300153, 45.02894], [6.300117, 45.029045], [6.300085, 45.02915], [6.300056, 45.029256], [6.300034, 45.029363], [6.300014, 45.02947], [6.299993, 45.029577], [6.299971, 45.029684], [6.29995, 45.029791], [6.29993, 45.029898], [6.299911, 45.030005], [6.299895, 45.030112], [6.299882, 45.03022], [6.299873, 45.030327], [6.299868, 45.030435], [6.299865, 45.030543], [6.299868, 45.030651], [6.299876, 45.030759], [6.299887, 45.030866], [6.299901, 45.030974], [6.299917, 45.031081], [6.299934, 45.031188], [6.299951, 45.031296], [6.299968, 45.031403], [6.299984, 45.03151], [6.299998, 45.031618], [6.30001, 45.031725], [6.300018, 45.031833], [6.300023, 45.031941], [6.300022, 45.032049], [6.300013, 45.032156], [6.3, 45.032264], [6.299984, 45.032371], [6.299963, 45.032478], [6.299939, 45.032585], [6.299909, 45.032691], [6.299874, 45.032796], [6.299833, 45.0329], [6.299786, 45.033002], [6.299734, 45.033104], [6.299678, 45.033204], [6.299616, 45.033303], [6.299551, 45.0334], [6.299478, 45.033495], [6.299398, 45.033587], [6.299314, 45.033677], [6.299226, 45.033765], [6.299135, 45.033852], [6.299042, 45.033938], [6.298948, 45.034023], [6.298854, 45.034108], [6.29876, 45.034193], [6.298667, 45.034279], [6.298576, 45.034365], [6.298487, 45.034453], [6.298401, 45.034542], [6.298321, 45.034634], [6.298246, 45.034728], [6.298177, 45.034824], [6.29811, 45.034921], [6.298047, 45.035019], [6.297987, 45.035119], [6.29793, 45.035219], [6.297877, 45.03532], [6.297828, 45.035422], [6.297783, 45.035525], [6.297743, 45.035629], [6.297708, 45.035734], [6.297678, 45.03584], [6.297654, 45.035947], [6.29764, 45.036054], [6.297635, 45.036162], [6.29764, 45.03627], [6.297654, 45.036377], [6.297677, 45.036484], [6.297705, 45.03659], [6.297737, 45.036696], [6.297771, 45.036801], [6.297805, 45.036906], [6.297839, 45.037011], [6.297876, 45.037116], [6.297916, 45.03722], [6.297959, 45.037324], [6.298003, 45.037427], [6.298049, 45.03753], [6.298096, 45.037633], [6.298144, 45.037735], [6.298192, 45.037837], [6.298241, 45.03794], [6.298289, 45.038042], [6.298336, 45.038145], [6.298342, 45.038157]]}};
+  var PHOTOS  = ["https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_8127725c-eb78-4b78-85f0-db867f2d49f3.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_1017cea5-f69f-4a9a-8c79-fe3d910a9cfc.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_5e2b7ff9-1e13-48b3-8b76-0fd26755a143.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_ed9971a4-82df-46d2-b840-29f498da5adf.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_1b257c3c-c4ed-4125-ac89-905e5fddc941.jpg", "https://media.steepmap.eu/figures/043741b3-0461-46ed-b94c-c09b1c9d22c0_f9226aad-6743-4cd3-809c-7085ab7afafe.jpg"];
+  var loading = document.getElementById('maploading');
+  var sec     = document.querySelector('.tourmap');
+  var strip   = document.getElementById('photostrip');
+  var toggle  = document.getElementById('mediaToggle');
+  var sel     = document.getElementById('langSelect');
+  var hasPhotos = !!(toggle && PHOTOS.length);
+  var refreshArrows = function(){};   // set once the arrows exist
+  if (sel) sel.value = window.STEEP_CUR;   // start on this page's language
+  var mapObj = null, mapThumb = null;
+  var photosTouched = false;   // any interaction with the photos cancels the automatic reveal
+  var coverStyle = toggle ? 'url(' + toggle.getAttribute('data-cover') + ')' : '';
+  var MAP_ICON   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>';
+  var PHOTO_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+
+  function L(){ return window.STEEP_I18N[window.STEEP_CUR]; }
+
+  // Toggle label / icon / thumbnail for the current view and language.
+  function refreshToggle(){
+    if (!hasPhotos) return;
+    var photosView = sec.classList.contains('photos');
+    var lbl = toggle.querySelector('.mt-count'), ic = toggle.querySelector('.mt-icon');
+    lbl.textContent = photosView ? L().show_map : PHOTOS.length + ' ' + L().photos;
+    ic.innerHTML = photosView ? MAP_ICON : PHOTO_ICON;
+    // The picture always matches the label: photo view = map preview ('Show map'),
+    // map view = cover photo ('N photos'). Until the map preview exists, a plain tile.
+    toggle.style.backgroundImage = photosView ? (mapThumb ? 'url(' + mapThumb + ')' : 'none') : coverStyle;
+    toggle.classList.toggle('is-loading', photosView && !mapThumb);
+    toggle.setAttribute('aria-label', photosView ? L().show_map : L().photos);
+  }
+
+  // Slide the photos away and start the map. Skipped if the viewer already used the photos.
+  // Calls cb once the map reports its tiles as loaded (capped, so it never hangs).
+  function waitSettled(map, cb){
+    var tries = 0;
+    (function check(){
+      tries++;
+      if (map.areTilesLoaded() || tries > 60) cb();
+      else setTimeout(check, 250);
+    })();
+  }
+
+  function revealMap(){
+    if (photosTouched || !sec.classList.contains('photos')) return;
+    sec.classList.add('revealing');
+    setTimeout(function(){
+      if (photosTouched){ sec.classList.remove('revealing'); return; }
+      sec.classList.remove('photos', 'revealing');
+      if (mapObj && mapObj.__spin) mapObj.__spin.start();
+      refreshToggle(); setTimeout(function(){ syncScroll(); refreshArrows(); }, 60);
+    }, 800);
+  }
+
+  // Switch every visible string to the chosen language in place. The map is not
+  // reloaded; the URL is updated so a refresh keeps the language.
+  function applyLang(lang){
+    var S = window.STEEP_I18N[lang]; if (!S) return;
+    window.STEEP_CUR = lang;
+    document.documentElement.lang = lang;
+    document.title = S.meta_title;
+    var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute('content', S.meta_desc);
+    document.querySelectorAll('[data-t]').forEach(function(el){ var k = el.getAttribute('data-t'); if (S[k] != null) el.textContent = S[k]; });
+    document.querySelectorAll('[data-t-html]').forEach(function(el){ var k = el.getAttribute('data-t-html'); if (S[k] != null) el.innerHTML = S[k]; });
+    document.querySelectorAll('[data-ta]').forEach(function(el){ var k = el.getAttribute('data-ta'); if (S[k] != null) el.setAttribute('title', S[k]); });
+    if (sel) sel.value = lang;
+    strip.querySelectorAll('img').forEach(function(im, i){ im.alt = S.title + ' – photo ' + (i + 1); });
+    refreshToggle();
+  }
+  if (sel) sel.addEventListener('change', function(){
+    applyLang(this.value);
+    var u = window.STEEP_URLS[this.value];
+    if (u) history.replaceState(null, '', u);
+  });
+
+  // Photos are the default view: the map loads behind them, so there is no wait.
+  if (hasPhotos){
+    sec.classList.add('photos');
+    refreshToggle();   // label + icon for the photo view from the start
+    PHOTOS.forEach(function(u, i){
+      var im = document.createElement('img');
+      im.src = u; im.alt = L().title + ' – photo ' + (i + 1); im.loading = i < 2 ? 'eager' : 'lazy';
+      strip.appendChild(im);
+    });
+    toggle.addEventListener('click', async function(){
+      photosTouched = true;
+      if (sec.classList.contains('photos')){
+        sec.classList.remove('photos');                      // show the map
+        if (mapObj && mapObj.__spin) mapObj.__spin.resume();
+      } else {                                               // show the photos
+        if (mapObj){
+          if (mapObj.__spin) mapObj.__spin.stop();
+          try { var u = await mapObj.captureImage(); if (u) mapThumb = u; } catch(e){}
+        }
+        sec.classList.add('photos'); strip.scrollLeft = 0;
+      }
+      refreshToggle(); setTimeout(function(){ syncScroll(); refreshArrows(); }, 60);
+    });
+  }
+
+  createSteepTourMap({ container:'map', track:TRACK, center:[6.281833, 45.02071], zoom:13, color:'#111827' })
+    .then(function(map){
+      mapObj = map; loading.classList.add('hidden');
+      // Loaded while the photos are showing: keep it still and grab the thumbnail.
+      if (hasPhotos && sec.classList.contains('photos')){
+        map.captureImage().then(function(u){ if (u){ mapThumb = u; refreshToggle(); } });
+        // Reveal only once the terrain and tiles have settled, so the view doesn't
+        // shift (zoom/terrain pop-in) after the photos are gone.
+        waitSettled(map, function(){
+          if (map.__reframe) map.__reframe();          // fix the zoom while the photos are still up
+          waitSettled(map, function(){ setTimeout(revealMap, 300); });
+        });
+      }
+    })
+    .catch(function(e){ console.error('[steep-map]', e); loading.classList.add('hidden'); if (toggle) toggle.classList.remove('is-loading'); });
+
+  // Custom overlay scrollbar for the photo strip
+  var sbar = document.getElementById('photoscroll');
+  var sthumb = sbar ? sbar.querySelector('.thumb') : null;
+  function syncScroll(){
+    if (!sbar || !sthumb || !hasPhotos) return;
+    var vis = strip.clientWidth, total = strip.scrollWidth;
+    if (total <= vis + 1){ sbar.style.display = 'none'; return; }
+    sbar.style.display = sec.classList.contains('photos') ? 'block' : 'none';
+    var track = sbar.clientWidth;
+    var w = Math.max(36, track * vis / total);
+    var x = (track - w) * (strip.scrollLeft / (total - vis));
+    sthumb.style.width = w + 'px';
+    sthumb.style.transform = 'translateX(' + x + 'px)';
+  }
+  if (hasPhotos){
+    strip.addEventListener('scroll', syncScroll, { passive:true });
+    ['pointerdown','wheel','touchstart','keydown'].forEach(function(ev){
+      strip.addEventListener(ev, function(){ photosTouched = true; }, { passive:true });
+      sbar.addEventListener(ev, function(){ photosTouched = true; }, { passive:true });
+    });
+    var pvPrev = document.querySelector('.pv-prev'), pvNext = document.querySelector('.pv-next');
+    function stepBy(dir){ strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior: 'smooth' }); }
+    pvPrev.addEventListener('click', function(){ photosTouched = true; stepBy(-1); });
+    pvNext.addEventListener('click', function(){ photosTouched = true; stepBy(1); });
+    function syncArrows(){
+      var max = strip.scrollWidth - strip.clientWidth;
+      pvPrev.disabled = strip.scrollLeft <= 2;
+      pvNext.disabled = strip.scrollLeft >= max - 2;
+    }
+    strip.addEventListener('scroll', syncArrows, { passive:true });
+    window.addEventListener('resize', syncArrows);
+    syncArrows();
+    refreshArrows = syncArrows;
+    // The strip only gets its real width once the photos have loaded.
+    strip.querySelectorAll('img').forEach(function(im){ im.addEventListener('load', function(){ syncArrows(); syncScroll(); }); });
+    window.addEventListener('load', function(){ syncArrows(); syncScroll(); });
+    window.addEventListener('resize', syncScroll);
+    if (sthumb){
+      var dragging = false, startX = 0, startScroll = 0;
+      sthumb.addEventListener('pointerdown', function(e){
+        dragging = true; startX = e.clientX; startScroll = strip.scrollLeft;
+        sbar.classList.add('dragging'); sthumb.setPointerCapture(e.pointerId); e.preventDefault();
+      });
+      sthumb.addEventListener('pointermove', function(e){
+        if (!dragging) return;
+        var vis = strip.clientWidth, total = strip.scrollWidth, track = sbar.clientWidth;
+        var w = Math.max(36, track * vis / total);
+        var ratio = (total - vis) / (track - w);
+        strip.scrollLeft = startScroll + (e.clientX - startX) * ratio;
+      });
+      var endDrag = function(){ dragging = false; sbar.classList.remove('dragging'); };
+      sthumb.addEventListener('pointerup', endDrag);
+      sthumb.addEventListener('pointercancel', endDrag);
+      sbar.addEventListener('pointerdown', function(e){
+        if (e.target !== sbar) return;
+        var r = sbar.getBoundingClientRect();
+        strip.scrollLeft = ((e.clientX - r.left) / r.width) * (strip.scrollWidth - strip.clientWidth);
+      });
+    }
+  } else if (toggle){
+    toggle.remove();
+    var sb = document.getElementById('photoscroll'); if (sb) sb.remove();
+  }
+</script>
+
+</body>
+</html>
