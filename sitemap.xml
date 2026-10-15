@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://steepmap.eu/</loc>
     <lastmod>2026-09-08</lastmod>
@@ -26,74 +27,268 @@
   </url>
   <url>
     <loc>https://steepmap.eu/featured/serles-north-couloir.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://steepmap.eu/featured/zuckerhuetl-from-grawa-alm.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/serles-north-couloir.html"/>
   </url>
   <url>
     <loc>https://steepmap.eu/de/featured/serles-north-couloir.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://steepmap.eu/de/featured/zuckerhuetl-from-grawa-alm.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/serles-north-couloir.html"/>
   </url>
   <url>
     <loc>https://steepmap.eu/fr/featured/serles-north-couloir.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://steepmap.eu/fr/featured/zuckerhuetl-from-grawa-alm.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/serles-north-couloir.html"/>
   </url>
   <url>
     <loc>https://steepmap.eu/it/featured/serles-north-couloir.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://steepmap.eu/it/featured/zuckerhuetl-from-grawa-alm.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/serles-north-couloir.html"/>
   </url>
   <url>
     <loc>https://steepmap.eu/es/featured/serles-north-couloir.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://steepmap.eu/es/featured/zuckerhuetl-from-grawa-alm.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/serles-north-couloir.html"/>
   </url>
   <url>
     <loc>https://steepmap.eu/ja/featured/serles-north-couloir.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/serles-north-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/serles-north-couloir.html"/>
   </url>
   <url>
-    <loc>https://steepmap.eu/ja/featured/zuckerhuetl-from-grawa-alm.html</loc>
-    <lastmod>2026-10-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://steepmap.eu/featured/zuckerhuetl-from-grawa-alm.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/zuckerhuetl-from-grawa-alm.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/de/featured/zuckerhuetl-from-grawa-alm.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/zuckerhuetl-from-grawa-alm.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/fr/featured/zuckerhuetl-from-grawa-alm.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/zuckerhuetl-from-grawa-alm.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/it/featured/zuckerhuetl-from-grawa-alm.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/zuckerhuetl-from-grawa-alm.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/es/featured/zuckerhuetl-from-grawa-alm.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/zuckerhuetl-from-grawa-alm.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/zuckerhuetl-from-grawa-alm.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/featured/verso-la-cima-soliva.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/verso-la-cima-soliva.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/verso-la-cima-soliva.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/verso-la-cima-soliva.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/de/featured/verso-la-cima-soliva.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/verso-la-cima-soliva.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/verso-la-cima-soliva.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/verso-la-cima-soliva.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/it/featured/verso-la-cima-soliva.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/verso-la-cima-soliva.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/verso-la-cima-soliva.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/verso-la-cima-soliva.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/featured/la-grave-pan-de-redeau.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://steepmap.eu/es/featured/la-grave-pan-de-redeau.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://steepmap.eu/ja/featured/la-grave-pan-de-redeau.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/featured/tomastinden-nw-couloir.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/tomastinden-nw-couloir.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/de/featured/tomastinden-nw-couloir.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/tomastinden-nw-couloir.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/fr/featured/tomastinden-nw-couloir.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/tomastinden-nw-couloir.html"/>
+  </url>
+  <url>
+    <loc>https://steepmap.eu/it/featured/tomastinden-nw-couloir.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://steepmap.eu/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://steepmap.eu/de/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://steepmap.eu/fr/featured/tomastinden-nw-couloir.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://steepmap.eu/it/featured/tomastinden-nw-couloir.html"/>
   </url>
 </urlset>

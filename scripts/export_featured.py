@@ -105,6 +105,9 @@ def build_record(db, slug, tour_id):
         },
         "description": desc,
         "photos": [f"{MEDIA}/figures/{k}" for k in (d.get("photo_keys") or [])],
+        "updated_at": d.get("updated_at"),
+        "langs": [src] + sorted(l for l in desc if l != src and (desc[l] or "").strip()
+                                and any(r["lang"] == l and (r.get("description") or "").strip() for r in trs)),
         "center": center, "zoom": 13,
         "track": {"type": "Feature", "geometry": {"type": "LineString", "coordinates": coords}},
     }

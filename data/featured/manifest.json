@@ -1,6 +1,34 @@
 {
   "tours": [
-    { "slug": "serles-north-couloir", "id": "408ae531-9a2d-41de-a732-e26555d51d71" },
-    { "slug": "zuckerhuetl-from-grawa-alm", "id": "0841457b-2711-4cdd-902c-1b0deffd069e" }
+    {
+      "slug": "serles-north-couloir",
+      "id": "408ae531-9a2d-41de-a732-e26555d51d71",
+      "place": "Stubai Alps",
+      "region": "Stubai Alps, Tyrol, Austria"
+    },
+    {
+      "slug": "zuckerhuetl-from-grawa-alm",
+      "id": "0841457b-2711-4cdd-902c-1b0deffd069e",
+      "place": "Stubai Alps",
+      "region": "Stubai Alps, Tyrol, Austria"
+    },
+    {
+      "slug": "verso-la-cima-soliva",
+      "id": "e62cc64b-9566-451e-a9d7-5dc7c971b8d0",
+      "place": "Valtellina",
+      "region": "Valtellina, Lombardy, Italy"
+    },
+    {
+      "slug": "la-grave-pan-de-redeau",
+      "id": "043741b3-0461-46ed-b94c-c09b1c9d22c0",
+      "place": "Hautes-Alpes",
+      "region": "La Grave, Hautes-Alpes, France"
+    },
+    {
+      "slug": "tomastinden-nw-couloir",
+      "id": "cad085ee-2970-45dc-a85a-9f8aa2c9ab1a",
+      "place": "Troms",
+      "region": "Troms, Norway"
+    }
   ]
 }

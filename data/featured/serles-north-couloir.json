@@ -46,6 +46,15 @@
   "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_166cf6d5-9d25-4891-b19a-977a9d9bb3f7.jpg",
   "https://media.steepmap.eu/figures/408ae531-9a2d-41de-a732-e26555d51d71_e74b8d5b-9ba4-4fa1-bb5f-8b8c6a8cd8f5.jpg"
  ],
+ "updated_at": "2026-10-11T20:19:44.569378+00:00",
+ "langs": [
+  "en",
+  "de",
+  "es",
+  "fr",
+  "it",
+  "ja"
+ ],
  "center": [
   11.391924,
   47.125757
