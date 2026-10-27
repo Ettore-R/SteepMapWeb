@@ -303,20 +303,6 @@ def write_picker(tours):
         json.dump({"labels": labels, "tours": lists}, f, ensure_ascii=False, indent=1)
     print(f"  picker: {len(tours)} tours")
 
-def write_home_links(tours):
-    """Crawlable links to every English tour page, in the home page footer."""
-    path = os.path.join(ROOT, "index.html")
-    html = open(path, encoding="utf-8").read()
-    links = " · ".join(
-        f'<a href="/{page_path(tr["slug"], "en")}">{esc(tr["title"])}</a>' for tr in tours if "en" in tour_langs(tr))
-    block = ('<!-- featured-links:start -->\n'
-             f'    <nav class="footer-featured" aria-label="Featured tours"><span>Featured tours:</span> {links}</nav>\n'
-             '    <!-- featured-links:end -->')
-    new, n = re.subn(r"<!-- featured-links:start -->.*?<!-- featured-links:end -->", block, html, flags=re.S)
-    assert n == 1, "home page footer markers missing"
-    open(path, "w", encoding="utf-8").write(new)
-    print("  home page: featured links updated")
-
 def load_tours():
     manifest = json.load(open(os.path.join(ROOT, "data", "featured", "manifest.json"), encoding="utf-8"))
     global PLACE, TOURS_ALL
@@ -369,7 +355,6 @@ def main():
             count += 1
         print(f"  {tour['slug']}: {', '.join(langs)}")
     write_picker(tours)
-    write_home_links(tours)
     update_sitemap(tours)
     print(f"Generated {count} pages from {len(tours)} tour(s).")
 
