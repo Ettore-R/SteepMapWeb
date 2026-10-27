@@ -37,5 +37,4 @@ Suggested URLs once deployed:
 - **Store links** - the "Get the app" modal's Android / iOS / Web links are `#`
   placeholders. Drop in the real Google Play / App Store / web-app URLs when live
   (there's a comment in `index.html` marking the Android link).
-- **Contact email** - currently `alpinemapapp@gmail.com`. Update if a STEEP map-branded
-  address is set up.
+- **Contact email** - `info@steepmap.eu` (Cloudflare Email Routing → the team Gmail inbox).
