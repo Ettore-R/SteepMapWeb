@@ -235,12 +235,18 @@
   }
   .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%;padding:60px 0 90px}
   /* clamp min kept small enough that even the longest single word (e.g. German
-     "Backcountry.", or CJK strings) fits the content box on a ~320px phone; the
-     break rules below are the hard guarantee that a word can NEVER be wider than
-     its line, so the title can never push the page past the viewport (which is
-     what let users scroll/zoom to the empty white strip on the right). */
+     "Backcountry.", or CJK strings) fits the content box on a ~320px phone.
+     In the two-column desktop layout the text column is only ~half the viewport,
+     so 6vw made the title too big for it and it wrapped as "Find your next / line /
+     in the / backcountry." – the desktop size below is calibrated so "in the
+     backcountry." (~9.4em) fits on one line of that column. overflow-wrap:anywhere is
+     the hard guarantee that a word can NEVER be wider than its line (so the title
+     can never push the page past the viewport), but it only splits a word that
+     can't fit at all – no hyphens:auto, which split words like "backcoun-try"
+     even when the whole word fit on the next line. */
   .hero h1{font-size:clamp(2rem,6vw,4.6rem);font-weight:800;letter-spacing:-.03em;
-    max-width:100%;overflow-wrap:break-word;word-break:break-word;hyphens:auto}
+    max-width:100%;overflow-wrap:anywhere;text-wrap:balance}
+  @media(min-width:901px){.hero h1{font-size:clamp(2rem,5.2vw,4rem)}}
   .hero h1 .g{background:linear-gradient(120deg,#bfe0ff,#7cc0ff 60%,#ffb488);-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero p.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);color:rgba(255,255,255,.9);max-width:34ch;margin-top:1.3rem}
   .hero .cta-row{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:2rem}
