@@ -421,14 +421,12 @@
   .step p{color:var(--slate);font-size:.98rem}
   @media(max-width:820px){.steps{grid-template-columns:1fr}}
 
-  /* ---------- GALLERY ---------- */
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));grid-auto-rows:260px;gap:14px}
-  .gallery a{position:relative;overflow:hidden;border-radius:16px;background:#0a1420}
-  .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease),filter .5s}
-  .gallery a:hover img{transform:scale(1.08)}
-  .gcap{position:absolute;left:14px;bottom:12px;color:#fff;font-weight:700;font-size:.9rem;text-shadow:0 2px 10px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:.4s var(--ease)}
-  .gallery a:hover .gcap{opacity:1;transform:none}
-  @media(max-width:820px){.gallery{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));grid-auto-rows:200px}}
+  /* ---------- SUPPORTERS ---------- */
+  .supporters .sec-head{margin-bottom:36px}
+  .supporters-logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:32px 56px}
+  .supporters-logos a{display:block;opacity:.88;transition:opacity .25s var(--ease),transform .25s var(--ease)}
+  .supporters-logos a:hover,.supporters-logos a:focus-visible{opacity:1;transform:translateY(-2px)}
+  .supporters-logos img{display:block;width:min(300px,72vw);height:auto}
 
   /* ---------- CTA BAND ---------- */
   .cta{position:relative;color:#fff;text-align:center;overflow:hidden}
@@ -1037,15 +1035,18 @@
   </div>
 </section>
 
-<!-- ============ GALLERY ============ -->
-<section class="block" id="gallery">
+<!-- ============ SUPPORTERS ============ -->
+<section class="block supporters" id="supporters">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow" data-i18n="gallery.eyebrow">The reason we build this</span>
-      <h2 data-i18n="gallery.h2">Earn your next turns.</h2>
+      <span class="eyebrow" data-i18n="supporters.eyebrow">Our supporters</span>
+      <h2 data-i18n="supporters.h2">Proudly supported by</h2>
     </div>
-    <!-- Gallery tiles injected from SCENERY_PHOTOS (see script) -->
-    <div class="gallery reveal" id="galleryGrid"></div>
+    <div class="supporters-logos reveal">
+      <a href="https://protectourwinters.at" target="_blank" rel="noopener" aria-label="Protect Our Winters Austria">
+        <img src="media/brand/pow-austria-logo.svg" alt="Protect Our Winters Austria" width="300" height="98" loading="lazy" decoding="async"/>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1143,9 +1144,8 @@
   /* ============================================================
    * SCENERY PHOTOS - single source of truth
    * ------------------------------------------------------------
-   * These drive BOTH the hero background rotator (10s each) and
-   * the "The reason we build this" gallery, and generate the
-   * Unsplash credit in the footer.
+   * These drive the hero background rotator (10s each) and
+   * generate the Unsplash credit in the footer.
    *
    * To add/remove a photo: add/remove an entry below. That's it.
    *   id      – the Unsplash CDN photo id (from images.unsplash.com/<id>)
@@ -1211,27 +1211,6 @@
       i = (i + 1) % slides.length;
       slides[i].classList.add('on');
     }, HERO_INTERVAL);
-  })();
-
-  // --- Gallery ("The reason we build this") - same photos ---
-  (function(){
-    var grid = document.getElementById('galleryGrid');
-    if(!grid) return;
-    SCENERY_PHOTOS.forEach(function(p, idx){
-      var a = document.createElement('a');
-      a.href = '#get';
-      var img = document.createElement('img');
-      img.src = photoSrc(p, 1000, 75);
-      img.alt = p.alt;
-      img.loading = 'lazy';
-      var cap = document.createElement('span');
-      cap.className = 'gcap';
-      // i18n: caption text lives in the catalogs (scenery.cap.N); English stays here as the source.
-      cap.setAttribute('data-i18n', 'scenery.cap.' + idx);
-      cap.textContent = p.caption || '';
-      a.appendChild(img); a.appendChild(cap);
-      grid.appendChild(a);
-    });
   })();
 
   // --- Footer Unsplash credit - built from the same list ---
@@ -1496,8 +1475,8 @@
       'about.c3.h': `Unterstützung, die sich lohnt`,
       'about.c3.p': 'Wer STEEP map mit einem Pro-Abo unterstützt, erhält zusätzliche Funktionen. Gleichzeitig hilft diese Unterstützung dabei, neue Features für alle – kostenlose User und Pro-Mitglieder – weiterzuentwickeln.',
       'about.signoff': `Wir stehen noch am Anfang. Unser Ziel bleibt, die Berge für <strong>alle</strong> alle zugänglich zu halten.`,
-      'gallery.eyebrow': `Warum wir das entwickeln`,
-      'gallery.h2': `Deine nächsten Lines warten schon.`,
+      'supporters.eyebrow': `Unsere Unterstützer`,
+      'supporters.h2': `Mit Unterstützung von`,
       'cta.eyebrow': `Dein Winter beginnt hier`,
       'cta.h2': `Der ganze Berg, in deiner Tasche`,
       'cta.p': `Entdecke, plane und teile Skitouren mit Steep. Die Karte kannst du kostenlos erkunden. Wenn du zusätzliche Planungsfunktionen nutzen möchtest, wechsel zu Pro.`,
@@ -1625,8 +1604,8 @@
       'about.c3.h': `Récompenser nos soutiens`,
       'about.c3.p': `Ceux qui nous soutiennent avec Pro débloquent des extras – et leur soutien permet de continuer à sortir de nouvelles fonctions pour tous, gratuit comme Pro.`,
       'about.signoff': `Nous ne faisons que commencer – et nous nous engageons à garder la montagne ouverte à <strong>tous</strong>.`,
-      'gallery.eyebrow': `La raison de tout ça`,
-      'gallery.h2': `Méritez vos prochains virages.`,
+      'supporters.eyebrow': `Nos soutiens`,
+      'supporters.h2': `Avec le soutien de`,
       'cta.eyebrow': `Votre saison commence ici`,
       'cta.h2': `Toute la montagne, dans votre poche`,
       'cta.p': `Découvrez, planifiez et partagez vos randos à ski avec Steep. Gratuit à explorer – passez à Pro quand vous voulez les calques de planification.`,
@@ -1754,8 +1733,8 @@
       'about.c3.h': `Premiamo i nostri sostenitori`,
       'about.c3.p': `Chi ci sostiene con Pro sblocca extra entusiasmanti – e il loro supporto fa arrivare nuove funzioni per utenti free e Pro allo stesso modo.`,
       'about.signoff': `Abbiamo appena iniziato – e ci impegniamo a tenere la montagna aperta a <strong>tutti</strong>.`,
-      'gallery.eyebrow': `Il motivo per cui lo facciamo`,
-      'gallery.h2': `Guadagnati le prossime curve.`,
+      'supporters.eyebrow': `I nostri sostenitori`,
+      'supporters.h2': `Con il sostegno di`,
       'cta.eyebrow': `La tua stagione inizia qui`,
       'cta.h2': `Tutta la montagna, in tasca`,
       'cta.p': `Scopri, pianifica e condividi gite scialpinistiche con Steep. Gratis da esplorare – passa a Pro quando vuoi gli overlay di pianificazione.`,
@@ -1883,8 +1862,8 @@
       'about.c3.h': `Recompensamos a quienes nos apoyan`,
       'about.c3.p': `Quienes nos apoyan con Pro desbloquean extras estupendos – y su apoyo hace que sigan llegando nuevas funciones para usuarios gratuitos y Pro por igual.`,
       'about.signoff': `Solo estamos empezando – y nos comprometemos a mantener la montaña abierta para <strong>todos</strong>.`,
-      'gallery.eyebrow': `La razón por la que lo hacemos`,
-      'gallery.h2': `Gánate tus próximos giros.`,
+      'supporters.eyebrow': `Nuestros apoyos`,
+      'supporters.h2': `Con el apoyo de`,
       'cta.eyebrow': `Tu temporada empieza aquí`,
       'cta.h2': `Toda la montaña, en tu bolsillo`,
       'cta.p': `Descubre, planifica y comparte rutas de esquí de travesía con Steep. Gratis para explorar – pásate a Pro cuando quieras las capas de planificación.`,
@@ -2012,8 +1991,8 @@
       'about.c3.h': `支えてくれる人へ`,
       'about.c3.p': `Pro で支えてくれる人はわくわくする追加機能を手にできます――そのサポートが、無料ユーザーにも Pro ユーザーにも新機能を届け続けます。`,
       'about.signoff': `私たちはまだ始まったばかり――山を<strong>すべての人</strong>に開かれたものに保ち続けます。`,
-      'gallery.eyebrow': `私たちがこれを作る理由`,
-      'gallery.h2': `次のターンを勝ち取ろう。`,
+      'supporters.eyebrow': `サポーター`,
+      'supporters.h2': `ご支援・ご協力`,
       'cta.eyebrow': `あなたのシーズンはここから`,
       'cta.h2': `山まるごと、ポケットに`,
       'cta.p': `Steep でバックカントリースキーツアーを発見・計画・共有。探索は無料――計画オーバーレイが欲しくなったら Pro へ。`,
