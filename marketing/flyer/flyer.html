@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>STEEP map flyer A5</title>
+<style>
+@page{size:148mm 210mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:148mm;height:210mm}
+body{font-family:"Segoe UI",Arial,sans-serif;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{position:relative;width:148mm;height:210mm;overflow:hidden;background:#0a1420 url(bg.jpg) center 30%/cover no-repeat}
+.page::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,18,32,.78) 0%,rgba(8,18,32,.45) 40%,rgba(8,18,32,.85) 100%)}
+.in{position:relative;z-index:1;height:100%;padding:11mm 11mm 10mm}
+.brand{display:flex;align-items:center;gap:3mm;font-weight:800;font-size:5.5mm;letter-spacing:.02em}
+.brand img{width:9mm;height:9mm;border-radius:2.4mm}
+.eyebrow{margin-top:8mm;color:#bfe0ff;font-weight:700;font-size:3.2mm;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:2mm}
+.eyebrow::before{content:"";width:7mm;height:.7mm;background:#3b82f6;border-radius:1mm}
+h1{margin-top:3mm;font-size:11.5mm;line-height:1.05;font-weight:800;letter-spacing:-.03em}
+h1 span{background:linear-gradient(120deg,#bfe0ff,#7cc0ff 60%,#ffb488);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin-top:6mm;width:68mm;font-size:3.5mm;line-height:1.45;color:rgba(255,255,255,.92)}
+.stats{position:absolute;left:11mm;bottom:30mm;width:62mm;display:flex;flex-direction:column;gap:3.4mm}
+.stat{border-left:.8mm solid #ff8a4c;padding-left:3mm}
+.stat b{display:block;font-size:5mm;font-weight:800}
+.stat span{font-size:3mm;color:rgba(255,255,255,.75)}
+.phone{position:absolute;right:10mm;top:68mm;width:52mm;aspect-ratio:689/1492;background:#0b1622;border-radius:8mm;padding:2.2mm;transform:rotate(3deg);box-shadow:0 8mm 14mm -4mm rgba(0,0,0,.65)}
+.phone img{width:100%;height:100%;border-radius:6.2mm;display:block;object-fit:cover;object-position:top}
+.foot{position:absolute;left:11mm;right:11mm;bottom:9mm;display:flex;align-items:center;justify-content:space-between;gap:4mm}
+.cta{background:linear-gradient(135deg,#ff8a4c,#ff6a3d);color:#3a1200;font-weight:800;font-size:4mm;padding:3mm 5.5mm;border-radius:10mm}
+.site{font-weight:700;font-size:4.2mm}
+.stores{font-size:3mm;color:rgba(255,255,255,.8);text-align:right}
+</style></head><body>
+<div class="page"><div class="in">
+  <div class="brand"><img src="icon.png" alt="">STEEP map</div>
+  <div class="eyebrow">Backcountry, mapped</div>
+  <h1>Find your next line<br><span>in the backcountry.</span></h1>
+  <p class="lead">Discover new ski tours, keep a bucket list of the descents you dream about, repeat the lines your friends have skied, and explore the most astonishing backcountry map.</p>
+  <div class="stats">
+    <div class="stat"><b>Discover</b><span>Tours near you &amp; worldwide</span></div>
+    <div class="stat"><b>Plan</b><span>Slope &amp; aspect overlays</span></div>
+    <div class="stat"><b>Share</b><span>Follow your crew's lines</span></div>
+  </div>
+  <div class="phone"><img src="phone.png" alt=""></div>
+  <div class="foot">
+    <div class="cta">Start exploring</div>
+    <div><div class="site">steepmap.eu</div></div>
+    <div class="stores">Free on<br>Google Play &amp; App Store</div>
+  </div>
+</div></div>
+</body></html>
